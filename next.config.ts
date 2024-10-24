@@ -1,7 +1,23 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*", // Match API calls starting with /api
+        destination: "http://localhost:4000/api/:path*", // Proxy to your NestJS backend running on port 4000
+      },
+    ];
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "wypeydidbspluuiqhjua.supabase.co", // Allow images from your Supabase host
+        pathname: "/storage/v1/object/sign/**", // Match the Supabase storage image path
+      },
+    ],
+  },
 };
 
 export default nextConfig;
