@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Array of image paths
 const images = [
-  "/temple5.png",  // Ensure these paths are correct
+  "/temple5.jpg",  // Ensure these paths are correct
   "/temple2.png",
   "/temple3.jpg",
   "/temple4.png"
