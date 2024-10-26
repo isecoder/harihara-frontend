@@ -1,56 +1,100 @@
+"use client";
 import Image from "next/image";
+import { useState, useEffect, useRef, useCallback } from "react";
 
-// Define the structure of your image data
 interface ImageData {
   image_id: number;
   alt_text: string;
   signed_url: string;
 }
 
-// Fetch data in a Server Component
-async function fetchImages(page: number, limit: number): Promise<ImageData[]> {
-  try {
-    const res = await fetch(
-      `http://localhost:4000/api/images/batch?limit=${limit}&page=${page}`,
-      {
-        cache: "no-store", // Ensure fresh data on every request
+export default function ImageGallery(): JSX.Element {
+  const [images, setImages] = useState<ImageData[]>([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const loaderRef = useRef<HTMLDivElement | null>(null);
+
+  // Fetch images function with retry
+  const fetchImages = useCallback(async (currentPage: number) => {
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `http://localhost:4000/api/images/batch?limit=6&page=${currentPage}`,
+        { cache: "no-store" }
+      );
+
+      if (!res.ok) throw new Error("Failed to load images");
+
+      const data = await res.json();
+      const newImages: ImageData[] = data?.data?.images || [];
+
+      if (newImages.length === 0) {
+        setHasMore(false);
+      } else {
+        setImages((prevImages) => [
+          ...prevImages,
+          ...newImages.filter(
+            (newImage: ImageData) =>
+              !prevImages.some((img) => img.image_id === newImage.image_id)
+          ),
+        ]);
       }
+    } catch (error) {
+      console.error("Error fetching images:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Load the initial set of images on mount
+  useEffect(() => {
+    fetchImages(1); // Load the first set of images
+  }, [fetchImages]);
+
+  // Observer for subsequent pages
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && hasMore && !loading) {
+          setPage((prevPage) => prevPage + 1); // Increment the page for the next batch
+        }
+      },
+      { threshold: 1.0 }
     );
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch images"); // Handle HTTP errors
+    const currentLoaderRef = loaderRef.current;
+    if (currentLoaderRef && !loading) {
+      observer.observe(currentLoaderRef);
     }
 
-    const data = await res.json();
-    return data?.data?.images || [];
-  } catch {
-    // Silently handle any errors and return an empty array
-    return [];
-  }
-}
+    return () => {
+      if (currentLoaderRef) {
+        observer.unobserve(currentLoaderRef);
+      }
+    };
+  }, [loading, hasMore]);
 
-// The main ImageGallery component with SSR
-export default async function ImageGallery({
-  searchParams,
-}: {
-  searchParams: { page?: string };
-}): Promise<JSX.Element> {
-  const pageParam = await searchParams;
-  const currentPage = parseInt(pageParam.page as string) || 1; // Get current page from URL or default to 1
-  const limit = 6; // Number of images to display per page
-
-  const images = await fetchImages(currentPage, limit);
-
-  if (images.length === 0) {
-    return <p>No images available</p>;
-  }
+  // Fetch images whenever `page` updates for additional pages
+  useEffect(() => {
+    if (page > 1 && hasMore) {
+      fetchImages(page);
+    }
+  }, [page, hasMore, fetchImages]);
 
   return (
-    <div className="mt-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {images.map((image) => (
+    <div className="relative">
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="loader"></div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+        {images.map((image, index) => (
           <div
-            key={image.image_id}
+            key={`${image.image_id}-${index}`}
             className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out"
           >
             <div className="relative w-full h-48">
@@ -67,27 +111,33 @@ export default async function ImageGallery({
             </div>
           </div>
         ))}
+
+        <div
+          ref={loaderRef}
+          className="w-full h-10 flex justify-center items-center"
+        >
+          {!hasMore && <p>No more images to load</p>}
+        </div>
       </div>
 
-      {/* Pagination Controls */}
-      <div className="flex justify-between mt-4">
-        <a
-          href={`?page=${currentPage - 1}`}
-          className={`px-4 py-2 bg-blue-500 text-white rounded-md ${
-            currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          style={{ pointerEvents: currentPage === 1 ? "none" : "auto" }}
-        >
-          Previous
-        </a>
-        <span className="self-center">Page {currentPage}</span>
-        <a
-          href={`?page=${currentPage + 1}`}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md"
-        >
-          Next
-        </a>
-      </div>
+      <style jsx>{`
+        .loader {
+          border: 8px solid #f3f3f3;
+          border-top: 8px solid #3498db;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
     </div>
   );
 }
