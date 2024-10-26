@@ -4,7 +4,12 @@ import Image from "next/image";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const images: string[] = ["/temple2.png", "/temple3.jpg", "/temple4.png"];
+const images: string[] = [
+  "/temple2.png",
+  "/temple3.jpg",
+  "/temple4.png",
+  "/temple5.png",
+];
 
 const ImageSlider: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
