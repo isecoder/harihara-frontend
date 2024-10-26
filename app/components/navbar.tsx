@@ -30,15 +30,16 @@ const Navbar: React.FC = () => {
   return (
     <>
       {/* Banner Image */}
-      <div className="relative w-full h-56">
-        <Image
-          src="/banner.png"
-          alt="Banner"
-          fill
-          className="object-cover object-center"
-          quality={100}
-        />
-      </div>
+      <div className="relative w-full h-44 md:h-64">
+  <Image
+    src="/banner.png"
+    alt="Banner"
+    fill
+    className="object-center"
+    quality={100}
+    priority
+  />
+</div>
 
       {/* Navbar Container */}
       <div className="sticky top-0 w-full z-10 bg-gradient-to-r from-white to-orange-100 shadow-lg">
