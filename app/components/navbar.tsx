@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
       <div className="sticky top-0 w-full z-10 bg-gradient-to-r from-white to-orange-100 shadow-lg">
         <div className="flex justify-end items-center mx-auto py-4 px-4 md:px-8">
           {/* Navbar Links - Visible on Large Screens */}
-          <nav className="hidden md:flex justify-center flex-1 space-x-8">
+          <nav className="hidden md:flex justify-center flex-1 space-x-8 text-sm">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
