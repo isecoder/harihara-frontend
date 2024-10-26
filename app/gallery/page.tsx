@@ -15,7 +15,6 @@ export default function ImageGallery(): JSX.Element {
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
-  // Fetch images function with retry
   const fetchImages = useCallback(async (currentPage: number) => {
     setLoading(true);
     try {
@@ -23,23 +22,18 @@ export default function ImageGallery(): JSX.Element {
         `http://localhost:4000/api/images/batch?limit=6&page=${currentPage}`,
         { cache: "no-store" }
       );
-
       if (!res.ok) throw new Error("Failed to load images");
 
       const data = await res.json();
       const newImages: ImageData[] = data?.data?.images || [];
 
-      if (newImages.length === 0) {
-        setHasMore(false);
-      } else {
-        setImages((prevImages) => [
-          ...prevImages,
-          ...newImages.filter(
-            (newImage: ImageData) =>
-              !prevImages.some((img) => img.image_id === newImage.image_id)
-          ),
-        ]);
-      }
+      setHasMore(newImages.length > 0);
+      setImages((prev) => [
+        ...prev,
+        ...newImages.filter(
+          (newImage) => !prev.some((img) => img.image_id === newImage.image_id)
+        ),
+      ]);
     } catch (error) {
       console.error("Error fetching images:", error);
     } finally {
@@ -47,40 +41,30 @@ export default function ImageGallery(): JSX.Element {
     }
   }, []);
 
-  // Load the initial set of images on mount
   useEffect(() => {
-    fetchImages(1); // Load the first set of images
+    fetchImages(1);
   }, [fetchImages]);
 
-  // Observer for subsequent pages
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting && hasMore && !loading) {
-          setPage((prevPage) => prevPage + 1); // Increment the page for the next batch
+        if (entries[0].isIntersecting && hasMore && !loading) {
+          setPage((prevPage) => prevPage + 1);
         }
       },
       { threshold: 1.0 }
     );
 
     const currentLoaderRef = loaderRef.current;
-    if (currentLoaderRef && !loading) {
-      observer.observe(currentLoaderRef);
-    }
+    if (currentLoaderRef) observer.observe(currentLoaderRef);
 
     return () => {
-      if (currentLoaderRef) {
-        observer.unobserve(currentLoaderRef);
-      }
+      if (currentLoaderRef) observer.unobserve(currentLoaderRef);
     };
   }, [loading, hasMore]);
 
-  // Fetch images whenever `page` updates for additional pages
   useEffect(() => {
-    if (page > 1 && hasMore) {
-      fetchImages(page);
-    }
+    if (page > 1 && hasMore) fetchImages(page);
   }, [page, hasMore, fetchImages]);
 
   return (
@@ -92,9 +76,9 @@ export default function ImageGallery(): JSX.Element {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-        {images.map((image, index) => (
+        {images.map((image) => (
           <div
-            key={`${image.image_id}-${index}`}
+            key={image.image_id}
             className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out"
           >
             <div className="relative w-full h-48">
@@ -102,6 +86,7 @@ export default function ImageGallery(): JSX.Element {
                 src={image.signed_url}
                 alt={image.alt_text || "Image"}
                 fill
+                loading="lazy"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
               />
@@ -111,7 +96,6 @@ export default function ImageGallery(): JSX.Element {
             </div>
           </div>
         ))}
-
         <div
           ref={loaderRef}
           className="w-full h-10 flex justify-center items-center"
