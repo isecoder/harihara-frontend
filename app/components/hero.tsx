@@ -13,11 +13,18 @@ const images: string[] = [
 
 const ImageSlider: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // Helper function to handle slide transition with delay
-  const transitionSlide = useCallback((nextPage: number) => {
-    setCurrentPage(nextPage);
-  }, []);
+  const transitionSlide = useCallback(
+    (nextPage: number) => {
+      if (isAnimating) return; // Prevent rapid clicking
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), 500); // Animation delay
+      setCurrentPage(nextPage);
+    },
+    [isAnimating]
+  );
 
   // Auto transition every 5 seconds
   useEffect(() => {
@@ -33,16 +40,22 @@ const ImageSlider: React.FC = () => {
     transitionSlide((currentPage + 1) % images.length);
 
   return (
-    <div className="relative flex flex-col w-full bg-gradient-to-b from-white to-orange-200">
-      <div className="relative w-screen h-[500px] md:h-[620px] overflow-hidden">
-        <Image
-          src={images[currentPage]}
-          alt={`Image ${currentPage + 1}`}
-          fill
-          sizes="100vw"
-          className="object-center w-full h-full"
-          priority
-        />
+    <div className="relative flex flex-col items-center w-full max-w-xl mx-auto bg-gradient-to-b from-white to-orange-200">
+      <div className="relative w-full h-72 md:h-80 overflow-hidden">
+        <div
+          className={`transition-transform duration-500 ease-in-out ${
+            isAnimating ? "transform scale-95" : ""
+          }`}
+        >
+          <Image
+            src={images[currentPage]}
+            alt={`Image ${currentPage + 1}`}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+            className="object-contain w-full h-full"
+            priority
+          />
+        </div>
 
         {/* Left arrow */}
         <div
@@ -66,7 +79,7 @@ const ImageSlider: React.FC = () => {
             <div
               key={index}
               onClick={() => transitionSlide(index)}
-              className={`w-3 h-3 rounded-full cursor-pointer ${
+              className={`w-2 h-2 rounded-full cursor-pointer ${
                 index === currentPage ? "bg-orange-500" : "bg-gray-400"
               }`}
             ></div>
