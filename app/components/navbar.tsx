@@ -26,8 +26,6 @@ const Navbar = () => {
     <div className="relative w-full z-10">
       {/* Banner Image directly at the top */}
       <div className="relative w-full h-52 md:h-64">
-        {" "}
-        {/* Reduced height */}
         <Image
           src="/banner.png"
           alt="Banner"
@@ -39,26 +37,25 @@ const Navbar = () => {
         />
       </div>
 
-      {/* Navbar with sticky positioning */}
+      {/* Navbar with more spacing between links */}
       <div className="sticky top-0 bg-gradient-to-r from-white to-orange-100 shadow-md z-20">
-        <div className="flex items-center justify-between px-4 py-2 md:px-4 md:py-3">
-          {" "}
-          {/* Added padding for top/bottom spacing */}
+        <div className="flex items-center justify-between px-4 py-3 md:px-6 md:py-4">
           {/* Desktop Links */}
-          <nav className="hidden md:flex space-x-3 flex-1 justify-center">
+          <nav className="hidden md:flex space-x-8 flex-1 justify-center">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="text-orange-500 font-medium text-[10px] md:text-xs hover:text-gray-600 transition duration-200"
+                className="text-orange-500 font-medium text-sm md:text-base hover:text-gray-600 transition duration-200 tracking-wider"
               >
                 {label}
               </Link>
             ))}
           </nav>
+
           {/* Mobile Menu Toggle */}
           <div
-            className="md:hidden cursor-pointer text-orange-500 text-base" // Smaller icon size
+            className="md:hidden cursor-pointer text-orange-500 text-xl"
             onClick={toggleMenu}
           >
             {menuOpen ? <FaTimes /> : <FaBars />}
@@ -67,14 +64,12 @@ const Navbar = () => {
 
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="md:hidden flex flex-col items-center space-y-1 bg-gradient-to-r from-white to-orange-200 py-3 shadow-md text-center">
-            {" "}
-            {/* Increased padding for more spacing */}
+          <div className="md:hidden flex flex-col items-center space-y-2 bg-gradient-to-r from-white to-orange-200 py-4 shadow-md text-center">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="text-orange-500 font-medium text-[10px] hover:text-gray-600 transition duration-200"
+                className="text-orange-500 font-medium text-sm hover:text-gray-600 transition duration-200 tracking-wide"
               >
                 {label}
               </Link>
