@@ -9,20 +9,32 @@ interface ImageData {
 
 // Fetch data in a Server Component
 async function fetchImages(page: number, limit: number): Promise<ImageData[]> {
-  const res = await fetch(
-    `http://localhost:4000/api/images/batch?limit=${limit}&page=${page}`,
-    {
-      cache: "no-store", // Ensure fresh data on every request
-    }
-  );
+  try {
+    const res = await fetch(
+      `http://localhost:4000/api/images/batch?limit=${limit}&page=${page}`,
+      {
+        cache: "no-store", // Ensure fresh data on every request
+      }
+    );
 
-  const data = await res.json();
-  return data?.data?.images || [];
+    if (!res.ok) {
+      throw new Error("Failed to fetch images"); // Handle HTTP errors
+    }
+
+    const data = await res.json();
+    return data?.data?.images || [];
+  } catch {
+    // Silently handle any errors and return an empty array
+    return [];
+  }
 }
 
 // The main ImageGallery component with SSR
-export default async function ImageGallery({ searchParams }: { searchParams: { page?: string } }): Promise<JSX.Element> {
-  // Await searchParams to ensure we can access it
+export default async function ImageGallery({
+  searchParams,
+}: {
+  searchParams: { page?: string };
+}): Promise<JSX.Element> {
   const pageParam = await searchParams;
   const currentPage = parseInt(pageParam.page as string) || 1; // Get current page from URL or default to 1
   const limit = 6; // Number of images to display per page
@@ -61,7 +73,9 @@ export default async function ImageGallery({ searchParams }: { searchParams: { p
       <div className="flex justify-between mt-4">
         <a
           href={`?page=${currentPage - 1}`}
-          className={`px-4 py-2 bg-blue-500 text-white rounded-md ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`px-4 py-2 bg-blue-500 text-white rounded-md ${
+            currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
           style={{ pointerEvents: currentPage === 1 ? "none" : "auto" }}
         >
           Previous

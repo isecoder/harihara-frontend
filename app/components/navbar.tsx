@@ -24,28 +24,29 @@ const Navbar = () => {
 
   return (
     <div className="relative w-full z-10">
-      {/* Banner Image */}
-      <div className="relative w-full h-56 md:h-72">
+      {/* Banner Image directly at the top */}
+      <div className="relative w-full h-60 md:h-72">
         <Image
           src="/banner.png"
           alt="Banner"
-          layout="fill"
-          objectFit="cover"
+          fill
+          className="object-top"
           quality={100}
           priority
+          sizes="100vw"
         />
       </div>
 
-      {/* Navbar */}
-      <div className="sticky top-0 bg-gradient-to-r from-white to-orange-100 shadow-lg">
-        <div className="flex items-center justify-between px-4 py-4 md:px-8">
+      {/* Navbar with sticky positioning */}
+      <div className="sticky top-0 bg-gradient-to-r from-white to-orange-100 shadow-md z-20">
+        <div className="flex items-center justify-between px-4 py-2 md:px-6 md:py-3">
           {/* Desktop Links */}
-          <nav className="hidden md:flex space-x-8 flex-1 justify-center">
+          <nav className="hidden md:flex space-x-6 flex-1 justify-center">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="text-orange-500 font-medium hover:text-gray-600 transition duration-200"
+                className="text-orange-500 font-medium text-sm md:text-base hover:text-gray-600 transition duration-200"
               >
                 {label}
               </Link>
@@ -54,7 +55,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Toggle */}
           <div
-            className="md:hidden cursor-pointer text-orange-500 text-2xl"
+            className="md:hidden cursor-pointer text-orange-500 text-xl"
             onClick={toggleMenu}
           >
             {menuOpen ? <FaTimes /> : <FaBars />}
@@ -63,12 +64,12 @@ const Navbar = () => {
 
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 py-6 shadow-md text-center">
+          <div className="md:hidden flex flex-col items-center space-y-2 bg-gradient-to-r from-white to-orange-200 py-4 shadow-md text-center">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="text-orange-500 font-medium hover:text-gray-600 transition duration-200"
+                className="text-orange-500 font-medium text-sm hover:text-gray-600 transition duration-200"
               >
                 {label}
               </Link>
@@ -76,9 +77,6 @@ const Navbar = () => {
           </div>
         )}
       </div>
-
-      {/* Spacer */}
-      <div className="pt-[12rem]"></div>
     </div>
   );
 };
