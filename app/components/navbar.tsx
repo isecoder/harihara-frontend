@@ -4,7 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-const navLinks = [
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
@@ -15,61 +20,60 @@ const navLinks = [
   { href: "/gallery", label: "Gallery" },
 ];
 
-const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+const Navbar: React.FC = () => {
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
   };
 
   return (
-    <div className="relative w-full z-10">
-      {/* Banner Image directly at the top */}
-      <div className="relative w-full h-52 md:h-64 aspect-w-16 aspect-h-9">
-        <Image
-          src="/banner.png"
-          alt="Banner"
-          fill
-          className="object-cover object-center"
-          quality={100}
-          priority
-          sizes="100vw"
-        />
-      </div>
+    <>
+      <div className="fixed w-full z-10 bg-gradient-to-r from-white to-orange-100 shadow-lg">
+        {/* Banner Image */}
+        <div className="relative w-full h-56">
+          <Image
+            src="/banner.png"
+            alt="Banner"
+            fill
+            className="object-cover object-center"
+            quality={100}
+          />
+        </div>
 
-      {/* Navbar with more spacing between links */}
-      <div className="sticky top-0 bg-gradient-to-r from-white to-orange-100 shadow-md z-20">
-        <div className="flex items-center justify-between px-4 py-3 md:px-6 md:py-4">
-          {/* Desktop Links */}
-          <nav className="hidden md:flex space-x-8 flex-1 justify-center">
+        {/* Navbar Container */}
+        <div className="flex justify-end items-center mx-auto py-6 px-4 md:px-8">
+          {/* Navbar Links - Visible on Large Screens */}
+          <nav className="hidden md:flex justify-center flex-1 space-x-8">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="text-orange-500 font-medium text-sm md:text-base hover:text-gray-600 transition duration-200 tracking-wider"
+                className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
               >
                 {label}
               </Link>
             ))}
           </nav>
 
-          {/* Mobile Menu Toggle */}
-          <div
-            className="md:hidden cursor-pointer text-orange-500 text-xl"
-            onClick={toggleMenu}
-          >
-            {menuOpen ? <FaTimes /> : <FaBars />}
+          {/* Hamburger Icon - Visible on Small and Medium Screens */}
+          <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
+            {menuOpen ? (
+              <FaTimes className="text-orange-500 text-2xl" />
+            ) : (
+              <FaBars className="text-orange-500 text-2xl" />
+            )}
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Dropdown Menu for Small and Medium Screens */}
         {menuOpen && (
-          <div className="md:hidden flex flex-col items-center max-w-xs mx-auto w-full px-4 space-y-2 bg-gradient-to-r from-white to-orange-200 py-4 shadow-md text-center">
+          <div className="md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 text-center py-6 shadow-md">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="text-orange-500 font-medium text-sm hover:text-gray-600 transition duration-200 tracking-wide"
+                className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
               >
                 {label}
               </Link>
@@ -77,7 +81,10 @@ const Navbar = () => {
           </div>
         )}
       </div>
-    </div>
+
+      {/* Spacer to prevent content from being hidden behind navbar */}
+      <div className="pt-[14rem]"></div>
+    </>
   );
 };
 
