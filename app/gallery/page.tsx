@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 interface ImageData {
   image_id: number;
   alt_text: string;
-  signed_url: string;
+  public_url: string; // Direct public URL for the image
 }
 
 export default function ImageGallery(): JSX.Element {
@@ -19,15 +19,18 @@ export default function ImageGallery(): JSX.Element {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:4000/api/images/batch?limit=6&page=${currentPage}`,
+        `http://localhost:4000/api/images/batch?limit=5&page=${currentPage}`,
         { cache: "no-store" }
       );
       if (!res.ok) throw new Error("Failed to load images");
 
       const data = await res.json();
+      console.log("Fetched data:", data); // Log the response to verify structure
+
+      // Access the images array from data.images
       const newImages: ImageData[] = data?.data?.images || [];
 
-      setHasMore(newImages.length > 0);
+      setHasMore(newImages.length > 0); // Check if there are more images to load
       setImages((prev) => [
         ...prev,
         ...newImages.filter(
@@ -83,7 +86,7 @@ export default function ImageGallery(): JSX.Element {
           >
             <div className="relative w-full h-48">
               <Image
-                src={image.signed_url}
+                src={image.public_url} // Use public_url directly
                 alt={image.alt_text || "Image"}
                 fill
                 loading="lazy"

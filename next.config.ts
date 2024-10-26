@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "wypeydidbspluuiqhjua.supabase.co", // Allow images from your Supabase host
-        pathname: "/storage/v1/object/sign/**", // Match the Supabase storage image path
+        pathname: "/storage/v1/object/public/harihara_image/images/**", // Match the public Supabase storage image path
       },
     ],
   },
