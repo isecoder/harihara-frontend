@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
+import Swal from "sweetalert2";
 
 interface ImageData {
   image_id: number;
   alt_text: string;
-  public_url: string; // Direct public URL for the image
+  public_url: string;
 }
 
 export default function ImageGallery(): JSX.Element {
@@ -17,20 +18,21 @@ export default function ImageGallery(): JSX.Element {
 
   const fetchImages = useCallback(async (currentPage: number) => {
     setLoading(true);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
     try {
       const res = await fetch(
         `http://localhost:4000/api/images/batch?limit=5&page=${currentPage}`,
-        { cache: "no-store" }
+        { cache: "no-store", signal: controller.signal }
       );
+      clearTimeout(timeoutId);
+
       if (!res.ok) throw new Error("Failed to load images");
 
       const data = await res.json();
-      console.log("Fetched data:", data); // Log the response to verify structure
-
-      // Access the images array from data.images
       const newImages: ImageData[] = data?.data?.images || [];
-
-      setHasMore(newImages.length > 0); // Check if there are more images to load
+      setHasMore(newImages.length > 0);
       setImages((prev) => [
         ...prev,
         ...newImages.filter(
@@ -38,8 +40,15 @@ export default function ImageGallery(): JSX.Element {
         ),
       ]);
     } catch (error) {
-      console.error("Error fetching images:", error);
+      if ((error as Error).name === "AbortError") {
+        Swal.fire({
+          text: "The request took too long and was aborted. Please try again.",
+          icon: "info",
+          confirmButtonText: "Reload",
+        }).then(() => location.reload());
+      }
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   }, []);
@@ -50,14 +59,13 @@ export default function ImageGallery(): JSX.Element {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading) {
-          setPage((prevPage) => prevPage + 1);
+      ([entry]) => {
+        if (entry.isIntersecting && hasMore && !loading) {
+          setPage((prev) => prev + 1);
         }
       },
       { threshold: 1.0 }
     );
-
     const currentLoaderRef = loaderRef.current;
     if (currentLoaderRef) observer.observe(currentLoaderRef);
 
@@ -82,11 +90,11 @@ export default function ImageGallery(): JSX.Element {
         {images.map((image) => (
           <div
             key={image.image_id}
-            className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out"
+            className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out"
           >
             <div className="relative w-full h-48">
               <Image
-                src={image.public_url} // Use public_url directly
+                src={image.public_url}
                 alt={image.alt_text || "Image"}
                 fill
                 loading="lazy"
