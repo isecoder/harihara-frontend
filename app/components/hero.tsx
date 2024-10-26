@@ -15,7 +15,6 @@ const ImageSlider: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Helper function to handle slide transition with delay
   const transitionSlide = useCallback(
     (nextPage: number) => {
       if (isAnimating) return; // Prevent rapid clicking
@@ -26,7 +25,6 @@ const ImageSlider: React.FC = () => {
     [isAnimating]
   );
 
-  // Auto transition every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       transitionSlide((currentPage + 1) % images.length);
@@ -40,8 +38,10 @@ const ImageSlider: React.FC = () => {
     transitionSlide((currentPage + 1) % images.length);
 
   return (
-    <div className="relative flex flex-col items-center w-full max-w-xl mx-auto bg-gradient-to-b from-white to-orange-200">
-      <div className="relative w-full h-72 md:h-80 overflow-hidden">
+    <div className="relative flex flex-col w-full bg-gradient-to-b from-white to-orange-200">
+      <div className="relative w-full h-64 md:h-80 overflow-hidden">
+        {" "}
+        {/* Increased height */}
         <div
           className={`transition-transform duration-500 ease-in-out ${
             isAnimating ? "transform scale-95" : ""
@@ -51,30 +51,27 @@ const ImageSlider: React.FC = () => {
             src={images[currentPage]}
             alt={`Image ${currentPage + 1}`}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
-            className="object-contain w-full h-full"
+            sizes="100vw"
+            className="object-contain w-full h-full" // Full width, increased height
             priority
           />
         </div>
-
         {/* Left arrow */}
         <div
           onClick={handlePrevPage}
-          className="absolute inset-y-1/2 left-4 text-white text-2xl font-semibold cursor-pointer hover:text-orange-500"
+          className="absolute inset-y-1/2 left-4 text-white text-xl cursor-pointer hover:text-orange-500"
         >
           <FontAwesomeIcon icon={faArrowLeft} />
         </div>
-
         {/* Right arrow */}
         <div
           onClick={handleNextPage}
-          className="absolute inset-y-1/2 right-4 text-white text-2xl font-semibold cursor-pointer hover:text-orange-500"
+          className="absolute inset-y-1/2 right-4 text-white text-xl cursor-pointer hover:text-orange-500"
         >
           <FontAwesomeIcon icon={faArrowRight} />
         </div>
-
         {/* Dots navigation */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {images.map((_, index) => (
             <div
               key={index}
