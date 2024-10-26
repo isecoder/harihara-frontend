@@ -1,106 +1,85 @@
-'use client'
-import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FaBars, FaTimes } from 'react-icons/fa';
+"use client";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { FaBars, FaTimes } from "react-icons/fa";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/contact", label: "Contact" },
+  { href: "/sevas", label: "Sevas" },
+  { href: "/donations", label: "Donations" },
+  { href: "/festivals", label: "Festivals" },
+  { href: "/gallery", label: "Gallery" },
+];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    setMenuOpen((prev) => !prev);
   };
 
   return (
-    <>
-      <div className="fixed w-full z-10 bg-gradient-to-r from-white to-orange-100 shadow-lg">
-        {/* Banner Image */}
-        <div className="relative w-full h-56">
-          <Image
-            src="/banner.png"
-            alt="Banner"
-            layout="fill"
-            objectFit="center"
-            quality={100}
-          />
-        </div>
+    <div className="relative w-full z-10">
+      {/* Banner Image */}
+      <div className="relative w-full h-56 md:h-72">
+        <Image
+          src="/banner.png"
+          alt="Banner"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          priority
+        />
+      </div>
 
-        {/* Navbar Container */}
-        <div className="flex justify-end items-center mx-auto py-6 px-4 md:px-8">
-          {/* Navbar Links - Visible on Large Screens */}
-          <nav className="hidden md:flex justify-center flex-1 space-x-20 ">
-            <Link href="/" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-              Home
-            </Link>
-            <Link href="/about" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-              About
-            </Link>
-            <Link href="/services" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-              Services
-            </Link>
-            <Link href="/contact" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-              Contact
-            </Link>
-            <Link href="/sevas" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-              Sevas
-            </Link>
-            <Link href="/donations" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-              Donations
-            </Link>
-            <Link href="/festivals" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-              Festivals
-            </Link>
-            <Link href="/gallery" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-              Gallery
-            </Link>
+      {/* Navbar */}
+      <div className="sticky top-0 bg-gradient-to-r from-white to-orange-100 shadow-lg">
+        <div className="flex items-center justify-between px-4 py-4 md:px-8">
+          {/* Desktop Links */}
+          <nav className="hidden md:flex space-x-8 flex-1 justify-center">
+            {navLinks.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-orange-500 font-medium hover:text-gray-600 transition duration-200"
+              >
+                {label}
+              </Link>
+            ))}
           </nav>
 
-          {/* Hamburger Icon - Visible on Small and Medium Screens */}
-          <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
-            {menuOpen ? (
-              <FaTimes className="text-orange-500 text-2xl" />
-            ) : (
-              <FaBars className="text-orange-500 text-2xl" />
-            )}
+          {/* Mobile Menu Toggle */}
+          <div
+            className="md:hidden cursor-pointer text-orange-500 text-2xl"
+            onClick={toggleMenu}
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
           </div>
         </div>
 
-        {/* Dropdown Menu for Small and Medium Screens */}
-        <div
-          className={`${
-            menuOpen ? 'flex' : 'hidden'
-          } md:hidden flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 text-center py-6 shadow-md`}
-        >
-          <Link href="/" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-            Home
-          </Link>
-          <Link href="/about" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-            About
-          </Link>
-          <Link href="/services" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-            Services
-          </Link>
-          <Link href="/contact" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-            Contact
-          </Link>
-          <Link href="/sevas" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-            Sevas
-          </Link>
-          <Link href="/donations" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-            Donations
-          </Link>
-          <Link href="/festivals" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-            Festivals
-          </Link>
-          <Link href="/gallery" className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200">
-            Gallery
-          </Link>
-        </div>
+        {/* Mobile Dropdown Menu */}
+        {menuOpen && (
+          <div className="md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 py-6 shadow-md text-center">
+            {navLinks.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-orange-500 font-medium hover:text-gray-600 transition duration-200"
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Spacer to prevent content from being hidden behind navbar */}
-      <div className="pt-[14rem]"></div>
-    </>
+      {/* Spacer */}
+      <div className="pt-[12rem]"></div>
+    </div>
   );
 };
 
