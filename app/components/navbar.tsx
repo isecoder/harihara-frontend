@@ -25,12 +25,12 @@ const Navbar = () => {
   return (
     <div className="relative w-full z-10">
       {/* Banner Image directly at the top */}
-      <div className="relative w-full h-52 md:h-64">
+      <div className="relative w-full h-52 md:h-64 aspect-w-16 aspect-h-9">
         <Image
           src="/banner.png"
           alt="Banner"
           fill
-          className="object-top"
+          className="object-cover object-center"
           quality={100}
           priority
           sizes="100vw"
@@ -64,7 +64,7 @@ const Navbar = () => {
 
         {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="md:hidden flex flex-col items-center space-y-2 bg-gradient-to-r from-white to-orange-200 py-4 shadow-md text-center">
+          <div className="md:hidden flex flex-col items-center max-w-xs mx-auto w-full px-4 space-y-2 bg-gradient-to-r from-white to-orange-200 py-4 shadow-md text-center">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
