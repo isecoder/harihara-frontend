@@ -40,11 +40,11 @@ const Banner: React.FC = () => {
         HARIHARAPALLATHADKA, SULLIA TALUK, DAKSHINA KANNADA - 574218
       </p>
 
-      {/* Decorative Icons */}
+      {/*  Icons */}
       <div className="absolute bottom-6 flex justify-between w-full px-8 md:px-16 z-10">
         <div className="flex items-center space-x-2">
           <Image
-            src="/logo.jpg" // Replace with the actual path to the temple logo if available
+            src="/logo.jpg" 
             alt="Temple Logo"
             width={48}
             height={48}

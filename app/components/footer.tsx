@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
           </ul>
         </div>
 
-        {/* Address Section */}
+        
         <div className="text-center lg:text-left mb-6 lg:mb-0">
           <h3 className="text-lg font-semibold mb-2">
           <span className="text-ms font-normal">🛈</span>Address</h3>
