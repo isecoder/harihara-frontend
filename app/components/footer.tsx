@@ -3,11 +3,12 @@ import Image from "next/image";
 import Link from 'next/link';
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gradient-to-r from-orange-700 to-orange-400 text-white py-10 px-10 md:px-10 lg:px-10 mt-[100rem]">
+    <div className="flex flex-col min-h-screen">
+    <footer className="bg-gradient-to-r from-orange-700 to-orange-400 text-white py-10 px-10 md:px-10 lg:px-10 mt-[100rem] flex-grow">
       <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center">
   
   {/* Logo and Title Section */}
-  <div className="flex flex-col items-center lg:items-start mb-8 lg:mb-0">
+  <div className="flex flex-col items-center lg:items-start mb-8 lg:mb-0 ">
     <div className="mb-8">
       <Image
         src="/logo.jpg"
@@ -37,7 +38,7 @@ const Footer: React.FC = () => {
       {/* Instagram Link */}
       <a href="https://www.instagram.com/shreeharihareshwara" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
   <svg
-    className="w-6 h-7 text-white hover:text-blue-400 transition-colors duration-200"
+    className="w-6 h-6 text-white hover:text-blue-400 transition-colors duration-200"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 16 16" 
     fill="currentColor"
@@ -93,7 +94,7 @@ const Footer: React.FC = () => {
         </div>
 
         
-        <div className="text-center lg:text-left mb-6 lg:mb-0">
+        <div className="text-center lg:text-left mb-6 lg:mb-0 mt-6">
           <h3 className="text-lg font-semibold mb-2">
           <span className="text-ms font-normal">🛈</span>Address</h3>
           <address>
@@ -158,9 +159,15 @@ const Footer: React.FC = () => {
 </div>
 
       </div>
+    </footer>
+      <div className="bg-orange-800 text-white py-2 text-center site-footer-bottom mx-0 mb-0">
+        <p>© 2021-2024 | Disclaimer - <Link href="/policy" className="hover:text-yellow-400 hover:underline">Privacy Policy</Link> | <Link href="/policy" className="hover:text-yellow-400 hover:underline">Refund & Cancellation</Link> | Harihareshwara Temple Pallathadka. All Rights Reserved</p>
+        <p>Designed by: <Link href="https://www.instagram.com/iscoderz/" className="hover:text-yellow-400 hover:underline">ISCODERZ</Link></p>
+    </div>
+
 
       
-    </footer>
+    </div>
   );
 };
 
