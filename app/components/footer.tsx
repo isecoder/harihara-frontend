@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-
+import Link from 'next/link';
 const Footer: React.FC = () => {
   return (
     <footer className="bg-gradient-to-r from-orange-700 to-orange-400 text-white py-10 px-10 md:px-10 lg:px-10 mt-[100rem]">
@@ -61,32 +61,32 @@ const Footer: React.FC = () => {
           <h3 className="text-lg font-semibold mb-6">≡ Quick Links</h3>
           <ul className="space-y-1">
             <li>
-            <a href="/about" className="hover:underline hover:text-yellow-500 flex items-center">
+            <Link href="/about" className="hover:underline hover:text-yellow-500 flex items-center">
     <span className="inline-block w-4 ">
       <span className="text-xs leading-4">►</span>
     </span>History
-              </a>
+              </Link>
             </li>
             <li>
-            <a href="#" className="hover:underline hover:text-yellow-500 flex items-center">
+            <Link href="#" className="hover:underline hover:text-yellow-500 flex items-center">
     <span className="inline-block w-4 ">
       <span className="text-xs leading-4">►</span>
     </span>News
-              </a>
+              </Link>
             </li>
             <li>
-            <a href="/sevas" className="hover:underline hover:text-yellow-500 flex items-center">
+            <Link href="/sevas" className="hover:underline hover:text-yellow-500 flex items-center">
     <span className="inline-block w-4 ">
       <span className="text-xs leading-4">►</span>
     </span> Seva List
-              </a>
+              </Link>
             </li>
             <li>
-  <a href="/gallery" className="hover:underline hover:text-yellow-500 flex items-center">
+  <Link href="/gallery" className="hover:underline hover:text-yellow-500 flex items-center">
     <span className="inline-block w-4 ">
       <span className="text-xs leading-4">►</span>
     </span> Gallery
-  </a>
+  </Link>
 </li>
 
           </ul>
