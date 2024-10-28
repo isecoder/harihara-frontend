@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*", // Match API calls starting with /api
-        destination: "http://localhost:4000/api/:path*", // Proxy to your NestJS backend running on port 4000
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`, // Use the environment variable for the API URL
       },
     ];
   },

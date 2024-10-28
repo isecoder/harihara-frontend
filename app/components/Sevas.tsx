@@ -19,18 +19,27 @@ export default function SevasList(): JSX.Element {
 
   const fetchSevas = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/api/sevas`);
+      const res = await fetch(`http://localhost:3000/api/sevas`);
       if (!res.ok) throw new Error("Failed to load sevas");
       const { data } = await res.json();
 
-      const formattedData = data.map((seva: { seva_id: number; name: string; description: string; base_price: string; name_kannada?: string; description_kannada?: string }) => ({
-        id: seva.seva_id,
-        name: seva.name,
-        description: seva.description,
-        base_price: parseFloat(seva.base_price), // Convert to number
-        name_kannada: seva.name_kannada,
-        description_kannada: seva.description_kannada,
-      }));
+      const formattedData = data.map(
+        (seva: {
+          seva_id: number;
+          name: string;
+          description: string;
+          base_price: string;
+          name_kannada?: string;
+          description_kannada?: string;
+        }) => ({
+          id: seva.seva_id,
+          name: seva.name,
+          description: seva.description,
+          base_price: parseFloat(seva.base_price), // Convert to number
+          name_kannada: seva.name_kannada,
+          description_kannada: seva.description_kannada,
+        })
+      );
 
       setSevas(formattedData);
     } catch (err) {
@@ -59,7 +68,9 @@ export default function SevasList(): JSX.Element {
   return (
     <div className="container mx-auto p-6">
       {error && <p className="text-red-500 text-center">{error}</p>}
-      {sevas.length === 0 && !error && <p className="text-center">No sevas available.</p>}
+      {sevas.length === 0 && !error && (
+        <p className="text-center">No sevas available.</p>
+      )}
 
       <div className="flex justify-center">
         <button

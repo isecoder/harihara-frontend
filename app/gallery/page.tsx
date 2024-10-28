@@ -23,7 +23,7 @@ export default function ImageGallery(): JSX.Element {
 
     try {
       const res = await fetch(
-        `http://localhost:4000/api/images/batch?limit=5&page=${currentPage}`,
+        `http://localhost:3000/api/images/batch?limit=5&page=${currentPage}`,
         { cache: "no-store", signal: controller.signal }
       );
       clearTimeout(timeoutId);
