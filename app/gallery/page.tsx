@@ -99,43 +99,37 @@ export default function ImageGallery(): JSX.Element {
   };
 
   return (
-    <div className="relative">
+    <div className="relative px-4 md:px-8 lg:px-16">
+      {" "}
+      {/* Added padding here */}
       {loading && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="loader"></div>
         </div>
       )}
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 mt-10">
         {images.map((image, index) => (
           <div
             key={image.image_id}
-            className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out"
+            className="relative w-full h-48 cursor-pointer overflow-hidden"
             onClick={() => openModal(index)}
           >
-            <div className="relative w-full h-48">
-              <Image
-                src={image.public_url}
-                alt={image.alt_text || "Image"}
-                fill
-                loading="lazy"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="p-4">
-              <p className="text-sm text-gray-600">{image.alt_text}</p>
-            </div>
+            <Image
+              src={image.public_url}
+              alt="Image"
+              fill
+              loading="lazy"
+              className="object-cover transition-transform duration-300 hover:scale-105"
+            />
           </div>
         ))}
         <div
           ref={loaderRef}
           className="w-full h-10 flex justify-center items-center"
         >
-          {!hasMore && <p>No more images to load</p>}
+          {/* {!hasMore && <p>No more images to load</p>} */}
         </div>
       </div>
-
       <ImageModal
         isOpen={isModalOpen}
         images={images}
@@ -143,7 +137,6 @@ export default function ImageGallery(): JSX.Element {
         onClose={closeModal}
         onNavigate={navigate}
       />
-
       <style jsx>{`
         .loader {
           border: 8px solid #f3f3f3;
