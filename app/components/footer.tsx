@@ -4,7 +4,7 @@ import Link from 'next/link';
 const Footer: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
-    <footer className="bg-gradient-to-r from-orange-700 to-orange-400 text-white py-10 px-10 md:px-10 lg:px-10 mt-[100rem] flex-grow">
+    <footer className="bg-gradient-to-r from-orange-300 to-orange-400 text-white py-10 px-10 md:px-10 lg:px-10 mt-[100rem] flex-grow">
       <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center">
   
   {/* Logo and Title Section */}
@@ -160,7 +160,7 @@ const Footer: React.FC = () => {
 
       </div>
     </footer>
-      <div className="bg-orange-800 text-white py-2 text-center site-footer-bottom mx-0 mb-0">
+      <div className="bg-black text-white py-2 text-center site-footer-bottom mx-0 mb-0">
         <p>© 2021-2024 | Disclaimer - <Link href="/policy" className="hover:text-yellow-400 hover:underline">Privacy Policy</Link> | <Link href="/policy" className="hover:text-yellow-400 hover:underline">Refund & Cancellation</Link> | Harihareshwara Temple HariharaPallathadka. All Rights Reserved</p>
         <p>Designed by: <Link href="https://www.instagram.com/iscoderz/" className="hover:text-yellow-400 hover:underline">ISCODERZ</Link></p>
     </div>
