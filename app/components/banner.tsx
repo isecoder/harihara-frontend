@@ -28,8 +28,9 @@ const Banner = () => {
           />
         </div>
 
+        
         {/* Center Section - Department Text, Title, and Address */}
-        <div className="text-center flex flex-col items-center">
+        <div className="text-center flex flex-col items-center mr-4 md:mr-10">
           <div className="bg-orange-300 text-black rounded-full py-1 px-4 text-xs md:text-sm mb-2">
             Hindu Religious Institutions & Charitable Endowments Department
           </div>
@@ -42,7 +43,7 @@ const Banner = () => {
         </div>
 
         {/* Right Logo - Government Logo for Large Screens */}
-        <div className="hidden md:block absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2">
+        <div className="hidden md:block absolute right-4 md:right-8 top-[42%] transform -translate-y-1/2">
           <Image
             src="/government.png" // Use the actual path to the government logo
             alt="Government Logo"
@@ -68,3 +69,4 @@ const Banner = () => {
 };
 
 export default Banner;
+
