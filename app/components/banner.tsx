@@ -44,7 +44,7 @@ const Banner: React.FC = () => {
       <div className="absolute bottom-6 flex justify-between w-full px-8 md:px-16 z-10">
         <div className="flex items-center space-x-2">
           <Image
-            src="/path/to/your/icon1.png" // Replace with the actual path to the temple logo if available
+            src="/logo.jpg"
             alt="Temple Logo"
             width={48}
             height={48}
