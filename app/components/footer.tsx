@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 const Footer: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <footer className="bg-gradient-to-r from-orange-700 to-orange-400 text-white py-10 px-10 md:px-10 lg:px-10 mt-5 flex-grow">
+    <div className="flex flex-col ">
+      <footer className="bg-gradient-to-r from-orange-500 to-orange-300 text-white py-10 px-10 md:px-10 lg:px-10 mt-5 flex-grow">
         <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center">
           {/* Logo and Title Section */}
           <div className="flex flex-col items-center lg:items-start mb-8 lg:mb-0 ">
@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="/about"
-                  className="hover:underline hover:text-yellow-500 flex items-center"
+                  className="hover:underline hover:text-yellow-300 flex items-center"
                 >
                   <span className="inline-block w-4 ">
                     <span className="text-xs leading-4">►</span>
@@ -76,7 +76,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="#"
-                  className="hover:underline hover:text-yellow-500 flex items-center"
+                  className="hover:underline hover:text-yellow-300 flex items-center"
                 >
                   <span className="inline-block w-4 ">
                     <span className="text-xs leading-4">►</span>
@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="/sevas"
-                  className="hover:underline hover:text-yellow-500 flex items-center"
+                  className="hover:underline hover:text-yellow-300 flex items-center"
                 >
                   <span className="inline-block w-4 ">
                     <span className="text-xs leading-4">►</span>
@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="/gallery"
-                  className="hover:underline hover:text-yellow-500 flex items-center"
+                  className="hover:underline hover:text-yellow-300 flex items-center"
                 >
                   <span className="inline-block w-4 ">
                     <span className="text-xs leading-4">►</span>
