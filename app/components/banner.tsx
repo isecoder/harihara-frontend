@@ -1,71 +1,68 @@
-// components/Banner.tsx
-"use client";
-import Image from "next/image";
-import { FaOm } from "react-icons/fa";
-import { AiOutlineStar } from "react-icons/ai";
+import React from "react";
+import Image from "next/image"; // Import the Image component from next/image
 
-const Banner: React.FC = () => {
+const Banner = () => {
   return (
-    <div className="relative w-full h-52 md:h-64 bg-orange-500 text-white flex flex-col items-center justify-center text-center p-4 overflow-hidden">
-      {/* Top Decorative Border */}
-      <div className="absolute top-0 w-full h-3 bg-green-700"></div>
-
-      {/* Background Patterns */}
-      <div className="absolute inset-0 bg-orange-500 opacity-90">
-        <div className="absolute left-4 top-10 w-24 h-24 rounded-full bg-orange-400 opacity-50"></div>
-        <div className="absolute right-4 top-10 w-24 h-24 rounded-full bg-orange-400 opacity-50"></div>
-        <div className="absolute left-4 bottom-10 w-32 h-32 rounded-full bg-orange-600 opacity-40"></div>
-        <div className="absolute right-4 bottom-10 w-32 h-32 rounded-full bg-orange-600 opacity-40"></div>
-      </div>
-
-      {/* Government Badges */}
-      <div className="flex justify-between items-center w-full px-6 md:px-12 z-10">
-        <div className="flex items-center space-x-2 text-white text-sm bg-orange-600 px-3 py-1 rounded-full shadow-md">
-          <AiOutlineStar className="text-lg" />
-          <span>Government of Karnataka</span>
-        </div>
-        <div className="flex items-center space-x-2 text-white text-sm bg-orange-600 px-3 py-1 rounded-full shadow-md">
-          <span>
-            Hindu Religious Institutions & Charitable Endowments Department
-          </span>
-          <AiOutlineStar className="text-lg" />
-        </div>
-      </div>
-
-      {/* Main Banner Text */}
-      <h1 className="text-3xl md:text-5xl font-bold mt-4 z-10 text-white  thick-border ">
-        SHRI HARIHARESHWARA TEMPLE
-      </h1>
-      <p className="text-sm md:text-lg z-10 text-white ">
-        HARIHARAPALLATHADKA, SULLIA TALUK, DAKSHINA KANNADA - 574218
-      </p>
-
-      {/* Decorative Icons */}
-      <div className="absolute bottom-6 flex justify-between w-full px-8 md:px-16 z-10">
-        <div className="flex items-center space-x-2">
+    <div className="bg-gradient-to-br from-orange-300 to-orange-500 text-white py-12 px-4 md:px-8 lg:px-16 relative">
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto flex flex-col items-center space-y-4 relative">
+        {/* Left Logo - Temple Logo for Large Screens */}
+        <div className="hidden md:block absolute left-2 md:left-8 top-1/2 transform -translate-y-1/2">
           <Image
-            src="/logo.jpg"
+            src="/logo.jpg" // Use the actual path to the temple logo
             alt="Temple Logo"
-            width={48}
-            height={48}
-            className="rounded-full"
+            width={100} // Set width for optimization
+            height={100} // Set height for optimization
+            className="h-16 md:h-20 lg:h-24 w-auto rounded-full"
           />
-          <span className="text-xl md:text-2xl font-kannada text-white ">
-            ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ
-          </span>
         </div>
-        <FaOm className="text-pink-500 text-2xl md:text-3xl" />
+
+        {/* Logo for Small Screens */}
+        <div className="md:hidden flex flex-col items-center">
+          <Image
+            src="/logo.jpg" // Use the actual path to the temple logo
+            alt="Temple Logo"
+            width={150} // Set width for optimization
+            height={150} // Set height for optimization
+            className="h-24 w-auto rounded-full" // Larger size for small screens
+          />
+        </div>
+
+        {/* Center Section - Department Text, Title, and Address */}
+        <div className="text-center flex flex-col items-center">
+          <div className="bg-orange-300 text-black rounded-full py-1 px-4 text-xs md:text-sm mb-2">
+            Hindu Religious Institutions & Charitable Endowments Department
+          </div>
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold whitespace-nowrap">
+            SHRI HARIHARESHWARA TEMPLE
+          </h1>
+          <p className="text-xs md:text-lg mt-2">
+            HARIHARAPALLATHADKA, SULLIA TALUK, DAKSHINA KANNADA - 574218
+          </p>
+        </div>
+
+        {/* Right Logo - Government Logo for Large Screens */}
+        <div className="hidden md:block absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2">
+          <Image
+            src="/government.png" // Use the actual path to the government logo
+            alt="Government Logo"
+            width={100} // Set width for optimization
+            height={100} // Set height for optimization
+            className="h-16 md:h-20 lg:h-24 w-auto"
+          />
+        </div>
+
+        {/* Government Logo for Small Screens */}
+        <div className="md:hidden flex flex-col items-center mt-4">
+          <Image
+            src="/government.png" // Use the actual path to the government logo
+            alt="Government Logo"
+            width={150} // Set width for optimization
+            height={150} // Set height for optimization
+            className="h-24 w-auto rounded-full" // Larger size for small screens
+          />
+        </div>
       </div>
-
-      {/* Bottom Decorative Border */}
-      <div className="absolute bottom-0 w-full h-3 bg-green-700"></div>
-
-      <style jsx>{`
-        .thick-border {
-          text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000,
-            -2px 2px 0 #000;
-        }
-      `}</style>
     </div>
   );
 };

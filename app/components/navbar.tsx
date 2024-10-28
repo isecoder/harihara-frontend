@@ -1,4 +1,3 @@
-// components/Navbar.tsx
 "use client";
 import { useState } from "react";
 import Link from "next/link";
@@ -34,8 +33,10 @@ const Navbar: React.FC = () => {
       {/* Navbar Container */}
       <div className="sticky top-0 w-full z-10 bg-gradient-to-r from-white to-orange-100 shadow-lg">
         <div className="flex justify-end items-center mx-auto py-4 px-4 md:px-8">
+          {/* Logo - Visible on Small Screens */}
+
           {/* Navbar Links - Visible on Large Screens */}
-          <nav className="hidden md:flex justify-center flex-1 space-x-8 text-sm">
+          <nav className="hidden md:flex justify-center flex-1 space-x-6 text-sm">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
@@ -59,7 +60,7 @@ const Navbar: React.FC = () => {
 
         {/* Dropdown Menu for Small and Medium Screens */}
         {menuOpen && (
-          <div className="md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 text-center py-6 shadow-md">
+          <div className="md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 text-center py-6 shadow-md transition-all duration-200">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
