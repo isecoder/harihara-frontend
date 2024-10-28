@@ -1,5 +1,7 @@
 import React from "react";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 interface ImageData {
   image_id: number;
@@ -26,12 +28,19 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
   const currentImage = images[currentIndex];
 
+  const handleOverlayClick = (event: React.MouseEvent) => {
+    // Close the modal when clicking on the overlay
+    if (event.target === event.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+      onClick={handleOverlayClick}
+    >
       <div className="relative max-w-3xl w-full p-4">
-        <button onClick={onClose} className="absolute top-2 right-2 text-white">
-          ✖️
-        </button>
         <div className="relative w-full h-96">
           <Image
             src={currentImage.public_url}
@@ -41,26 +50,40 @@ const ImageModal: React.FC<ImageModalProps> = ({
             priority
           />
         </div>
-        <div className="flex justify-between mt-4">
+
+        {/* Arrows positioned absolutely outside the image */}
+        <div className="absolute inset-y-1/2 left-0 flex items-center justify-center transform -translate-y-1/2">
           <button
             onClick={() => onNavigate("prev")}
             disabled={currentIndex === 0}
-            className={`bg-white text-black px-4 py-2 rounded ${
+            className={`flex items-center justify-center w-10 h-10 rounded-full ${
               currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
+            style={{
+              backgroundColor:
+                currentIndex === 0 ? "transparent" : "rgba(255, 255, 255, 0.3)",
+            }}
           >
-            Previous
+            <FontAwesomeIcon icon={faArrowLeft} className="text-white" />
           </button>
+        </div>
+        <div className="absolute inset-y-1/2 right-0 flex items-center justify-center transform -translate-y-1/2">
           <button
             onClick={() => onNavigate("next")}
             disabled={currentIndex === images.length - 1}
-            className={`bg-white text-black px-4 py-2 rounded ${
+            className={`flex items-center justify-center w-10 h-10 rounded-full ${
               currentIndex === images.length - 1
                 ? "opacity-50 cursor-not-allowed"
                 : ""
             }`}
+            style={{
+              backgroundColor:
+                currentIndex === images.length - 1
+                  ? "transparent"
+                  : "rgba(255, 255, 255, 0.3)",
+            }}
           >
-            Next
+            <FontAwesomeIcon icon={faArrowRight} className="text-white" />
           </button>
         </div>
       </div>
