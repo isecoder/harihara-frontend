@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
 import Swal from "sweetalert2";
+import ImageModal from "../components/ImageModal";
 
 interface ImageData {
   image_id: number;
@@ -14,6 +15,8 @@ export default function ImageGallery(): JSX.Element {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   const fetchImages = useCallback(async (currentPage: number) => {
@@ -78,6 +81,23 @@ export default function ImageGallery(): JSX.Element {
     if (page > 1 && hasMore) fetchImages(page);
   }, [page, hasMore, fetchImages]);
 
+  const openModal = (index: number) => {
+    setCurrentIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const navigate = (direction: "next" | "prev") => {
+    if (direction === "next" && currentIndex < images.length - 1) {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    } else if (direction === "prev" && currentIndex > 0) {
+      setCurrentIndex((prevIndex) => prevIndex - 1);
+    }
+  };
+
   return (
     <div className="relative">
       {loading && (
@@ -87,10 +107,11 @@ export default function ImageGallery(): JSX.Element {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-        {images.map((image) => (
+        {images.map((image, index) => (
           <div
             key={image.image_id}
             className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out"
+            onClick={() => openModal(index)}
           >
             <div className="relative w-full h-48">
               <Image
@@ -114,6 +135,14 @@ export default function ImageGallery(): JSX.Element {
           {!hasMore && <p>No more images to load</p>}
         </div>
       </div>
+
+      <ImageModal
+        isOpen={isModalOpen}
+        images={images}
+        currentIndex={currentIndex}
+        onClose={closeModal}
+        onNavigate={navigate}
+      />
 
       <style jsx>{`
         .loader {
