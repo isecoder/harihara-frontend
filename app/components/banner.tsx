@@ -33,10 +33,10 @@ const Banner: React.FC = () => {
       </div>
 
       {/* Main Banner Text */}
-      <h1 className="text-3xl md:text-5xl font-bold mt-4 z-10 text-white thick-border">
+      <h1 className="text-3xl md:text-5xl font-bold mt-4 z-10 text-white ">
         SHRI HARIHARESHWARA TEMPLE
       </h1>
-      <p className="text-sm md:text-lg z-10 text-white thick-border">
+      <p className="text-sm md:text-lg z-10 text-white ">
         HARIHARAPALLATHADKA, SULLIA TALUK, DAKSHINA KANNADA - 574218
       </p>
 
@@ -50,7 +50,7 @@ const Banner: React.FC = () => {
             height={48}
             className="rounded-full"
           />
-          <span className="text-xl md:text-2xl font-kannada text-white thick-border">
+          <span className="text-xl md:text-2xl font-kannada text-white ">
             ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ
           </span>
         </div>
