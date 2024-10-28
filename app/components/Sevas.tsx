@@ -19,7 +19,7 @@ export default function SevasList(): JSX.Element {
 
   const fetchSevas = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sevas`);
+      const res = await fetch(`/api/sevas`);
       if (!res.ok) throw new Error("Failed to load sevas");
       const { data } = await res.json();
 
