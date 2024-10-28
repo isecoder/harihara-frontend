@@ -33,7 +33,7 @@ const Banner: React.FC = () => {
       </div>
 
       {/* Main Banner Text */}
-      <h1 className="text-3xl md:text-5xl font-bold mt-4 z-10 text-white ">
+      <h1 className="text-3xl md:text-5xl font-bold mt-4 z-10 text-white  thick-border ">
         SHRI HARIHARESHWARA TEMPLE
       </h1>
       <p className="text-sm md:text-lg z-10 text-white ">
