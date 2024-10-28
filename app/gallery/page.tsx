@@ -22,10 +22,10 @@ export default function ImageGallery(): JSX.Element {
     const timeoutId = setTimeout(() => controller.abort(), 5000);
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/images/batch?limit=5&page=${currentPage}`,
-        { cache: "no-store", signal: controller.signal }
-      );
+      const res = await fetch(`/api/images/batch?limit=5&page=${currentPage}`, {
+        cache: "no-store",
+        signal: controller.signal,
+      });
       clearTimeout(timeoutId);
 
       if (!res.ok) throw new Error("Failed to load images");
