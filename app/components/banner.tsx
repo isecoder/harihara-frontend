@@ -28,7 +28,8 @@ const Banner = () => {
           />
         </div>
 
-        {/* Center Section - Department Text, Title, and Address */}
+        
+         {/* Center Section - Department Text, Title, and Address */}
         <div className="text-center flex flex-col items-center">
           <div className="bg-orange-300 text-black rounded-full py-1 px-4 text-xs md:text-sm mb-2">
             Hindu Religious Institutions & Charitable Endowments Department
@@ -68,3 +69,4 @@ const Banner = () => {
 };
 
 export default Banner;
+
