@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../store"; // Adjust the import if needed
+import { RootState, AppDispatch } from "../store";
 import { changeLocale } from "../store/localeSlice";
 
 // Define a type for the locales
@@ -25,19 +25,21 @@ const historicalMessages: Record<LocaleType, string[]> = {
   ],
 };
 
+const titles: Record<LocaleType, string> = {
+  en: "Historical Significance",
+  kn: "ಆತ್ಮೀಯ ಶ್ರೇಷ್ಠತೆ",
+};
+
 export default function About() {
   const dispatch = useDispatch<AppDispatch>();
   const currentLocale: LocaleType = useSelector(
     (state: RootState) => state.locale.locale
-  ) as LocaleType; // Access current locale from state
+  ) as LocaleType;
 
-  // Get the historical messages based on the current locale
   const messages = historicalMessages[currentLocale];
-
   const [isLocaleLoaded, setIsLocaleLoaded] = useState(false);
 
   useEffect(() => {
-    // If the locale is not already in localStorage, set it to the initial value
     const savedLocale = (localStorage.getItem("locale") || "en") as LocaleType;
     dispatch(changeLocale(savedLocale));
     setIsLocaleLoaded(true);
@@ -46,12 +48,15 @@ export default function About() {
   if (!isLocaleLoaded) return null; // Prevent rendering until locale is loaded
 
   return (
-    <main className="min-h-screen flex flex-col items-center p-8 text-center">
-      {messages.map((para: string, index: number) => (
-        <p key={index} className="text-lg mb-4 text-justify px-2">
-          {para}
-        </p> // Reduced horizontal padding
-      ))}
+    <main className="min-h-screen flex flex-col items-center p-6 text-center">
+      <h1 className="text-3xl font-bold mb-6">{titles[currentLocale]}</h1>
+      <div className="max-w-2xl mx-auto">
+        {messages.map((para: string, index: number) => (
+          <p key={index} className="text-lg mb-4 text-justify">
+            {para}
+          </p>
+        ))}
+      </div>
     </main>
   );
 }

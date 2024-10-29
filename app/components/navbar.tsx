@@ -71,7 +71,7 @@ const Navbar: React.FC = () => {
 
           {/* Hamburger Icon - Visible on Small and Medium Screens */}
           <div
-            className="md:hidden cursor-pointer"
+            className="md:hidden cursor-pointer "
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
