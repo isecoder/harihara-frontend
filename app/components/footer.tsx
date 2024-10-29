@@ -170,7 +170,7 @@ const Footer: React.FC = () => {
       </footer>
 
       {/* Footer Bottom Section */}
-      <div className="bg-black text-white py-4 text-center site-footer-bottom mx-0 mb-0">
+      <div className="bg-black text-white py-2 text-center site-footer-bottom mx-0 mb-0">
         <p>
           © 2024 | Disclaimer -{" "}
           <Link
