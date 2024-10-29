@@ -32,7 +32,8 @@ export default function LanguageSwitcher({
         onClick={() => setDropdownOpen((prev) => !prev)} // Toggle dropdown
         className="flex items-center text-orange-500 font-medium hover:text-gray-600"
       >
-        Language <FaCaretDown className="ml-1 text-center" />
+        {/* Display current locale */}
+        {locale === "kn" ? "ಕನ್ನಡ" : "English"} <FaCaretDown className="ml-1 text-center" />
       </button>
       {dropdownOpen && ( // Show dropdown if it's open
         <ul className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md z-10">
@@ -48,8 +49,6 @@ export default function LanguageSwitcher({
           ))}
         </ul>
       )}
-      
-      {/* Display current locale */}
     </div>
   );
 }
