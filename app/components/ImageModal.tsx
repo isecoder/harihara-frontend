@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface ImageData {
   image_id: number;
@@ -104,6 +108,14 @@ const ImageModal: React.FC<ImageModalProps> = ({
             priority
           />
         </div>
+
+        {/* Close button (X mark) */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-200 focus:outline-none transition duration-200 ease-in-out"
+        >
+          <FontAwesomeIcon icon={faTimes} className="text-black text-2xl" />
+        </button>
 
         {/* Fade-in message for escaping the modal */}
         {showEscapeMessage && (
