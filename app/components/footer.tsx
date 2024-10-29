@@ -6,7 +6,7 @@ import Link from "next/link";
 const Footer: React.FC = () => {
   return (
     <div className="flex flex-col max-h-screen">
-      <footer className="bg-gradient-to-r from-orange-200 to-orange-400 text-white py-10 px-10 md:px-10 lg:px-10 mt-[6rem] flex-grow">
+      <footer className="bg-gradient-to-r from-orange-400 to-orange-500 text-white py-10 px-10 md:px-10 lg:px-10 mt-[6rem] flex-grow">
         <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center">
           {/* Logo and Title Section */}
           <div className="flex flex-col items-center lg:items-start mb-8 lg:mb-0">
@@ -158,9 +158,9 @@ const Footer: React.FC = () => {
       </footer>
 
       {/* Footer Bottom Section */}
-      <div className="bg-black text-white py-2 text-center site-footer-bottom mx-0 mb-0">
+      <div className="bg-black text-white py-4 text-center site-footer-bottom mx-0 mb-0">
         <p>
-          © 2021-2024 | Disclaimer -{" "}
+          © 2024 | Disclaimer -{" "}
           <Link href="/policy" className="hover:text-yellow-400 hover:underline">
             Privacy Policy
           </Link>{" "}
