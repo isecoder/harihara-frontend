@@ -8,8 +8,8 @@ import { Phone, Mail } from "lucide-react";
 export default function Footer() {
   return (
     <div className="relative">
-      <Image
-        src="/placeholder.svg?height=600&width=1200"
+      {/* <Image
+        src="/?height=600&width=1200"
         alt="Temple Background"
         fill // Use fill for the new layout
         className="object-cover z-0" // Use object-cover to maintain aspect ratio
@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="flex flex-col items-center md:items-start">
             <Image
-              src="/placeholder.svg?height=96&width=96"
+              src="/logo.jpg?height=96&width=96"
               alt="Temple Logo"
               width={96}
               height={96}

@@ -1,17 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "./store";
+import {  useDispatch } from "react-redux";
+import {  AppDispatch } from "./store";
 import { changeLocale } from "./store/localeSlice";
 import Hero from "./components/hero";
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
-  const { welcome, greeting } = useSelector(
-    (state: RootState) => state.locale.messages
-  );
-
+  
   const [isLocaleLoaded, setIsLocaleLoaded] = useState(false);
 
   useEffect(() => {
