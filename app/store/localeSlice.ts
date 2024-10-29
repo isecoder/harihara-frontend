@@ -14,14 +14,21 @@ const translations = {
   },
 };
 
+const getInitialLocale = (): string => {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("locale") || "en"; // Default to English if not found
+  }
+  return "en"; // Fallback for server-side rendering
+};
+
 interface LocaleState {
   locale: string;
   messages: typeof translations.en;
 }
 
 const initialState: LocaleState = {
-  locale: "en",
-  messages: translations["en"],
+  locale: getInitialLocale(), // Use the function to get the initial locale
+  messages: translations[getInitialLocale() as keyof typeof translations],
 };
 
 const localeSlice = createSlice({

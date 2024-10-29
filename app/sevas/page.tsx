@@ -1,6 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
-import SevaForm from "./SevaForm"; // Import the SevaForm component directly
+
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store"; // Adjust the import if needed
+import SevaForm from "../components/SevaForm"; // Ensure SevaForm is correctly imported
 
 interface Seva {
   id: number;
@@ -11,10 +14,13 @@ interface Seva {
   description_kannada?: string; // Kannada description
 }
 
-export default function SevasList(): JSX.Element {
+const SevasList = (): JSX.Element => {
+  const showKannada = useSelector(
+    (state: RootState) => state.locale.locale === "kn"
+  ); // Track language from Redux state
+
   const [sevas, setSevas] = useState<Seva[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [showKannada, setShowKannada] = useState<boolean>(false); // State to track language
   const [selectedSeva, setSelectedSeva] = useState<Seva | null>(null); // State to store selected seva
 
   const fetchSevas = async () => {
@@ -52,10 +58,6 @@ export default function SevasList(): JSX.Element {
     fetchSevas();
   }, []);
 
-  const toggleLanguage = () => {
-    setShowKannada((prev) => !prev); // Toggle between languages
-  };
-
   const handleSevaClick = (seva: Seva) => {
     setSelectedSeva(seva); // Set the selected seva to display in SevaForm
   };
@@ -71,15 +73,6 @@ export default function SevasList(): JSX.Element {
       {sevas.length === 0 && !error && (
         <p className="text-center">No sevas available.</p>
       )}
-
-      <div className="flex justify-center">
-        <button
-          onClick={toggleLanguage}
-          className="mt-4 bg-orange-600 text-white py-2 px-6 rounded shadow hover:bg-orange-700 transition"
-        >
-          {showKannada ? "English" : "ಕನ್ನಡ"}
-        </button>
-      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
         {sevas.map((seva) => (
@@ -100,4 +93,6 @@ export default function SevasList(): JSX.Element {
       </div>
     </div>
   );
-}
+};
+
+export default SevasList;
