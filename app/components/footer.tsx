@@ -62,28 +62,28 @@ const Footer: React.FC = () => {
           <h3 className="text-lg font-semibold mb-6">≡ Quick Links</h3>
           <ul className="space-y-1">
             <li>
-            <Link href="/about" className="hover:underline hover:text-yellow-500 flex items-center">
+            <Link href="/about" className="hover:underline hover:text-yellow-400 flex items-center">
     <span className="inline-block w-4 ">
       <span className="text-xs leading-4">►</span>
     </span>History
               </Link>
             </li>
             <li>
-            <Link href="#" className="hover:underline hover:text-yellow-500 flex items-center">
+            <Link href="#" className="hover:underline hover:text-yellow-400 flex items-center">
     <span className="inline-block w-4 ">
       <span className="text-xs leading-4">►</span>
     </span>News
               </Link>
             </li>
             <li>
-            <Link href="/sevas" className="hover:underline hover:text-yellow-500 flex items-center">
+            <Link href="/sevas" className="hover:underline hover:text-yellow-400 flex items-center">
     <span className="inline-block w-4 ">
       <span className="text-xs leading-4">►</span>
     </span> Seva List
               </Link>
             </li>
             <li>
-  <Link href="/gallery" className="hover:underline hover:text-yellow-500 flex items-center">
+  <Link href="/gallery" className="hover:underline hover:text-yellow-400 flex items-center">
     <span className="inline-block w-4 ">
       <span className="text-xs leading-4">►</span>
     </span> Gallery
