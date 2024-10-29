@@ -1,19 +1,24 @@
 import React from "react";
-import Image from "next/image"; 
+import Image from "next/image";
 
 const Banner = () => {
   return (
     <div className="bg-gradient-to-br from-orange-300 to-orange-500 text-white relative">
-      <img
-            src="/banner.png" 
-            alt="Temple Logo"
-            className="lg:h-full  w-screen "
-          />
+      <Image
+        src="/banner.png"
+        alt="Temple Logo"
+        layout="responsive"
+        width={1920}
+        height={1080}
+        className="lg:h-full w-screen object-cover"
+        priority
+      />
     </div>
   );
 };
 
 export default Banner;
+
 
 
 // <div className="max-w-7xl mx-auto flex flex-col items-center space-y-4 relative">

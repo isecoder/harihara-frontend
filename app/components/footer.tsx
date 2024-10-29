@@ -7,18 +7,18 @@ import { Facebook, Instagram, Phone, Mail } from 'lucide-react'
 export default function Footer() {
   return (
     <div className="relative">
-      <Image
-        src="/placeholder.svg?height=600&width=1200"
+      {/* <Image
+        src="/?height=600&width=1200"
         alt="Temple Background"
         layout="fill"
         objectFit="cover"
         className="z-0"
-      />
+      /> */}
       <footer className="relative z-10 bg-gradient-to-r from-orange-500/90 to-orange-300/90 text-white py-10 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="flex flex-col items-center md:items-start">
             <Image
-              src="/placeholder.svg?height=96&width=96"
+              src="/logo.jpg?height=96&width=96"
               alt="Temple Logo"
               width={96}
               height={96}
