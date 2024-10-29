@@ -29,6 +29,15 @@ export default function Home() {
       <h1>{welcome}</h1>
       <p>{language}</p>
       <p>{greeting}</p>
+      <main className="container mx-auto p-4">
+        <h2 className="text-3xl font-bold mb-4">Donation</h2>
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-2xl font-bold text-orange-500 mb-4">ACCOUNT DETAILS</h3>
+          <p className="text-xl mb-2">Bank of Baroda</p>
+          <p className="mb-2">Account Number: 131101011001504</p>
+          <p>IFSC Code: VIJB0001311</p>
+        </div>
+      </main>
       <LanguageSwitcher />
     </main>
   );
