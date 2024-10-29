@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaBars, FaTimes, FaCaretDown } from "react-icons/fa";
 import Banner from "./banner"; // Import the Banner component
 import LanguageSwitcher from "./LanguageSwitcher"; // Import the LanguageSwitcher component
+import LoadingSpinner from "./LoadingSpinner"; // Import the LoadingSpinner component
 
 interface NavLink {
   href: string;
@@ -25,6 +26,7 @@ const navLinks: NavLink[] = [
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false); // State for dropdown menu
+  const [loading, setLoading] = useState<boolean>(false); // State for loading
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -34,18 +36,24 @@ const Navbar: React.FC = () => {
     setDropdownOpen(false); // Close the dropdown
   };
 
+  const handleLinkClick = () => {
+    setLoading(true); // Set loading state when a link is clicked
+  };
+
   return (
     <>
+      {loading && <LoadingSpinner />} {/* Show spinner while loading */}
       <Banner /> {/* Render the Banner component here */}
       {/* Navbar Container */}
-      <div className="sticky top-0 w-full z-10 bg-gradient-to-r from-white to-orange-100 shadow-lg text-center">
+      <div className="sticky top-0 w-full z-10 bg-gradient-to-r from-white to-orange-100 shadow-lg">
         <div className="flex justify-between items-center mx-auto py-4 px-4 md:px-8">
           {/* Navbar Links - Visible on Large Screens */}
-          <nav className="hidden md:flex justify-center flex-1 space-x-8 text-sm">
+          <nav className="hidden md:flex justify-center flex-1 space-x-6 text-sm">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
+                onClick={handleLinkClick} // Set loading on link click
                 className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
               >
                 {label}
@@ -54,7 +62,7 @@ const Navbar: React.FC = () => {
           </nav>
 
           {/* Language Switcher - Dropdown Menu */}
-          <div className="relative hidden md:flex items-center">
+          <div className="relative hidden md:flex items-center ">
             <button
               onClick={() => setDropdownOpen((prev) => !prev)} // Toggle dropdown
               className="flex items-center text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
@@ -62,7 +70,7 @@ const Navbar: React.FC = () => {
               Language <FaCaretDown className="ml-1" />
             </button>
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md z-10">
+              <div className="absolute right-0 mt-2 w-40 bg-gradient-to-r from-orange-100 to-orange-200 shadow-lg rounded-md z-10">
                 <LanguageSwitcher onSelect={closeDropdown} />{" "}
                 {/* Include LanguageSwitcher component */}
               </div>
@@ -90,6 +98,7 @@ const Navbar: React.FC = () => {
               <Link
                 key={href}
                 href={href}
+                onClick={handleLinkClick} // Set loading on link click
                 className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
               >
                 {label}
