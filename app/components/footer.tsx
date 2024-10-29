@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <footer className="bg-gradient-to-r from-orange-200 to-orange-400 text-white py-10 px-10 md:px-10 lg:px-10 mt-4 flex-grow">
+    <div className="flex flex-col max-h-screen">
+      <footer className="bg-gradient-to-r from-orange-200 to-orange-400 text-white py-10 px-10 md:px-10 lg:px-10 mt-[6rem] flex-grow">
         <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center">
           {/* Logo and Title Section */}
           <div className="flex flex-col items-center lg:items-start mb-8 lg:mb-0">
