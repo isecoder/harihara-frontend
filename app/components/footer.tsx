@@ -1,8 +1,9 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { Facebook, Instagram, Phone, Mail } from 'lucide-react'
+import Image from "next/image";
+import Link from "next/link";
+import { FaFacebook, FaInstagram } from "react-icons/fa"; // Importing Facebook and Instagram icons
+import { Phone, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -10,9 +11,8 @@ export default function Footer() {
       <Image
         src="/placeholder.svg?height=600&width=1200"
         alt="Temple Background"
-        layout="fill"
-        objectFit="cover"
-        className="z-0"
+        fill // Use fill for the new layout
+        className="object-cover z-0" // Use object-cover to maintain aspect ratio
       />
       <footer className="relative z-10 bg-gradient-to-r from-orange-500/90 to-orange-300/90 text-white py-10 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -26,11 +26,19 @@ export default function Footer() {
             />
             <p className="text-xl font-bold mb-4">ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ</p>
             <div className="flex space-x-4">
-              <Link href="https://www.facebook.com/shreeharihareshwara" target="_blank" rel="noopener noreferrer">
-                <Facebook className="w-6 h-6 text-white hover:text-blue-400 transition-colors duration-200" />
+              <Link
+                href="https://www.facebook.com/shreeharihareshwara"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaFacebook className="w-6 h-6 text-white hover:text-blue-400 transition-colors duration-200" />
               </Link>
-              <Link href="https://www.instagram.com/shreeharihareshwara" target="_blank" rel="noopener noreferrer">
-                <Instagram className="w-6 h-6 text-white hover:text-pink-400 transition-colors duration-200" />
+              <Link
+                href="https://www.instagram.com/shreeharihareshwara"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaInstagram className="w-6 h-6 text-white hover:text-pink-400 transition-colors duration-200" />
               </Link>
             </div>
           </div>
@@ -38,9 +46,12 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">≡ Quick Links</h3>
             <ul className="space-y-2">
-              {['History', 'News', 'Seva List', 'Gallery'].map((item) => (
+              {["History", "News", "Seva List", "Gallery"].map((item) => (
                 <li key={item}>
-                  <Link href={`/${item.toLowerCase().replace(' ', '-')}`} className="hover:text-yellow-300 transition-colors duration-200 flex items-center">
+                  <Link
+                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    className="hover:text-yellow-300 transition-colors duration-200 flex items-center"
+                  >
                     <span className="mr-2">►</span>
                     {item}
                   </Link>
@@ -63,7 +74,10 @@ export default function Footer() {
               </div>
               <div className="flex items-center mt-2">
                 <Mail className="w-4 h-4 mr-2" />
-                <a href="mailto:shriharihareshwara@gmail.com" className="hover:text-blue-400 transition-colors duration-200">
+                <a
+                  href="mailto:shriharihareshwara@gmail.com"
+                  className="hover:text-blue-400 transition-colors duration-200"
+                >
                   shriharihareshwara@gmail.com
                 </a>
               </div>
@@ -85,27 +99,35 @@ export default function Footer() {
       </footer>
       <div className="relative z-10 bg-orange-800 text-white py-2 text-center text-sm">
         <p>
-          © 2021-2024 | Disclaimer -{' '}
-          <Link href="/policy" className="hover:text-yellow-400 hover:underline">
+          © 2021-2024 | Disclaimer -{" "}
+          <Link
+            href="/policy"
+            className="hover:text-yellow-400 hover:underline"
+          >
             Privacy Policy
-          </Link>{' '}
-          |{' '}
-          <Link href="/policy" className="hover:text-yellow-400 hover:underline">
+          </Link>{" "}
+          |{" "}
+          <Link
+            href="/policy"
+            className="hover:text-yellow-400 hover:underline"
+          >
             Refund & Cancellation
-          </Link>{' '}
+          </Link>{" "}
           | Harihareshwara Temple HariharaPallathadka. All Rights Reserved
         </p>
         <p>
-          Designed by:{' '}
-          <Link href="https://www.instagram.com/iscoderz/" className="hover:text-yellow-400 hover:underline">
+          Designed by:{" "}
+          <Link
+            href="https://www.instagram.com/iscoderz/"
+            className="hover:text-yellow-400 hover:underline"
+          >
             ISECODERZ
           </Link>
         </p>
       </div>
     </div>
-  )
+  );
 }
-
 
 // <div className="flex flex-col ">
 //       <footer className="bg-gradient-to-r from-orange-500 to-orange-300 text-white py-10 px-10 md:px-10 lg:px-10 mt-5 flex-grow">

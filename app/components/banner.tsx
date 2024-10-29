@@ -1,20 +1,22 @@
 import React from "react";
-import Image from "next/image"; 
+import Image from "next/image";
 
 const Banner = () => {
   return (
     <div className="bg-gradient-to-br from-orange-300 to-orange-500 text-white relative">
-      <img
-            src="/banner.png" 
-            alt="Temple Logo"
-            className="lg:h-full  w-screen "
-          />
+      <Image
+        src="/banner.png" // Use the actual path to your banner image
+        alt="Temple Banner" // Updated alt text for better accessibility
+        layout="responsive" // Adjusts to maintain aspect ratio and responsiveness
+        width={1920} // Set the width according to your design
+        height={1080} // Set the height according to your design
+        className="w-screen" // This will keep the image responsive
+      />
     </div>
   );
 };
 
 export default Banner;
-
 
 // <div className="max-w-7xl mx-auto flex flex-col items-center space-y-4 relative">
 //         {/* Left Logo - Temple Logo for Large Screens */}
@@ -39,7 +41,6 @@ export default Banner;
 //           />
 //         </div>
 
-        
 //         {/* Center Section - Department Text, Title, and Address */}
 //         <div className="text-center flex flex-col items-center mr-4 md:mr-10">
 //           <div className="bg-orange-300 text-black rounded-full py-1 px-4 text-xs md:text-sm mb-2">
