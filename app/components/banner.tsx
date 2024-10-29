@@ -34,7 +34,7 @@ const Banner = () => {
           <div className="bg-orange-300 text-black rounded-full py-1 px-4 text-xs md:text-sm mb-2">
             Hindu Religious Institutions & Charitable Endowments Department
           </div>
-          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold whitespace-nowrap">
+          <h1 className="text-lg md:text-4xl lg:text-5xl font-bold whitespace-nowrap">
             SHRI HARIHARESHWARA TEMPLE
           </h1>
           <p className="text-xs md:text-lg mt-2">
