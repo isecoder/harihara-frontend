@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import Image from "next/image";
 import Link from 'next/link';
 const Footer: React.FC = () => {
@@ -161,7 +161,7 @@ const Footer: React.FC = () => {
       </div>
     </footer>
       <div className="bg-orange-800 text-white py-2 text-center site-footer-bottom mx-0 mb-0">
-        <p>© 2021-2024 | Disclaimer - <Link href="/policy" className="hover:text-yellow-400 hover:underline">Privacy Policy</Link> | <Link href="/policy" className="hover:text-yellow-400 hover:underline">Refund & Cancellation</Link> | Harihareshwara Temple HariharaPallathadka. All Rights Reserved</p>
+        <p> © 2024 | Disclaimer - <Link href="/policy" className="hover:text-yellow-400 hover:underline">Privacy Policy</Link> | <Link href="/policy" className="hover:text-yellow-400 hover:underline">Refund & Cancellation</Link> | Harihareshwara Temple HariharaPallathadka. All Rights Reserved</p>
         <p>Designed by: <Link href="https://www.instagram.com/iscoderz/" className="hover:text-yellow-400 hover:underline">ISCODERZ</Link></p>
     </div>
 
