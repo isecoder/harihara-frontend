@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 
 const Contact: React.FC = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -12,12 +13,17 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Contact Us</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name:</label>
+            <label
+              htmlFor="name"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Name:
+            </label>
             <input
               type="text"
               id="name"
@@ -28,7 +34,12 @@ const Contact: React.FC = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email:</label>
+            <label
+              htmlFor="email"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Email:
+            </label>
             <input
               type="email"
               id="email"
@@ -39,7 +50,12 @@ const Contact: React.FC = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="message" className="block text-gray-700 font-bold mb-2">Message:</label>
+            <label
+              htmlFor="message"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Message:
+            </label>
             <textarea
               id="message"
               value={message}
