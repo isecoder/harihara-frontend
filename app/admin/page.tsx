@@ -1,54 +1,70 @@
-// app/admin/page.tsx
 "use client"; // Ensure this component uses client-side rendering
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link"; // Import Link for navigation
 
 const AdminPage = () => {
   const [sevasCount, setSevasCount] = useState(0);
   const [newsUpdatesCount, setNewsUpdatesCount] = useState(0);
   const [galleryCount, setGalleryCount] = useState(0);
-  const [sevaFormsCount, setSevaFormsCount] = useState(0); // State for Seva Forms count
+  const [sevaFormsCount, setSevaFormsCount] = useState(0);
   const [loading, setLoading] = useState(true); // Loading state
 
-  const fetchCounts = async () => {
+  const fetchCounts = useCallback(async () => {
+    setLoading(true); // Set loading to true when fetching
     try {
-      const [sevasRes, newsUpdatesRes, galleryRes, sevaFormsRes] =
-        await Promise.all([
-          fetch("/api/sevas"),
-          fetch("/api/newsupdates"),
-          fetch("/api/images/batch"),
-          fetch("/api/sevaforms"), // Fetch Seva Forms count
-        ]);
+      const [sevasRes, newsUpdatesRes, sevaFormsRes] = await Promise.all([
+        fetch("/api/sevas"),
+        fetch("/api/newsupdates"),
+        fetch("/api/sevaforms"),
+      ]);
 
-      if (
-        !sevasRes.ok ||
-        !newsUpdatesRes.ok ||
-        !galleryRes.ok ||
-        !sevaFormsRes.ok
-      ) {
+      if (!sevasRes.ok || !newsUpdatesRes.ok || !sevaFormsRes.ok) {
         throw new Error("Failed to fetch data");
       }
 
       const sevasData = await sevasRes.json();
       const newsUpdatesData = await newsUpdatesRes.json();
-      const galleryData = await galleryRes.json();
-      const sevaFormsData = await sevaFormsRes.json(); // Get Seva Forms data
+      const sevaFormsData = await sevaFormsRes.json();
 
-      // Set the counts from the data arrays
-      setSevasCount(sevasData.data.length); // Count the number of sevas
-      setNewsUpdatesCount(newsUpdatesData.data.length); // Count the number of news updates
-      setGalleryCount(galleryData.data.images.length); // Count the number of images in the gallery
-      setSevaFormsCount(sevaFormsData.data.length); // Count the number of Seva Forms
+      // Update the counts from the data arrays
+      setSevasCount(sevasData.data.length);
+      setNewsUpdatesCount(newsUpdatesData.data.length);
+      setSevaFormsCount(sevaFormsData.data.length);
+
+      // Now, handle gallery count with pagination
+      let totalGalleryCount = 0;
+      let currentPage = 1;
+      let hasMoreImages = true;
+
+      while (hasMoreImages) {
+        const galleryRes = await fetch(
+          `/api/images/batch?limit=7&page=${currentPage}`
+        );
+        if (!galleryRes.ok) {
+          throw new Error("Failed to fetch gallery data");
+        }
+
+        const galleryData = await galleryRes.json();
+        const images = galleryData.data.images || [];
+
+        totalGalleryCount += images.length;
+
+        // Check if there are no more images
+        hasMoreImages = images.length > 0;
+        currentPage++; // Increment to the next page
+      }
+
+      setGalleryCount(totalGalleryCount); // Set the total gallery count after fetching all pages
     } catch (error) {
       console.error("Error fetching counts:", error);
     } finally {
-      setLoading(false);
+      setLoading(false); // Set loading to false when done
     }
-  };
+  }, []); // Removed currentPage from the dependency array
 
   useEffect(() => {
     fetchCounts();
-  }, []);
+  }, [fetchCounts]); // Fetch counts when component mounts or fetchCounts changes
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-transparent">
@@ -63,28 +79,24 @@ const AdminPage = () => {
           </div>
         ) : (
           <>
-            {/* Combined Sevas Box with Count Animation */}
             <Link href="/admin/sevas">
               <div className="flex flex-col items-center bg-green-500 text-white rounded-lg p-6 h-40 w-full sm:w-40 text-center cursor-pointer transition duration-200 hover:bg-green-600">
                 <CountAnimation count={sevasCount} />
                 <span className="text-lg font-bold">Sevas</span>
               </div>
             </Link>
-            {/* Combined News Updates Box with Count Animation */}
             <Link href="/admin/news-updates">
               <div className="flex flex-col items-center bg-yellow-500 text-white rounded-lg p-6 h-40 w-full sm:w-40 text-center cursor-pointer transition duration-200 hover:bg-yellow-600">
                 <CountAnimation count={newsUpdatesCount} />
                 <span className="text-lg font-bold">News Updates</span>
               </div>
             </Link>
-            {/* Combined Gallery Box with Count Animation */}
             <Link href="/admin/gallery">
               <div className="flex flex-col items-center bg-blue-500 text-white rounded-lg p-6 h-40 w-full sm:w-40 text-center cursor-pointer transition duration-200 hover:bg-blue-600">
                 <CountAnimation count={galleryCount} />
                 <span className="text-lg font-bold">Gallery</span>
               </div>
             </Link>
-            {/* Combined Seva Forms Box with Count Animation */}
             <Link href="/admin/sevaforms">
               <div className="flex flex-col items-center bg-teal-500 text-white rounded-lg p-6 h-40 w-full sm:w-40 text-center cursor-pointer transition duration-200 hover:bg-teal-600">
                 <CountAnimation count={sevaFormsCount} />
