@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes, FaCaretDown } from "react-icons/fa";
 import Banner from "@/app/components/banner";
-import LanguageSwitcher from "@/app/components/LanguageSwitcher"; // Import your LanguageSwitcher component
+import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 
 interface NavLink {
   href: string;
@@ -34,8 +34,7 @@ const navLinks: NavLink[] = [
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState<boolean>(false); // For desktop view
-  const [aboutDropdownMobileOpen, setAboutDropdownMobileOpen] =
-    useState<boolean>(false); // For mobile view
+  const [aboutDropdownMobileOpen, setAboutDropdownMobileOpen] = useState<boolean>(false); // For mobile view
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false); // State for language dropdown
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
