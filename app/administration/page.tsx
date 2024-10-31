@@ -1,9 +1,114 @@
-import React from 'react'
+"use client";
 
-const Administration = () => {
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../store";
+import { changeLocale } from "../store/localeSlice";
+
+type LocaleType = "en" | "kn";
+
+// Content in both English and Kannada
+const administrationContent: Record<LocaleType, any> = {
+  en: {
+    managementPresidentTitle: "Management Committee President:",
+    managementPresidentName: "Shri Kishor Kumar Kujugodu",
+    contactNumber: "Contact no: +91 94813 21850",
+    developmentPresidentTitle: "Development Committee President:",
+    developmentPresidentName: "Shri Sheshappa Gowda Kiribhaga",
+    membersTitle: "Management Committee Members",
+    members: [
+      "Shri Chandrahasa S. Shivala",
+      "Shri Chandrashekhara K.K Kiribhaga",
+      "Shri Sharath D.S Kajjodi",
+      "Smt. Reshma Kattemane",
+      "Shri Bhavanishankara P. Pailaje",
+      "Smt. Jyothi K.L Kalige",
+      "Shri Ananda K. Kerekkodi"
+    ],
+    templePriestTitle: "Temple Priest:",
+    templePriestName: "Shri Subrahmanya Narasimha Bhat",
+  },
+  kn: {
+    managementPresidentTitle: "ವ್ಯವಸ್ಥಾಪನ ಸಮಿತಿ ಅಧ್ಯಕ್ಷರು:",
+    managementPresidentName: "ಶ್ರೀ ಕಿಶೋರ್ ಕುಮಾರ್ ಕೂಜುಗೋಡು",
+    contactNumber: "ದೂರವಾಣಿ ಸಂ: +91 94813 21850",
+    developmentPresidentTitle: "ಅಭಿವೃದ್ಧಿ ಸಮಿತಿ ಅಧ್ಯಕ್ಷರು:",
+    developmentPresidentName: "ಶ್ರೀ ಶೇಷಪ್ಪ ಗೌಡ ಕಿರಿಭಾಗ",
+    membersTitle: "ಸದಸ್ಯರು",
+    members: [
+      "ಶ್ರೀ ಚಂದ್ರಹಾಸ ಎಸ್. ಶಿವಾಲ",
+      "ಶ್ರೀ ಚಂದ್ರಶೇಖರ ಕೆ. ಕೆ. ಕಿರಿಭಾಗ",
+      "ಶ್ರೀ ಶರತ್ ಡಿ. ಎಸ್. ಕಟ್ಟೋಡಿ",
+      "ಶ್ರೀಮತಿ ರೇಷ್ಮಾ ಕಟ್ಟೆಮನೆ",
+      "ಶ್ರೀ ಭವಾನಿಶಂಕರ ಪಿ. ಪೈಲಾಜೆ",
+      "ಶ್ರೀಮತಿ ಜ್ಯೋತಿ ಕೆ. ಎಲ್ ಕಲಿಗೆ",
+      "ಶ್ರೀ ಆನಂದ ಕೆ. ಕೆರೆಕ್ಕೋಡಿ"
+    ],
+    templePriestTitle: "ಅರ್ಚಕರು:",
+    templePriestName: "ಶ್ರೀ ಸುಬ್ರಹ್ಮಣ್ಯ ನರಸಿಂಹ ಭಟ್",
+  }
+};
+
+const Administration: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const currentLocale: LocaleType = useSelector(
+    (state: RootState) => state.locale.locale
+  ) as LocaleType;
+
+  const content = administrationContent[currentLocale];
+  const [isLocaleLoaded, setIsLocaleLoaded] = useState(false);
+
+  useEffect(() => {
+    const savedLocale = (localStorage.getItem("locale") || "en") as LocaleType;
+    dispatch(changeLocale(savedLocale));
+    setIsLocaleLoaded(true);
+  }, [dispatch]);
+
+  if (!isLocaleLoaded) return null; // Prevent rendering until locale is loaded
+
   return (
-    <div><p></p></div>
-  )
-}
+    <div style={{ backgroundColor: '#f9f7e6', padding: '20px', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
 
-export default Administration
+      {/* Management Committee President */}
+      <div style={{ marginBottom: '40px' }}>
+        <h3 style={{ color: 'red', fontWeight: 'bold', marginBottom: '5px' }}>{content.managementPresidentTitle}</h3>
+        <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>{content.managementPresidentName}</p>
+        <p>{content.contactNumber}</p>
+        <hr style={{ width: '50%', margin: '10px auto', border: '0.5px solid #ccc' }} />
+      </div>
+
+      {/* Development Committee President */}
+      <div style={{ marginBottom: '40px' }}>
+        <h3 style={{ color: 'red', fontWeight: 'bold', marginBottom: '5px' }}>{content.developmentPresidentTitle}</h3>
+        <p style={{ fontWeight: 'bold', marginBottom: '5px' }}>{content.developmentPresidentName}</p>
+      </div>
+
+      {/* Members Section */}
+      <h3 style={{ color: 'red', fontWeight: 'bold', marginBottom: '20px' }}>{content.membersTitle}</h3>
+      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '40px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          {content.members.slice(0, Math.ceil(content.members.length / 2)).map((member: string, index: number) => (
+            <div key={index} style={{ marginBottom: '15px' }}>
+              <p style={{ fontWeight: 'bold' }}>{member}</p>
+            </div>
+          ))}
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          {content.members.slice(Math.ceil(content.members.length / 2)).map((member: string, index: number) => (
+            <div key={index} style={{ marginBottom: '15px' }}>
+              <p style={{ fontWeight: 'bold' }}>{member}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Temple Priest Section */}
+      <div style={{ margin: '40px 0' }}>
+        <h3 style={{ color: 'red', fontWeight: 'bold', marginBottom: '5px' }}>{content.templePriestTitle}</h3>
+        <p style={{ fontWeight: 'bold' }}>{content.templePriestName}</p>
+      </div>
+    </div>
+  );
+};
+
+export default Administration;
