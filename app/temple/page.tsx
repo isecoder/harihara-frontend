@@ -8,26 +8,34 @@ import { changeLocale } from "../store/localeSlice";
 // Define a type for the locales
 type LocaleType = "en" | "kn";
 
-const historicalMessages: Record<LocaleType, string[]> = {
-  en: [
-    "According to historical accounts, thousands of years ago, a sage on his journey arrived in a town called Pallattadka, where he was delighted to see the confluence of three rivers. In that sacred spot, he installed the deity of Lord Harihareshwara and began worshipping him.",
-    "It is believed that approximately five thousand years ago, great sages performed a special yaga (ritual sacrifice) on the eastern side of the temple to defeat demons. For this yaga, sacred water (theertha) was brought from thousands of holy places across the Indian continent and used in the rituals. According to legend, after the demons were vanquished, the sages who performed the yaga poured the sacred water from their kamandala (water vessels) into a nearby river. This river, originating from the Sidda (Shesha) Parvatha mountain, is famously known as Koti Theertha. It is believed that bathing in this river’s confluence and receiving the darshan (vision) of Lord Harihareshwara can cure diseases, mental illnesses, and skin ailments without the need for medication.",
-    "This sacred site, where sages once meditated, is also known for the powerful effects of performing Shani Pooja (worship of the deity Saturn). On the day of Tula Sankramana (a Hindu festival), it is believed that the holy water, or theerthodbhava, emerges at the confluence of Shri Harihareshwara Sangam. Thousands of devotees gather on this day to bathe in the sacred waters and offer pinda pradhana (ritual offerings) to their ancestors. Even today, devotees follow the tradition of bathing in the holy waters at the start of the Tula month.",
-    "This kshetra (holy place), renowned as Triveni Sangam Kshetra, is where the sacred confluence occurs, similar to the theerthodbhava at Talakaveri. It is a rare and unique shrine where both Hari (Vishnu) and Hara (Shiva) are conceptualized within the same idol in the form of a Linga. This temple is one of the few shrines in India that boasts such distinct characteristics. Devotees believe that their desires will be fulfilled and their sins absolved through worship here. Pilgrims come from both near and far to bathe in the sacred waters and receive the darshan of the deity.",
-    "It is said that the current stone idol, in the form of a Linga, was brought and installed around 800 years ago by the Lingayat kings from North Karnataka. After the decline of the Ballala dynasty, the temple came under the rule of the Kodagu kings. During the state administration period, the temple was granted significant agricultural land, which is an important part of its historical legacy.",
-  ],
-  kn: [
-    "ಶ್ರೀ ಹರಿಹರೇಶ್ವರವು ಅನಾದಿ ಕಾಲದಿಂದಲೂ ಇದ್ದು ಋಷಿ ಶ್ರೇಷ್ಠರು ಈ ತೀರ್ಥಕ್ಷೇತ್ರದಲ್ಲಿ ತಪಸ್ಸನ್ನಾಚರಿಸಿ ಹರಿ ಮತ್ತು ಹರಿಬ್ಬರನ್ನು ಒಂದೇ ಮೂರ್ತಿಯಲ್ಲಿ ಸಂಕಲ್ಪಿಸಿ ಸ್ಥಾಪಿಸಿದ ಕ್ಷೇತ್ರವೇ ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಾಲಯ.",
-    "ದೇವಾಲಯದ ಪೂರ್ವದಿಕ್ಕಿನಲ್ಲಿರುವ ಸುಮಾರು ಐದು ಸಾವಿರ ವರುಷಗಳಿಗೂ ಹಿಂದೆ ರಾಕ್ಷಸರ ನಿಗ್ರಹಕ್ಕಾಗಿ ಮುನಿ ಶ್ರೇಷ್ಠರು ವಿಶಿಷ್ಟವಾದ ಯಾಗವನ್ನು ಮಾಡಿದ್ದರೆಂದೂ, ಆ ಯಾಗಕ್ಕೆ ಭರತ ಖಂಡದ ಸಹಸ್ರಾರು ಪುಣ್ಯ ಕ್ಷೇತ್ರಗಳಿಂದ ತೀರ್ಥವನ್ನು ತಂದು ಯಾಗಕ್ಕೆ ಬಳಸಿದ್ದರೆನ್ನಲಾಗುತ್ತಿದ್ದೆ. ಆ ರೀತಿಯಾಗಿ ರಾಕ್ಷಸರ ಸಂಹಾರವಾದ ಬಳಿಕ ಯಾಗವನ್ನು ನಡೆಸಿದ ಮುನಿಗಳು ತಮ್ಮ ಕಮಂಡಲದ ವೇದೋದಕಗಳನ್ನು ನದಿಗೆ ಎರೆದರೆನ್ನುವ ದಂತಕತೆಯಿದೆ. ಸಿದ್ದ ಪರ್ವತದಿಂದ ಹರಿದು ಬರುವ ನದಿಯು ”ಕೋಟಿ ತೀರ್ಥ”ವೆಂದು ಪ್ರಸಿದ್ದಿಯಾಗಿದೆ. ಈ ನದಿಯು ಸಂಗಮವಾಗುವ ಹರಿಹರೇಶ್ವರ ನೆಲೆಯಲ್ಲಿ ಪುಣ್ಯಸ್ನಾನ ಮಾಡಿ ಹರಿಹರೇಶ್ವರನ ದರುಶನ ಪಡೆಯುವುದರಿಂದ ಔಷಧಿ ರಹಿತವಾಗಿ ಕಾಯಿಲೆಗಳು, ಮನೋರೋಗ, ಚರ್ಮರೋಗಾಧಿಗಳು ವಾಸಿಯಾಗುತ್ತವೆ ಎಂಬ ನಂಬಿಕೆ ಇದೆ. ಅಲ್ಲದೇ ಸಕಲ ಪಾಪ ನಿವಾರಣೆ ಆಗಿ ಮುಕ್ತಿಯನ್ನು ಕರುಣೆಸುವ ಕ್ಷೇತ್ರವಾಗಿ ಸಹಸ್ರಾರು ಭಕ್ತರನ್ನು ಆಕರ್ಷಿಸುವ ಕ್ಷೇತ್ರವೆಂದು ಇಲ್ಲಿನ ಭಕ್ತರ ಅಚಲವಾದ ನಂಬಿಕೆಯಾಗಿದೆ.",
-    "ಋಷಿ ಮುನಿಗಳು ತಪಸ್ಸುಗೈದ ಪಾವನ ಸ್ಥಳವು ಈ ಕೇತ್ರವಾಗಿದ್ದು ಇಲ್ಲಿ ಮಾಡಿಸಿದ ಶನಿಪೂಜೆಗೆ ವಿಶೇಷ ಶಕ್ತಿ ಇರುತ್ತದೆ. ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ಸಂಗಮದಲ್ಲಿ ತುಲಾ ಸಂಕ್ರಮಣದ ದಿನ ತೀರ್ಥ ಉದ್ಭವವಾಗುತ್ತದೆ ಎಂಬ ನಂಬಿಕೆಯಿದೆ. ಆ ದಿನದಂದು ಭಕ್ತಾಧಿಗಳು ಸಹಸ್ರಾರು ಸಂಖ್ಯೆಯಲ್ಲಿ ತೀರ್ಥಸ್ನಾನ ಮಾಡುತ್ತಾರೆ ಹಾಗೂ ಮೃತರಿಗೆ ಪಿಂಡ ಪ್ರಧಾನವನ್ನು ಮಾಡುತ್ತಾರೆ ಈಗಲೂ ತುಲಾ ಮಾಸಾರಂಭದ ದಿನ ಭಕ್ತಾಧಿಗಳು ಬಂದು ತೀರ್ಥಸ್ನಾನ ಮಾಡುವ ಪದ್ದತಿ ರೂಢಿಯಲ್ಲಿದೆ.",
-    "ಹರಿ ಮತ್ತು ಹರರು ಒಂದೇ ಬಿಂಬದಲ್ಲಿ(ಲಿಂಗರೂಪ) ಸಂಕಲ್ಪಿಸಲ್ಟಟ್ಟ ವಿರಳವಾದ ವಿಶಿಷ್ಟವಾದ ಕ್ಷೇತ್ರ ಇದಾಗಿದೆ. ಹಲವಾರು ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಹೊಂದಿರುವ ಭಾರತದ ಕೆಲವೇ ಪುಣ್ಯಕ್ಷೇತ್ರಗಳಲ್ಲಿ ಇದು ಒಂದಾಗಿದೆ. ಭಕ್ತರ ಇಷ್ಟಾರ್ಥ ಸಿದ್ಧಿಯಾಗಿ, ಪಾಪನಾಶಕವಾಗುತ್ತದೆ. ದೇವಾಲಯಕ್ಕೆ ಸ್ಥಳೀಕರಲ್ಲದೇ ದೂರದ ಊರುಗಳಿಂದಲೂ ಭಕ್ತಾದಿಗಳು ಬಂದು ಈ ಪುಣ್ಯ ಕೇತ್ರದಲ್ಲಿ ತೀರ್ಥಸ್ನಾನ ಮಾಡಿ ದೇವರ ದರ್ಶನ ಪಡೆದು ಕೃತಾರ್ಥರಾಗುತ್ತಿರುತ್ತಾರೆ.",
-    "ಪ್ರಸ್ತುತ ಇರುವ ಶಿಲಾಮೂರ್ತಿಯು ಲಿಂಗಸ್ವರೂಪಿಯಾಗಿದ್ದು ಸುಮಾರು 800 ವರ್ಷಗಳ ಹಿಂದೆ ಉತ್ತರ ಕರ್ನಾಟಕದಿಂದ ಲಿಂಗಾಯತ ಅರಸರು ತಂದು ಸ್ಥಾಪಿಸಿದರು ಎಂದು ಪ್ರತಿತಿ. ಆ ನಂತರ ಬಲ್ಲಾಳರ ಆಡಳಿತವು ಕೊನೆಗೊಂಡ ನಂತರ ಕೊಡಗಿನ ಅರಸರ ಆಡಳಿತದಲ್ಲಿತ್ತು. ರಾಜ್ಯಾಡಳಿತದ ಕಾಲದಲ್ಲಿ ದೇವಾಲಯಕ್ಕೆ ಸಾಕಷ್ಟು ಕೃಷಿ ಭೂಮಿಯನ್ನು ಬಳುವಳಿ ನೀಡಲಾಗಿತ್ತು ಇದು ಈ ದೇವಾಲಯದ ಇತಿಹಾಸವನ್ನು ಸಾರುತ್ತದೆ.",
-  ],
-};
-
-const titles: Record<LocaleType, string> = {
-  en: "Historical Significance",
-  kn: "ಇತಿಹಾಸ",
+// Define content for transport and pooja timings in both English and Kannada
+const content: Record<LocaleType, { title: string; details: { title: string; description: string }[] }> = {
+  en: {
+    title: "About Temple",
+    details: [
+      { title: "Pooja Timings of Shri Harihareshwara Temple:", description: "7 am to 1 pm | 5 pm to 8 pm" },
+      { title: "Morning Puja", description: "8:00 AM - 8:15 AM" },
+      { title: "Maha Puja", description: "12:00 PM - 12:15 PM" },
+      { title: "Night Puja", description: "8 PM" },
+      { title: "Nearest Bus Stand", description: "Sri Harihareshwar Temple: Hariharapallattadaka" },
+      { title: "Nearest Major Bus Stand", description: "Kukke Subrahmanya (8 km)" },
+      { title: "Nearest Railway Station", description: "Subrahmanya Road (21 km)" },
+      { title: "Nearest Airport", description: "Mangalore International Airport (117 km)" },
+    ],
+  },
+  kn: {
+    title: "ದೇವಸ್ಥಾನದ ಮಾಹಿತಿ",
+    details: [
+      { title: "ಶ್ರೀ ದೇವಸ್ಥಾನದ ಪೂಜಾ ಸಮಯ:", description: "ದರ್ಶನ ಸಮಯ:\nಬೆಳಗ್ಗೆ 7 ಗಂಟೆಯಿಂದ ಮಧ್ಯಾಹ್ನ 1 ಗಂಟೆಯ ತನಕ | ಸಂಜೆ 5 ಗಂಟೆಯಿಂದ ರಾತ್ರಿ 8 ಗಂಟೆಯ ತನಕ" },
+      { title: "ಬೆಳಗ್ಗೆಯ ಪೂಜೆ", description: "8:00 - 8:15 ತನಕ" },
+      { title: "ಮಹಾಪೂಜೆ", description: "ಮಧ್ಯಾಹ್ನ 12:00 - 12:15 ತನಕ" },
+      { title: "ರಾತ್ರಿಯ ಪೂಜೆ", description: "ರಾತ್ರಿ 8 ಗಂಟೆ" },
+      { title: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನಕ್ಕೆ ಹತ್ತಿರದಲ್ಲಿರುವ ಬಸ್ಸು ನಿಲ್ದಾಣ", description: "ಹರಿಹರಪಲ್ಲತ್ತಡ್ಕ" },
+      { title: "ಹತ್ತಿರದ ಪ್ರಮುಖ ಬಸ್ಸು ನಿಲ್ದಾಣ", description: "ಕುಕ್ಕೆ ಸುಬ್ರಹ್ಮಣ್ಯ (8 ಕಿ.ಮಿ)" },
+      { title: "ಹತ್ತಿರದಲ್ಲಿರುವ ರೈಲು ನಿಲ್ದಾಣ", description: "ಸುಬ್ರಹ್ಮಣ್ಯ ರೋಡ್ (21 ಕಿ.ಮಿ)" },
+      { title: "ಹತ್ತಿರದಲ್ಲಿರುವ ವಿಮಾನ ನಿಲ್ದಾಣ", description: "ಮಂಗಳೂರು ಅಂತಾರಾಷ್ಟ್ರೀಯ ವಿಮಾನ ನಿಲ್ದಾಣ (117 ಕಿ.ಮಿ)" },
+    ],
+  },
 };
 
 export default function About() {
@@ -36,7 +44,7 @@ export default function About() {
     (state: RootState) => state.locale.locale
   ) as LocaleType;
 
-  const messages = historicalMessages[currentLocale];
+  const { title, details } = content[currentLocale];
   const [isLocaleLoaded, setIsLocaleLoaded] = useState(false);
 
   useEffect(() => {
@@ -48,13 +56,17 @@ export default function About() {
   if (!isLocaleLoaded) return null; // Prevent rendering until locale is loaded
 
   return (
-    <main className="min-h-screen flex flex-col items-center p-6 text-center">
-      <h1 className="text-3xl font-bold mb-6">{titles[currentLocale]}</h1>
-      <div className="max-w-2xl mx-auto">
-        {messages.map((para: string, index: number) => (
-          <p key={index} className="text-lg mb-4 text-justify">
-            {para}
-          </p>
+    <main className="min-h-screen flex flex-col items-center p-6 bg-gradient-to-b from-white to-[#fbc687] font-serif">
+      <h1 className="text-3xl font-bold mb-6 text-center text-black">{title}</h1>
+      <div className="max-w-2xl mx-auto bg-opacity-90 p-8 rounded-lg shadow-lg">
+        {details.map(({ title, description }, index) => (
+          <div key={index} className="mb-6">
+            <h2 className="text-orange-600 font-semibold text-lg">{title}</h2>
+            <p className="text-[#4a4a4a] leading-relaxed text-base mt-2 whitespace-pre-line">{description}</p>
+            {index < details.length - 1 && (
+              <hr className="border-t border-gray-300 my-4" />
+            )}
+          </div>
         ))}
       </div>
     </main>
