@@ -49,7 +49,7 @@ export default function Component() {
           <div className="flex-1">
             <h2 className="font-bold text-lg sm:text-xl mb-4">{welcomeTitle[currentLocale]}</h2>
             <div className="text-sm sm:text-base text-justify mb-4">{welcomeContent[currentLocale]}</div>
-            <Link href="/about">
+            <Link href="/history">
               <button className="text-red-600 hover:text-red-400 transition-all duration-300">Read more</button>
             </Link>
           </div>
