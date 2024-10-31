@@ -25,13 +25,11 @@ const navLinks: NavLink[] = [
       { href: "/nearby_places", label: "Nearby Places" },
     ],
   },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
   { href: "/sevas", label: "Sevas" },
   { href: "/donations", label: "Donations" },
-  { href: "/festivals", label: "Festivals" },
-  { href: "/gallery", label: "Gallery" },
   { href: "/newsupdates", label: "News & Updates" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/contact", label: "Contact" },
 ]
 
 export default function Navbar() {
