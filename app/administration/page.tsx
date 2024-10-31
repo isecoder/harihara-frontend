@@ -68,7 +68,6 @@ const Administration: React.FC = () => {
 
   return (
     <div style={{ backgroundColor: '#f9f7e6', padding: '20px', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
-
       {/* Management Committee President */}
       <div style={{ marginBottom: '40px' }}>
         <h3 style={{ color: 'red', fontWeight: 'bold', marginBottom: '5px' }}>{content.managementPresidentTitle}</h3>
@@ -85,7 +84,7 @@ const Administration: React.FC = () => {
 
       {/* Members Section */}
       <h3 style={{ color: 'red', fontWeight: 'bold', marginBottom: '20px' }}>{content.membersTitle}</h3>
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '40px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '40px', maxWidth: '800px', margin: '0 auto' }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
           {content.members.slice(0, Math.ceil(content.members.length / 2)).map((member: string, index: number) => (
             <div key={index} style={{ marginBottom: '15px' }}>
