@@ -1,18 +1,21 @@
+// app/admin/login/page.tsx
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter for navigation
 
 // Define the expected structure of the error response
 interface ApiError {
   message: string;
 }
 
-export default function AdminLogin() {
+const AdminLogin = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
+  const router = useRouter(); // Initialize useRouter for navigation
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -43,7 +46,9 @@ export default function AdminLogin() {
       const data = await response.json();
       setMessage(`Welcome back, ${data.name}`);
       setIsError(false); // Reset error state
-      // Redirect or perform additional actions after login
+
+      // Redirect to the admin dashboard after login
+      router.push("/admin");
     } catch (error) {
       if (error instanceof Error) {
         // Check if error is an instance of Error
@@ -62,8 +67,8 @@ export default function AdminLogin() {
         <div className="relative mb-6 w-full">
           <i className="fa fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
           <input
-            type="email" // Change to email type
-            name="email" // Change name to email
+            type="email"
+            name="email"
             placeholder="Email"
             className="w-full p-3 pl-10 border border-gray-300 rounded-md text-lg focus:outline-none"
             onChange={handleChange}
@@ -109,4 +114,6 @@ export default function AdminLogin() {
       )}
     </div>
   );
-}
+};
+
+export default AdminLogin;
