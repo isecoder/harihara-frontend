@@ -1,190 +1,55 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 const Contact: React.FC = () => {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [postal_code, setPostalCode] = useState("");
-  const [country, setCountry] = useState("");
-  const [phone, setPhone] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const contactData = {
-      name,
-      address,
-      city,
-      state,
-      postal_code,
-      country,
-      phone,
-    };
-
-    try {
-      const response = await fetch("/api/contacts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(contactData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const result = await response.json();
-      setSuccessMessage("Contact information submitted successfully!");
-      console.log(result);
-      // Clear form fields
-      setName("");
-      setAddress("");
-      setCity("");
-      setState("");
-      setPostalCode("");
-      setCountry("");
-      setPhone("");
-      setError(null);
-    } catch (error) {
-      setError("Failed to submit contact information. Please try again.");
-      console.error("Error:", error);
-    }
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Contact Us</h1>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        {successMessage && (
-          <p className="text-green-500 mb-4">{successMessage}</p>
-        )}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label
-              htmlFor="name"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-[#fdc8a0] p-10 relative font-serif">
+      <div className="flex flex-col lg:flex-row w-full max-w-5xl gap-10">
+        
+        {/* Address and Contact Details */}
+        <div className="flex-1 text-center lg:text-left">
+          <h2 className="text-red-600 font-semibold text-lg uppercase mb-4 tracking-wide">Postal Address</h2>
+          <p className="text-gray-800 mb-8">
+            Shri Harihareshwara Temple,<br />
+            Hariharapallathadka Post and Village,<br />
+            Sullia Taluk, Dakshina Kannada,<br />
+            PIN-574218
+          </p>
+
+          <h2 className="text-red-600 font-semibold text-lg uppercase mb-4 tracking-wide">Contact Detail</h2>
+          <p className="text-gray-800">
+            <strong>Contact Number:</strong> +919448116685, +918073030594
+          </p>
+          <p className="text-gray-800">
+            <strong>President:</strong> +919481321850
+          </p>
+          <p>
+            <strong>Tele:</strong> <span className="font-semibold">08257-283366</span>
+          </p>
+          <p>
+            <strong>E-mail:</strong> <span className="italic">shriharihareshwara@gmail.com</span>
+          </p>
+        </div>
+
+        {/* Google Map */}
+        <div className="flex-1">
+          <h2 className="text-red-600 font-semibold text-lg uppercase mb-4 tracking-wide">Google Map</h2>
+          <div className="border border-gray-300 shadow-lg">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14154.300532021494!2d75.6074572!3d12.618683!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba4e497c13f1aa5%3A0x5592ade3cc59cc91!2sHarihareshwara%20Temple!5e1!3m2!1sen!2sin!4v1730361727124!5m2!1sen!2sin"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
-          <div className="mb-4">
-            <label
-              htmlFor="address"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Address:
-            </label>
-            <input
-              type="text"
-              id="address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="city"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              City:
-            </label>
-            <input
-              type="text"
-              id="city"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="state"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              State:
-            </label>
-            <input
-              type="text"
-              id="state"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="postal_code"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Postal Code:
-            </label>
-            <input
-              type="text"
-              id="postal_code"
-              value={postal_code}
-              onChange={(e) => setPostalCode(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="country"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Country:
-            </label>
-            <input
-              type="text"
-              id="country"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="phone"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Phone:
-            </label>
-            <input
-              type="text"
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
+
+      {/* Bottom orange bar */}
+      <div className="absolute bottom-0 w-full h-1 bg-[#f28500]"></div>
     </div>
   );
 };
