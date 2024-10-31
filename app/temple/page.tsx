@@ -17,7 +17,7 @@ const content: Record<LocaleType, { title: string; details: { title: string; des
       { title: "Morning Puja", description: "8:00 AM - 8:15 AM" },
       { title: "Maha Puja", description: "12:00 PM - 12:15 PM" },
       { title: "Night Puja", description: "8 PM" },
-      { title: "Nearest Bus Stand", description: "Sri Harihareshwar Temple: Hariharapallattadaka" },
+      { title: "Nearest Bus Stand", description: "Hariharapallattadaka" },
       { title: "Nearest Major Bus Stand", description: "Kukke Subrahmanya (8 km)" },
       { title: "Nearest Railway Station", description: "Subrahmanya Road (21 km)" },
       { title: "Nearest Airport", description: "Mangalore International Airport (117 km)" },

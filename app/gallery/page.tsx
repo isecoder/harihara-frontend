@@ -2,8 +2,8 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
 import Swal from "sweetalert2";
+import LoadingSpinner from "../components/LoadingSpinner";
 import ImageModal from "../components/ImageModal";
-import LoadingSpinner from "../components/LoadingSpinner"; // Import the LoadingSpinner component
 
 interface ImageData {
   image_id: number;
@@ -11,17 +11,25 @@ interface ImageData {
   public_url: string;
 }
 
-export default function ImageGallery(): JSX.Element {
+export default function Gallery(): JSX.Element {
   const [images, setImages] = useState<ImageData[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
+  // Hardcoded YouTube videos
+  const videos = [
+    {
+      title: "ಹರಿಹರ ಜಾತ್ರೆ 2024 |ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವರ ನೃತ್ಯ ಬಲಿ| |Thidambu Nritham| |Shri Harihareshwara Temple|",
+      video_url: "https://www.youtube.com/embed/nKGWrYaBm9o?si=Y5xDuv4J1BbYASpH",
+    },
+  ];
+
   const fetchImages = useCallback(async (currentPage: number) => {
-    setLoading(true); // Show the spinner when loading starts
+    setLoading(true);
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
 
@@ -53,7 +61,7 @@ export default function ImageGallery(): JSX.Element {
       }
     } finally {
       clearTimeout(timeoutId);
-      setLoading(false); // Hide the spinner when loading completes
+      setLoading(false);
     }
   }, []);
 
@@ -82,16 +90,16 @@ export default function ImageGallery(): JSX.Element {
     if (page > 1 && hasMore) fetchImages(page);
   }, [page, hasMore, fetchImages]);
 
-  const openModal = (index: number) => {
+  const openImageModal = (index: number) => {
     setCurrentIndex(index);
-    setIsModalOpen(true);
+    setIsImageModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeImageModal = () => {
+    setIsImageModalOpen(false);
   };
 
-  const navigate = (direction: "next" | "prev") => {
+  const navigateImage = (direction: "next" | "prev") => {
     if (direction === "next" && currentIndex < images.length - 1) {
       setCurrentIndex((prevIndex) => prevIndex + 1);
     } else if (direction === "prev" && currentIndex > 0) {
@@ -101,37 +109,53 @@ export default function ImageGallery(): JSX.Element {
 
   return (
     <div className="relative px-4 md:px-8 lg:px-16">
-      {loading && <LoadingSpinner />} {/* Show the loading spinner when loading */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 mt-10">
+      {loading && <LoadingSpinner />}
+      
+      {/* Image Gallery Section */}
+      <h2 className="text-lg font-semibold mt-10 mb-4">SHRI HARIHARESHWARA TEMPLE</h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
         {images.map((image, index) => (
           <div
             key={image.image_id}
             className="relative w-full h-48 cursor-pointer overflow-hidden"
-            onClick={() => openModal(index)}
+            onClick={() => openImageModal(index)}
           >
             <Image
               src={image.public_url}
-              alt="Image"
+              alt={image.alt_text}
               fill
               loading="lazy"
               className="object-cover transition-transform duration-300 hover:scale-105"
             />
           </div>
         ))}
-        <div
-          ref={loaderRef}
-          className="w-full h-10 flex justify-center items-center"
-        >
-          {/* {!hasMore && <p>No more images to load</p>} */}
-        </div>
+        <div ref={loaderRef} className="w-full h-10 flex justify-center items-center" />
       </div>
+      
       <ImageModal
-        isOpen={isModalOpen}
+        isOpen={isImageModalOpen}
         images={images}
         currentIndex={currentIndex}
-        onClose={closeModal}
-        onNavigate={navigate}
+        onClose={closeImageModal}
+        onNavigate={navigateImage}
       />
+
+      {/* Video Gallery Section */}
+      <h2 className="text-lg font-semibold mt-10 mb-4">VIDEOS</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+        {videos.map((video, index) => (
+          <div key={index} className="w-full h-64">
+            <iframe
+              src={video.video_url}
+              title={video.title}
+              className="w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
