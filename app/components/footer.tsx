@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -67,7 +66,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-1">
               <li>
                 <Link
-                  href="/about"
+                  href="/history"
                   className="hover:underline hover:text-yellow-300 flex items-center"
                 >
                   <span className="inline-block w-4">
@@ -264,7 +263,7 @@ const Footer: React.FC = () => {
         <ul className="space-y-1">
           <li>
             <Link
-              href="/about"
+              href="/history"
               className="hover:underline hover:text-yellow-300 flex items-center"
             >
               <span className="inline-block w-4 ">
@@ -345,9 +344,7 @@ const Footer: React.FC = () => {
             >
               <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2l-8 5-8-5V6l8 5 8-5v2zM4 18v-8l8 5 8-5v8H4z" />
             </svg>
-            <p className="mt-0.5 text-white ">
-              shriharihareshwara@gmail.com
-            </p>
+            <p className="mt-0.5 text-white ">shriharihareshwara@gmail.com</p>
           </div>
         </address>
       </div>
