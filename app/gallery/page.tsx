@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
 import Swal from "sweetalert2";
 import ImageModal from "../components/ImageModal";
+import LoadingSpinner from "../components/LoadingSpinner"; // Import the LoadingSpinner component
 
 interface ImageData {
   image_id: number;
@@ -20,7 +21,7 @@ export default function ImageGallery(): JSX.Element {
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   const fetchImages = useCallback(async (currentPage: number) => {
-    setLoading(true);
+    setLoading(true); // Show the spinner when loading starts
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
 
@@ -52,7 +53,7 @@ export default function ImageGallery(): JSX.Element {
       }
     } finally {
       clearTimeout(timeoutId);
-      setLoading(false);
+      setLoading(false); // Hide the spinner when loading completes
     }
   }, []);
 
@@ -100,13 +101,7 @@ export default function ImageGallery(): JSX.Element {
 
   return (
     <div className="relative px-4 md:px-8 lg:px-16">
-      {" "}
-      {/* Added padding here */}
-      {loading && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="loader"></div>
-        </div>
-      )}
+      {loading && <LoadingSpinner />} {/* Show the loading spinner when loading */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 mt-10">
         {images.map((image, index) => (
           <div
@@ -137,24 +132,6 @@ export default function ImageGallery(): JSX.Element {
         onClose={closeModal}
         onNavigate={navigate}
       />
-      <style jsx>{`
-        .loader {
-          border: 8px solid #f3f3f3;
-          border-top: 8px solid #3498db;
-          border-radius: 50%;
-          width: 60px;
-          height: 60px;
-          animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
     </div>
   );
 }
