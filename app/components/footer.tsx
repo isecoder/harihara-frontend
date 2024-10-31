@@ -7,9 +7,9 @@ const Footer: React.FC = () => {
   return (
     <div className="flex flex-col max-h-screen">
       <footer className="bg-gradient-to-r from-orange-500 to-orange-300 text-white py-10 px-10 md:px-10 lg:px-10 mt-[6rem] flex-grow">
-        <div className="container mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center">
+        <div className="container mx-auto flex flex-col lg:flex-row justify-between  lg:items-center">
           {/* Logo and Title Section */}
-          <div className="flex flex-col items-center lg:items-start mb-8 lg:mb-0">
+          <div className="flex flex-col items-center lg:items-center  mb-8 lg:mb-0">
             <div className="mb-8 ">
               <Image
                 src="/logo.jpg"
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
           <div className="text-left lg:text-center mb-6 lg:mb-0">
             <h3 className="text-lg font-semibold mb-6">≡ Quick Links</h3>
             <ul className="space-y-1">
-              {['History', 'News', 'Seva List', 'Gallery'].map((link, index) => (
+              {['History', 'News', 'Sevas', 'Gallery'].map((link, index) => (
                 <li key={index}>
                   <Link href={`/${link.toLowerCase()}`} className="hover:underline hover:text-yellow-300 flex items-center">
                     <span className="inline-block w-4">
