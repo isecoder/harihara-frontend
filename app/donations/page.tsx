@@ -15,7 +15,7 @@ const DonationsPage: React.FC = () => {
             Account Number: <span className="font-normal">70640100001978</span>
           </p>
           <p className="text-lg text-gray-800">
-            IFSC Code: <span className="font-normal">BARBOVJKOMO</span>
+            IFSC Code: <span className="font-normal">BARB0VJKOMO</span>
           </p>
         </div>
 
@@ -27,7 +27,7 @@ const DonationsPage: React.FC = () => {
             Account Number: <span className="font-normal">70640100000059</span>
           </p>
           <p className="text-lg text-gray-800">
-            IFSC Code: <span className="font-normal">BARBOVJKOMO</span>
+            IFSC Code: <span className="font-normal">BARB0VJKOMO</span>
           </p>
         </div>
       </div>
