@@ -129,24 +129,29 @@ const Footer: React.FC = () => {
           © 2024 | Disclaimer -{" "}
           <Link
             href="/policy"
-            className="hover:text-yellow-400 hover:underline"
+            className="text-yellow-400 hover:underline"
           >
             Privacy Policy
           </Link>{" "}
           |{" "}
           <Link
             href="/policy"
-            className="hover:text-yellow-400 hover:underline"
+            className="text-yellow-400 hover:underline"
           >
             Refund & Cancellation
           </Link>{" "}
-          | Harihareshwara Temple HariharaPallathadka. All Rights Reserved
+          | Harihareshwara Temple HariharaPallathadka | <Link
+            href="/admin"
+            className="text-yellow-400 hover:underline"
+          >
+            Admin
+          </Link>{" "} | All Rights Reserved
         </p>
         <p>
           Designed by:{" "}
           <Link
             href="https://www.instagram.com/iscoderz/"
-            className="hover:text-yellow-400 hover:underline"
+            className="text-yellow-400 hover:underline"
           >
             ISCODERZ
           </Link>
