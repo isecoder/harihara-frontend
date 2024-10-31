@@ -26,6 +26,10 @@ export default function Gallery(): JSX.Element {
       title: "ಹರಿಹರ ಜಾತ್ರೆ 2024 |ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವರ ನೃತ್ಯ ಬಲಿ| |Thidambu Nritham| |Shri Harihareshwara Temple|",
       video_url: "https://www.youtube.com/embed/nKGWrYaBm9o?si=Y5xDuv4J1BbYASpH",
     },
+    {
+      title: "Shri Harihareshwara Temple, Harihara | ಪ್ರತಿಷ್ಠಾ ವಾರ್ಷಿಕೋತ್ಸವ ಮತ್ತು ಜಾತ್ರೋತ್ಸವ | LIVE",
+      video_url: "https://www.youtube.com/embed/aDmwh0ujr6Y?si=bdSh9OP6wXuF_shs",
+    },
   ];
 
   const fetchImages = useCallback(async (currentPage: number) => {
