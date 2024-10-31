@@ -54,16 +54,20 @@ const Footer: React.FC = () => {
           <div className="text-left lg:text-center mb-6 lg:mb-0">
             <h3 className="text-lg font-semibold mb-6">≡ Quick Links</h3>
             <ul className="space-y-1">
-              {['History', 'News', 'Sevas', 'Gallery'].map((link, index) => (
-                <li key={index}>
-                  <Link href={`/${link.toLowerCase()}`} className="hover:underline hover:text-yellow-300 flex items-center">
-                    <span className="inline-block w-4">
-                      <span className="text-xs leading-4">►</span>
-                    </span>
-                    {link}
-                  </Link>
-                </li>
-              ))}
+            {['History', 'News', 'Sevas', 'Gallery'].map((link, index) => (
+  <li key={index}>
+    <Link 
+      href={link === 'News' ? '/newsupdates' : `/${link.toLowerCase()}`} 
+      className="hover:underline hover:text-yellow-300 flex items-center"
+    >
+      <span className="inline-block w-4">
+        <span className="text-xs leading-4">►</span>
+      </span>
+      {link}
+    </Link>
+  </li>
+))}
+
             </ul>
           </div>
 
