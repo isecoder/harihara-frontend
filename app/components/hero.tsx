@@ -40,14 +40,14 @@ const ImageSlider: React.FC = () => {
   return (
     <div className="relative flex flex-col w-full bg-gradient-to-b from-white to-orange-200">
       {/* Responsive heights for different screen sizes */}
-      <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden">
+      <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[350px] overflow-hidden">
         <div className="transition-transform duration-500 ease-in-out">
           <Image
             src={images[currentPage]}
             alt={`Image ${currentPage + 1}`}
             fill
             sizes="100vw"
-            className="object-center h-full w-full" // Ensures image fully covers the area
+            className="object-contain" // Ensures the image covers the container proportionally
             priority
           />
         </div>
