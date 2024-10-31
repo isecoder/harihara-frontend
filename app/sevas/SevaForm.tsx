@@ -24,18 +24,20 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
   const [mobileNumberConfirmation, setMobileNumberConfirmation] = useState("");
   const [date, setDate] = useState("");
   
-  // State for error message and loading
+  // State for error message, loading, and confirmation messages
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [confirmation, setConfirmation] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     setLoading(true); // Set loading state to true
     setError(null); // Reset error state before the request
+    setConfirmation(null); // Reset confirmation state
 
     try {
-      const response = await fetch('/api/sevaform', {
+      const response = await fetch('/api/sevaforms', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -56,6 +58,9 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
         const data = await response.json();
         console.log('Seva created:', data);
         
+        // Show success confirmation
+        setConfirmation({ message: 'Seva submitted successfully!', type: 'success' });
+        
         // Reset form fields after successful submission
         setName("");
         setNakshathra("");
@@ -68,10 +73,15 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
         const errorData = await response.json();
         setError(errorData.message || 'Failed to create Seva.'); // Set error message
         console.error('Failed to create Seva:', errorData);
+        
+        // Show error confirmation
+        setConfirmation({ message: errorData.message || 'Failed to create Seva.', type: 'error' });
       }
     } catch (err) {
       setError('An unexpected error occurred.'); // Handle network or unexpected errors
       console.error('Error:', err);
+      // Show error confirmation
+      setConfirmation({ message: 'An unexpected error occurred.', type: 'error' });
     } finally {
       setLoading(false); // Reset loading state
     }
@@ -100,9 +110,6 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
       <p className="font-bold text-lg text-orange-600 mb-4">
         Price: ₹{seva.base_price}
       </p>
-
-      {/* Error message */}
-      {error && <p className="text-red-600 mb-4">{error}</p>}
 
       {/* Application Form */}
       <form onSubmit={handleSubmit} className="bg-white shadow rounded-lg p-4 space-y-4">
@@ -211,6 +218,16 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
           {loading ? 'Submitting...' : labels.submit} {/* Show loading text */}
         </button>
       </form>
+
+      {/* Error message */}
+      {error && <p className="text-red-600 mb-4">{error}</p>}
+
+      {/* Confirmation Message */}
+      {confirmation && (
+        <div className={`p-4 rounded-lg mb-8 ${confirmation.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+          {confirmation.message}
+        </div>
+      )}
     </div>
   );
 };
