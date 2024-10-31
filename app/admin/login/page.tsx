@@ -1,62 +1,110 @@
-// app/admin/login/page.tsx
+import React from "react";
 
-"use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
-export default function LoginPage() {
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const res = await fetch("http://your-backend-url.com/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include", // Include credentials for cookie session
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (res.ok) {
-      // Successful login
-      router.push("/admin"); // Redirect to the admin dashboard
-    } else {
-      const data = await res.json();
-      setError(data.message || "Login failed. Please try again.");
-    }
-  };
-
+export default function AdminLogin() {
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
+    <div style={styles.container}>
+      <h2 style={styles.heading}>Login</h2>
+      <form style={styles.form}>
+        <div style={styles.inputGroup}>
+          <i className="fa fa-user" style={styles.icon}></i>
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Username"
+            style={styles.input}
             required
           />
+          <span style={styles.required}>*</span>
         </div>
-        <div>
-          <label>Password:</label>
+        <div style={styles.inputGroup}>
+          <i className="fa fa-lock" style={styles.icon}></i>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            style={styles.input}
             required
           />
+          <span style={styles.required}>*</span>
         </div>
-        <button type="submit">Login</button>
+        <div style={styles.buttonGroup}>
+          <button type="submit" style={styles.loginButton}>
+            LOGIN
+          </button>
+          <button type="reset" style={styles.resetButton}>
+            RESET
+          </button>
+        </div>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }
+
+const styles = {
+  container: {
+    background: "linear-gradient(to bottom, #fdfcf1, #f2b890)", // Background gradient color
+    borderRadius: "5px",
+    padding: "2rem",
+    maxWidth: "400px",
+    margin: "5% auto",
+    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+    textAlign: "center" as const,
+  },
+  heading: {
+    fontSize: "24px",
+    marginBottom: "1.5rem",
+    color: "#333",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column" as const,
+    alignItems: "center" as const,
+  },
+  inputGroup: {
+    position: "relative" as const,
+    marginBottom: "1.5rem",
+    width: "100%",
+  },
+  icon: {
+    position: "absolute" as const,
+    left: "10px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    color: "gray",
+  },
+  input: {
+    width: "100%",
+    padding: "0.75rem 1rem 0.75rem 2.5rem",
+    border: "1px solid #ddd",
+    borderRadius: "3px",
+    fontSize: "16px",
+    outline: "none" as const,
+  },
+  required: {
+    color: "red",
+    position: "absolute" as const,
+    right: "10px",
+    top: "50%",
+    transform: "translateY(-50%)",
+  },
+  buttonGroup: {
+    display: "flex",
+    gap: "10px",
+  },
+  loginButton: {
+    backgroundColor: "#ff5722",
+    color: "#fff",
+    border: "none",
+    padding: "0.75rem 1.5rem",
+    cursor: "pointer",
+    fontSize: "16px",
+    borderRadius: "3px",
+  },
+  resetButton: {
+    backgroundColor: "#ff5722",
+    color: "#fff",
+    border: "none",
+    padding: "0.75rem 1.5rem",
+    cursor: "pointer",
+    fontSize: "16px",
+    borderRadius: "3px",
+  },
+};
