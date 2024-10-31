@@ -7,8 +7,20 @@ import { changeLocale } from "../store/localeSlice";
 
 type LocaleType = "en" | "kn";
 
+interface AdministrationContent {
+  managementPresidentTitle: string;
+  managementPresidentName: string;
+  contactNumber: string;
+  developmentPresidentTitle: string;
+  developmentPresidentName: string;
+  membersTitle: string;
+  members: string[];
+  templePriestTitle: string;
+  templePriestName: string;
+}
+
 // Content in both English and Kannada
-const administrationContent: Record<LocaleType, any> = {
+const administrationContent: Record<LocaleType, AdministrationContent> = {
   en: {
     managementPresidentTitle: "Management Committee President:",
     managementPresidentName: "Shri Kishor Kumar Kujugodu",
