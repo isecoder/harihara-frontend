@@ -1,45 +1,37 @@
 // app/admin/page.tsx
+import React from "react";
+import Link from "next/link"; // Import Link for navigation
 
-import { redirect } from "next/navigation"; // Use next/navigation for redirection
-import { cookies } from "next/headers"; // Import cookies from next/headers
-import SevaBookedList from "./components/SevaBookedList";
-import AddSevaForm from "./components/AddSevaForm";
-import NewsUpdatesForm from "./components/NewsUpdatesForm";
-
-export default async function AdminDashboard() {
-  // Retrieve cookies on the server side
-  const cookieStore = await cookies(); // Await the cookies
-  const sessionId = cookieStore.get("sessionId"); // Adjust the cookie name to your setup
-
-  if (!sessionId) {
-    // If the session cookie doesn't exist, redirect to /admin/login
-    redirect("/admin/login");
-  }
-
+const AdminPage = () => {
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Admin Dashboard</h1>
-      <p>Welcome to the admin dashboard!</p>
-      <SevaBookedList />
-      <AddSevaForm />
-      <NewsUpdatesForm />
+    <div className="max-w-3xl mx-auto p-6">
+      <h2 className="text-2xl font-semibold mb-6">
+        Welcome to the Admin Dashboard
+      </h2>
+      <div className="flex flex-col space-y-4">
+        <Link href="/admin/sevas">
+          <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200">
+            Sevas
+          </button>
+        </Link>
+        <Link href="/admin/news-updates">
+          <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200">
+            News Updates
+          </button>
+        </Link>
+        <Link href="/admin/seva-booked-list">
+          <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200">
+            Seva Booked List
+          </button>
+        </Link>
+        <Link href="/admin/gallery">
+          <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200">
+            Gallery
+          </button>
+        </Link>
+      </div>
     </div>
   );
-}
-
-const styles = {
-  container: {
-    background: "linear-gradient(to bottom, #fdfcf1, #f2b890)", // Background gradient color
-    borderRadius: "5px",
-    padding: "2rem",
-    maxWidth: "600px",
-    margin: "5% auto",
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-    textAlign: "center" as const,
-  },
-  heading: {
-    fontSize: "24px",
-    marginBottom: "1.5rem",
-    color: "#333",
-  },
 };
+
+export default AdminPage;

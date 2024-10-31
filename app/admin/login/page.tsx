@@ -1,110 +1,112 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+
+// Define the expected structure of the error response
+interface ApiError {
+  message: string;
+}
 
 export default function AdminLogin() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    // Reset message when the user starts typing
+    setMessage("");
+    setIsError(false);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData: ApiError = await response.json(); // Assert the response to ApiError
+        throw new Error(errorData.message || "Login failed");
+      }
+
+      const data = await response.json();
+      setMessage(`Welcome back, ${data.name}`);
+      setIsError(false); // Reset error state
+      // Redirect or perform additional actions after login
+    } catch (error) {
+      if (error instanceof Error) {
+        // Check if error is an instance of Error
+        setMessage(error.message);
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
+      setIsError(true); // Set error state
+    }
+  };
+
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>Login</h2>
-      <form style={styles.form}>
-        <div style={styles.inputGroup}>
-          <i className="fa fa-user" style={styles.icon}></i>
+    <div className="bg-gradient-to-b from-[#fdfcf1] to-[#f2b890] rounded-lg p-8 max-w-md mx-auto shadow-md text-center">
+      <h2 className="text-2xl mb-6 text-gray-800">Login</h2>
+      <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+        <div className="relative mb-6 w-full">
+          <i className="fa fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
           <input
-            type="text"
-            placeholder="Username"
-            style={styles.input}
+            type="email" // Change to email type
+            name="email" // Change name to email
+            placeholder="Email"
+            className="w-full p-3 pl-10 border border-gray-300 rounded-md text-lg focus:outline-none"
+            onChange={handleChange}
             required
           />
-          <span style={styles.required}>*</span>
+          <span className="text-red-500 absolute right-3 top-1/2 transform -translate-y-1/2">
+            *
+          </span>
         </div>
-        <div style={styles.inputGroup}>
-          <i className="fa fa-lock" style={styles.icon}></i>
+        <div className="relative mb-6 w-full">
+          <i className="fa fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
           <input
             type="password"
+            name="password"
             placeholder="Password"
-            style={styles.input}
+            className="w-full p-3 pl-10 border border-gray-300 rounded-md text-lg focus:outline-none"
+            onChange={handleChange}
             required
           />
-          <span style={styles.required}>*</span>
+          <span className="text-red-500 absolute right-3 top-1/2 transform -translate-y-1/2">
+            *
+          </span>
         </div>
-        <div style={styles.buttonGroup}>
-          <button type="submit" style={styles.loginButton}>
+        <div className="flex gap-4">
+          <button
+            type="submit"
+            className="bg-[#ff5722] text-white py-2 px-4 rounded-md font-semibold"
+          >
             LOGIN
           </button>
-          <button type="reset" style={styles.resetButton}>
+          <button
+            type="reset"
+            className="bg-[#ff5722] text-white py-2 px-4 rounded-md font-semibold"
+          >
             RESET
           </button>
         </div>
       </form>
+      {message && (
+        <p className={`mt-4 ${isError ? "text-red-500" : "text-green-500"}`}>
+          {message}
+        </p>
+      )}
     </div>
   );
 }
-
-const styles = {
-  container: {
-    background: "linear-gradient(to bottom, #fdfcf1, #f2b890)", // Background gradient color
-    borderRadius: "5px",
-    padding: "2rem",
-    maxWidth: "400px",
-    margin: "5% auto",
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-    textAlign: "center" as const,
-  },
-  heading: {
-    fontSize: "24px",
-    marginBottom: "1.5rem",
-    color: "#333",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center" as const,
-  },
-  inputGroup: {
-    position: "relative" as const,
-    marginBottom: "1.5rem",
-    width: "100%",
-  },
-  icon: {
-    position: "absolute" as const,
-    left: "10px",
-    top: "50%",
-    transform: "translateY(-50%)",
-    color: "gray",
-  },
-  input: {
-    width: "100%",
-    padding: "0.75rem 1rem 0.75rem 2.5rem",
-    border: "1px solid #ddd",
-    borderRadius: "3px",
-    fontSize: "16px",
-    outline: "none" as const,
-  },
-  required: {
-    color: "red",
-    position: "absolute" as const,
-    right: "10px",
-    top: "50%",
-    transform: "translateY(-50%)",
-  },
-  buttonGroup: {
-    display: "flex",
-    gap: "10px",
-  },
-  loginButton: {
-    backgroundColor: "#ff5722",
-    color: "#fff",
-    border: "none",
-    padding: "0.75rem 1.5rem",
-    cursor: "pointer",
-    fontSize: "16px",
-    borderRadius: "3px",
-  },
-  resetButton: {
-    backgroundColor: "#ff5722",
-    color: "#fff",
-    border: "none",
-    padding: "0.75rem 1.5rem",
-    cursor: "pointer",
-    fontSize: "16px",
-    borderRadius: "3px",
-  },
-};
