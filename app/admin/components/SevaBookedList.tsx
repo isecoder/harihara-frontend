@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 
 interface Seva {
@@ -22,8 +23,13 @@ export default function SevaBookedList() {
         }
         const data = await response.json();
         setSevas(data);
-      } catch (error: any) {
-        setError(error.message);
+      } catch (error: unknown) {
+        // Type check for error
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unexpected error occurred");
+        }
       } finally {
         setLoading(false);
       }
