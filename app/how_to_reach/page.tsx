@@ -2,7 +2,7 @@ import React from 'react'
 
 const How_to_reach = () => {
   return (
-    <div><p></p></div>
+    <div><p> how to reach</p></div>
   )
 }
 

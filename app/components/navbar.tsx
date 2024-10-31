@@ -48,6 +48,13 @@ const Navbar: React.FC = () => {
     setAboutDropdownMobileOpen((prev) => !prev);
   };
 
+  // Function to close all dropdowns and the mobile menu
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setAboutDropdownOpen(false);
+    setAboutDropdownMobileOpen(false);
+  };
+
   return (
     <>
       <Banner />
@@ -73,6 +80,7 @@ const Navbar: React.FC = () => {
                           <Link
                             key={subLink.href}
                             href={subLink.href}
+                            onClick={closeMenu} // Close dropdowns on click
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-100"
                           >
                             {subLink.label}
@@ -84,6 +92,7 @@ const Navbar: React.FC = () => {
                 ) : (
                   <Link
                     href={href}
+                    onClick={closeMenu} // Close dropdowns on click
                     className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
                   >
                     {label}
@@ -118,6 +127,7 @@ const Navbar: React.FC = () => {
                           <Link
                             key={subLink.href}
                             href={subLink.href}
+                            onClick={closeMenu} // Close dropdowns on click
                             className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
                           >
                             {subLink.label}
@@ -129,6 +139,7 @@ const Navbar: React.FC = () => {
                 ) : (
                   <Link
                     href={href}
+                    onClick={closeMenu} // Close dropdowns on click
                     className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
                   >
                     {label}
