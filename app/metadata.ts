@@ -61,9 +61,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Shri Harihareshwara Temple, Hariharapallathadka',
     description: 'Explore the spiritual heritage of Shri Harihareshwara Temple in Hariharapallathadka, Karnataka. Discover its rich history, unique architecture, and religious significance.',
-    images: ['https://example.com/path-to-your-image.jpg'],
+    images: ['/logo.jpg'],
   },
   icons: {
-    icon: '/path-to-your-favicon.ico',
+    icon: '/logo.jpg',
   },
 };
