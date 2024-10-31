@@ -35,6 +35,8 @@ export const metadata: Metadata = {
     'Lord Mahaganapathi',
     'Lord Ganesha',
     'Lord Subrahmanya',
+    'Champashasti',
+    'Shree Basaveshwara Temple, Hindu temple, Basavanamoola, Kulkunda, Lord Shiva, Kukke Subrahmanya,Kukke Shree Subrahmanya Temple, sacred place, cultural significance,historical place,Bisle Ghats,Tulunadu,Temples in Coastal Karnataka,Temples in Kukke Subrahmanya,Nearby places in Subrahmanya,places to visit,places to visit at Subrahmanya,Nearby temples to Kukke Shri Subrahmanya Temple,Dharmasthala,Shri Kshethra Dharmasthala,Kulkunda Shree Basaveshwara Temple, Kukke Shri Subrahmanya Temple, Adi Subrahmanya Temple, Shri Subrahmanya Mutt, Kashikatte Shri Ganapathi Temple, Biladwara, Shri Vanadurga Devi Temple, Shree Abhaya Mahaganapathi, Agrahara Shri Somanatha Temple, Shree Harihareshwara Temple, Kumaradhara River (Bathing Ghat), Shri Kshethra Dharmasthala, Bisle Ghat Viewpoint, Patla Betta, Mallalli Falls, Hindu temples, Karnataka, Western Ghats, Serpent king Vasuki, Kumaraparvatha, Dharmasthala Manjunatha Swamy Temple, Free meals, Jain Pergade family, Bisle Ghat, Somwarpet, Coorg, Monsoon season, Nature enthusiasts, Trekkers,Kumara Parvatha trek,Kumara Parvatha trekking,Shesha Parvatha,South India treks,South India Temples,Karnataka Hikers,Karnataka Trekkers,Bhattaramane,Bhattas house,Bhattara Mane,Treks in Karnataka,Treks in Western Ghats,Treks in South India,Toughest treks, Western Ghats landscapes'
   ],
   authors: [{ name: 'Shri Harihareshwara Temple Trust' }],
   openGraph: {
