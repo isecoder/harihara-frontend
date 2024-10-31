@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
                 href={href}
                 onClick={handleLinkClick} // Set loading on link click
                 className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
-              >
+          >
                 {label}
               </Link>
             ))}
