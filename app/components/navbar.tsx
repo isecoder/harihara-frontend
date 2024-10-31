@@ -2,9 +2,10 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { FaBars, FaTimes } from "react-icons/fa"
+import { FaBars, FaTimes, FaCaretDown } from "react-icons/fa"
 import { ChevronDown } from "lucide-react"
 import Banner from "@/app/components/banner"
+import LanguageSwitcher from "@/app/components/LanguageSwitcher"
 
 interface NavLink {
   href: string
@@ -37,6 +38,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
   const [aboutDropdownMobileOpen, setAboutDropdownMobileOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const toggleMenu = () => setMenuOpen((prev) => !prev)
 
@@ -54,13 +56,14 @@ export default function Navbar() {
     setMenuOpen(false)
     setAboutDropdownOpen(false)
     setAboutDropdownMobileOpen(false)
+    setDropdownOpen(false)
   }
 
   return (
     <>
       <Banner />
       <div className="sticky top-0 w-full z-10 bg-gradient-to-r from-white to-orange-100 shadow-lg">
-        <div className="flex justify-end items-center mx-auto py-4 px-4 md:px-8">
+        <div className="flex justify-between items-center mx-auto py-4 px-4 md:px-8">
           <nav className="hidden md:flex justify-center flex-1 space-x-6 text-sm">
             {navLinks.map(({ href, label, subLinks }) => (
               <div key={label} className="relative group">
@@ -110,7 +113,26 @@ export default function Navbar() {
               </div>
             ))}
           </nav>
-          <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
+
+          <div className="relative hidden md:flex items-center">
+            <button
+              onClick={() => setDropdownOpen((prev) => !prev)}
+              className="flex items-center text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
+            >
+              Languages <FaCaretDown className="ml-1" />
+            </button>
+            {dropdownOpen && (
+              <div className="absolute right-0 mt-2 w-40 bg-gradient-to-r from-orange-100 to-orange-200 shadow-lg rounded-md z-10">
+                <LanguageSwitcher onSelect={closeMenu} />
+              </div>
+            )}
+          </div>
+
+          <div
+            className="md:hidden cursor-pointer"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
             {menuOpen ? (
               <FaTimes className="text-orange-500 text-2xl" />
             ) : (
@@ -118,6 +140,7 @@ export default function Navbar() {
             )}
           </div>
         </div>
+
         <div
           className={`md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 text-center py-6 shadow-md transition-all duration-300 ease-in-out transform origin-top ${
             menuOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 h-0 overflow-hidden"
@@ -168,6 +191,7 @@ export default function Navbar() {
               )}
             </div>
           ))}
+          <LanguageSwitcher onSelect={closeMenu} />
         </div>
       </div>
       <div className="pt-4"></div>
