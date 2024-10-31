@@ -5,9 +5,9 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const images: string[] = [
-  "/temple2.png",
+  "/p9.jpeg",
   "/temple3.jpg",
-  "/temple4.png",
+  "/parvat.jpg",
   "/temple5.png",
 ];
 
@@ -39,42 +39,39 @@ const ImageSlider: React.FC = () => {
 
   return (
     <div className="relative flex flex-col w-full bg-gradient-to-b from-white to-orange-200">
-      <div className="relative w-full h-64 md:h-80 overflow-hidden">
-        {" "}
-        {/* Increased height */}
-        <div
-          className={`transition-transform duration-500 ease-in-out`}
-        >
+      {/* Responsive heights for different screen sizes */}
+      <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden">
+        <div className="transition-transform duration-500 ease-in-out">
           <Image
             src={images[currentPage]}
             alt={`Image ${currentPage + 1}`}
             fill
             sizes="100vw"
-            className="object-contain w-full h-full" // Full width, increased height
+            className="object-center h-full w-full" // Ensures image fully covers the area
             priority
           />
         </div>
         {/* Left arrow */}
         <div
           onClick={handlePrevPage}
-          className="absolute inset-y-1/2 left-4 text-white text-xl cursor-pointer hover:text-orange-500"
+          className="absolute inset-y-1/2 left-4 text-white text-2xl cursor-pointer hover:text-orange-500"
         >
           <FontAwesomeIcon icon={faArrowLeft} />
         </div>
         {/* Right arrow */}
         <div
           onClick={handleNextPage}
-          className="absolute inset-y-1/2 right-4 text-white text-xl cursor-pointer hover:text-orange-500"
+          className="absolute inset-y-1/2 right-4 text-white text-2xl cursor-pointer hover:text-orange-500"
         >
           <FontAwesomeIcon icon={faArrowRight} />
         </div>
         {/* Dots navigation */}
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {images.map((_, index) => (
             <div
               key={index}
               onClick={() => transitionSlide(index)}
-              className={`w-2 h-2 rounded-full cursor-pointer ${
+              className={`w-3 h-3 rounded-full cursor-pointer ${
                 index === currentPage ? "bg-orange-500" : "bg-gray-400"
               }`}
             ></div>

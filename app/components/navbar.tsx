@@ -82,7 +82,7 @@ export default function Navbar() {
                       />
                     </button>
                     <div
-                      className={`absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 z-20 transition-all duration-300 ease-in-out transform origin-top ${
+                      className={`absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-6 z-20 transition-all duration-300 ease-in-out transform origin-top ${
                         aboutDropdownOpen
                           ? "opacity-100 scale-y-100"
                           : "opacity-0 scale-y-0 pointer-events-none"
@@ -141,7 +141,7 @@ export default function Navbar() {
         </div>
 
         <div
-          className={`md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 text-center py-6 shadow-md transition-all duration-300 ease-in-out transform origin-top ${
+          className={`md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 text-center shadow-md transition-all duration-300 ease-in-out transform origin-top ${
             menuOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 h-0 overflow-hidden"
           }`}
         >
