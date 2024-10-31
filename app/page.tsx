@@ -6,22 +6,25 @@ import { RootState, AppDispatch } from "./store";
 import { changeLocale } from "./store/localeSlice";
 import Hero from "./components/hero";
 import Link from "next/link";
+import Image from "next/image"; // Import Image from Next.js
 
 type LocaleType = "en" | "kn";
+
 const welcomeTitle: Record<LocaleType, string> = {
   en: "WELCOME TO SHRI HARIHARESHWARA TEMPLE",
   kn: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನಕ್ಕೆ ಸ್ವಾಗತ",
 };
+
 const welcomeContent: Record<LocaleType, string> = {
-  en: "Shri Harihareshwara Temple is a sacred Triveni Sangam Kshetra located at the foot of the Western Ghats in this Tulunadu of Parasurama creation in South India.Sullia is a rural taluk in Dakshina Kannada where most of the land is covered by forests and agriculture lands. Hariharapallathadka is one of the village in this Sullia Taluk where Lord Harihareshwara resides.",
-  kn: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನಕ್ಕೆ ಸ್ವಾಗತ",
+  en: "Shri Harihareshwara Temple is a sacred Triveni Sangam Kshetra located at the foot of the Western Ghats in this Tulunadu of Parasurama creation in South India. Sullia is a rural taluk in Dakshina Kannada where most of the land is covered by forests and agriculture lands. Hariharapallathadka is one of the villages in this Sullia Taluk where Lord Harihareshwara resides.",
+  kn: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನವು ದಕ್ಷಿಣ ಭಾರತದ ತುಲನಾಡಿನ ಪಶ್ಚಿಮ ಘಟಗಳಲ್ಲಿ ಹಕ್ಕಿ ತಲೆಯಲ್ಲಿರುವ ಶ್ರದ್ಧೆ ಪೂಜಾ ಕೇಂದ್ರವಾಗಿದೆ.",
 };
 
 export default function Home() {
   // const dispatch = useDispatch<AppDispatch>();
-  // // const { welcome, greeting } = useSelector(
-  // //   (state: RootState) => state.locale.messages
-  // // );
+  // const { welcome, greeting } = useSelector(
+  //   (state: RootState) => state.locale.messages
+  // );
 
   // const [isLocaleLoaded, setIsLocaleLoaded] = useState(false);
 
@@ -39,7 +42,6 @@ export default function Home() {
     (state: RootState) => state.locale.locale
   ) as LocaleType;
 
-  const messages = welcomeContent[currentLocale];
   const [isLocaleLoaded, setIsLocaleLoaded] = useState(false);
 
   useEffect(() => {
@@ -71,9 +73,15 @@ export default function Home() {
       </main> */}
       <main className="flex flex-col items-center px-16 py-20 text-center border-4 mt-20">
         <div className="flex items-center">
-          <img src="temple4.png" className="h-60 rounded-md" />
+          <Image
+            src="/temple4.png" // Use the correct path to your image
+            alt="Shri Harihareshwara Temple"
+            className="h-60 rounded-md"
+            width={240} // Specify the width for optimization
+            height={160} // Specify the height for optimization
+          />
           <div>
-            <h2 className=" font-bold text-xl">{welcomeTitle[currentLocale]}</h2>
+            <h2 className="font-bold text-xl">{welcomeTitle[currentLocale]}</h2>
             <div className="p-7 text-justify">
               {welcomeContent[currentLocale]}
             </div>
