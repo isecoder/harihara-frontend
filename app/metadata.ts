@@ -57,12 +57,6 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Shri Harihareshwara Temple, Hariharapallathadka',
-    description: 'Explore the spiritual heritage of Shri Harihareshwara Temple in Hariharapallathadka, Karnataka. Discover its rich history, unique architecture, and religious significance.',
-    images: ['/logo.jpg'],
-  },
   icons: {
     icon: '/logo.jpg',
   },
