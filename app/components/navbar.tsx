@@ -1,16 +1,16 @@
-'use client'
+// app/components/Navbar.tsx
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { FaBars, FaTimes, FaCaretDown } from "react-icons/fa"
-import { ChevronDown } from "lucide-react"
-import Banner from "@/app/components/banner"
-import LanguageSwitcher from "@/app/components/LanguageSwitcher"
+import { useState } from "react";
+import Link from "next/link";
+import { FaBars, FaTimes } from "react-icons/fa";
+import Banner from "@/app/components/banner";
+import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 
 interface NavLink {
-  href: string
-  label: string
-  subLinks?: NavLink[]
+  href: string;
+  label: string;
+  subLinks?: NavLink[];
 }
 
 const navLinks: NavLink[] = [
@@ -31,32 +31,23 @@ const navLinks: NavLink[] = [
   { href: "/newsupdates", label: "News & Updates" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
-]
+];
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
-  const [aboutDropdownMobileOpen, setAboutDropdownMobileOpen] = useState(false)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
 
-  const toggleMenu = () => setMenuOpen((prev) => !prev)
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   const toggleAboutDropdown = (event: React.MouseEvent) => {
-    event.preventDefault()
-    setAboutDropdownOpen((prev) => !prev)
-  }
-
-  const toggleAboutDropdownMobile = (event: React.MouseEvent) => {
-    event.preventDefault()
-    setAboutDropdownMobileOpen((prev) => !prev)
-  }
+    event.preventDefault();
+    setAboutDropdownOpen((prev) => !prev);
+  };
 
   const closeMenu = () => {
-    setMenuOpen(false)
-    setAboutDropdownOpen(false)
-    setAboutDropdownMobileOpen(false)
-    setDropdownOpen(false)
-  }
+    setMenuOpen(false);
+    setAboutDropdownOpen(false);
+  };
 
   return (
     <>
@@ -75,11 +66,6 @@ export default function Navbar() {
                       aria-expanded={aboutDropdownOpen}
                     >
                       {label}
-                      <ChevronDown
-                        className={`ml-1 h-4 w-4 transition-transform duration-200 ${
-                          aboutDropdownOpen ? "rotate-180" : ""
-                        }`}
-                      />
                     </button>
                     <div
                       className={`absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-6 z-20 transition-all duration-300 ease-in-out transform origin-top ${
@@ -113,18 +99,8 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="relative hidden md:flex items-center">
-            <button
-              onClick={() => setDropdownOpen((prev) => !prev)}
-              className="flex items-center text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
-            >
-              Languages <FaCaretDown className="ml-1" />
-            </button>
-            {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-gradient-to-r from-orange-100 to-orange-200 shadow-lg rounded-md z-10">
-                <LanguageSwitcher onSelect={closeMenu} />
-              </div>
-            )}
+          <div className="hidden md:flex items-center">
+            <LanguageSwitcher />
           </div>
 
           <div
@@ -142,7 +118,9 @@ export default function Navbar() {
 
         <div
           className={`md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 text-center shadow-md transition-all duration-300 ease-in-out transform origin-top ${
-            menuOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 h-0 overflow-hidden"
+            menuOpen
+              ? "opacity-100 scale-y-100"
+              : "opacity-0 scale-y-0 h-0 overflow-hidden"
           }`}
         >
           {navLinks.map(({ href, label, subLinks }) => (
@@ -150,21 +128,18 @@ export default function Navbar() {
               {subLinks ? (
                 <>
                   <button
-                    onClick={toggleAboutDropdownMobile}
+                    onClick={toggleAboutDropdown}
                     className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 focus:outline-none flex items-center justify-center w-full"
                     aria-haspopup="true"
-                    aria-expanded={aboutDropdownMobileOpen}
+                    aria-expanded={aboutDropdownOpen}
                   >
                     {label}
-                    <ChevronDown
-                      className={`ml-1 h-4 w-4 transition-transform duration-200 ${
-                        aboutDropdownMobileOpen ? "rotate-180" : ""
-                      }`}
-                    />
                   </button>
                   <div
                     className={`flex flex-col items-center mt-2 space-y-2 transition-all duration-300 ease-in-out ${
-                      aboutDropdownMobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                      aboutDropdownOpen
+                        ? "max-h-96 opacity-100"
+                        : "max-h-0 opacity-0 overflow-hidden"
                     }`}
                   >
                     {subLinks.map((subLink) => (
@@ -190,10 +165,10 @@ export default function Navbar() {
               )}
             </div>
           ))}
-          <LanguageSwitcher onSelect={closeMenu} />
+          <LanguageSwitcher />
         </div>
       </div>
       <div className="pt-4"></div>
     </>
-  )
+  );
 }
