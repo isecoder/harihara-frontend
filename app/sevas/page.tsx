@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store"; // Adjust the import if needed
-import SevaForm from "../components/SevaForm"; // Ensure SevaForm is correctly imported
+import SevaForm from "./SevaForm"; // Ensure SevaForm is correctly imported
 import LoadingSpinner from "../components/LoadingSpinner"; // Import the LoadingSpinner component
 
 interface Seva {
