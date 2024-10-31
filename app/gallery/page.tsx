@@ -114,9 +114,14 @@ export default function Gallery(): JSX.Element {
   return (
     <div className="relative px-4 md:px-8 lg:px-16">
       {loading && <LoadingSpinner />}
+
+      {/* Centered Title for the Temple */}
+      <div className="text-center mt-10 mb-4">
+        <h1 className="text-3xl font-bold">SHRI HARIHARESHWARA TEMPLE</h1>
+      </div>
       
       {/* Image Gallery Section */}
-      <h2 className="text-lg font-semibold mt-10 mb-4">SHRI HARIHARESHWARA TEMPLE</h2>
+      <h2 className="text-xl font-semibold mt-10 mb-4">PHOTOS</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
         {images.map((image, index) => (
           <div
@@ -145,7 +150,7 @@ export default function Gallery(): JSX.Element {
       />
 
       {/* Video Gallery Section */}
-      <h2 className="text-lg font-semibold mt-10 mb-4">VIDEOS</h2>
+      <h2 className="text-xl font-semibold mt-10 mb-4">VIDEOS</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {videos.map((video, index) => (
           <div key={index} className="w-full h-64">
