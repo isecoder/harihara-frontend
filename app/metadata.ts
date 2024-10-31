@@ -40,7 +40,7 @@ export const metadata: Metadata = {
    'Dakshina Kannada temples', 'Lord Harihara', 'Vishnu and Shiva fusion', 'Hindu pilgrimage sites in Karnataka', 'Triveni Sangam', 'Tula Sankramana festival', 'Shani Pooja rituals', 'sacred river confluence', 'spiritual tourism in South India', 'Western Ghats temples', 'ancient Indian temples', 'Karnataka religious sites', 'temples near Sullia', 'Harihara deity worship', 'Koti Theertha significance', 'Pallathadka village attractions', 'temples in Western Ghats', 'Karnataka cultural heritage',
     'Shri Harihareshwara Temple', 'Hariharapallathadka', 'Dakshina Kannada temples', 'Lord Harihara', 'Vishnu and Shiva fusion', 'Hindu pilgrimage sites in Karnataka', 'Triveni Sangam', 'Tula Sankramana festival', 'Shani Pooja rituals', 'sacred river confluence', 'spiritual tourism in South India', 'Western Ghats temples', 'ancient Indian temples', 'Karnataka religious sites', 'temples near Sullia', 'Harihara deity worship', 'Koti Theertha significance', 'Pallathadka village attractions', 'temples in Western Ghats', 'Karnataka cultural heritage', 'Kukke Subrahmanya Temple', 'Subrahmanya', 'Kulkunda', 'Kulkunda Shree Basaveshwara Temple', 'Basavanamoola', 'Basavanamoola Shree Basaveshwara Temple'
   ],
-  authors: [{ name: 'Shri Harihareshwara Temple Trust' }],
+  authors: [{ name: 'Shri Harihareshwara Temple' }],
   openGraph: {
     title: 'Shri Harihareshwara Temple, Hariharapallathadka',
     description: 'Discover the divine amalgamation of Lord Vishnu and Lord Shiva at Shri Harihareshwara Temple in Hariharapallathadka, Karnataka. Learn about its historical legends, architectural marvels, and religious festivals.',
