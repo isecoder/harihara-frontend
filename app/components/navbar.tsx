@@ -32,6 +32,7 @@ const navLinks: NavLink[] = [
   { href: "/donations", label: "Donations" },
   { href: "/festivals", label: "Festivals" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/newsupdates", label: "News & Updates" },
 ]
 
 export default function Navbar() {
