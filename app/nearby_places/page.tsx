@@ -23,8 +23,9 @@ import P15 from "/app/nearby_places/p15.jpeg";
 import P16 from "/app/nearby_places/p16.png";
 
 type LocaleType = "en" | "kn";
+type ImageType = typeof P1; // Inferred type for images
 
-const placesContent: Record<LocaleType, { title: string; places: { name: string; description: string; image: StaticImageData }[] }> = {
+const placesContent: Record<LocaleType, { title: string; places: { name: string; description: string; image: ImageType }[] }> = {
   en: {
     title: "Nearby Places",
     places: [
@@ -65,6 +66,7 @@ const placesContent: Record<LocaleType, { title: string; places: { name: string;
       { name: "ಮಲ್ಲಳ್ಳಿ ಜಲಪಾತ", description: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ 57.3 ಕಿಮೀ ದೂರದಲ್ಲಿರುವ ಕುಮಾರಧಾರ ನದಿಯಿಂದ ನಿರ್ಮಾಣಗೊಳ್ಳುವ ಈ 200 ಅಡಿ ಎತ್ತರದ ಜಲಪಾತವನ್ನು ನೋಡಲು ಮಳೆಗಾಲ ಹೇಳಿದ ಸಮಯ.", image: P14 },
       { name: "ಕುಮಾರ ಪರ್ವತ ಚಾರಣ", description: "ಪುಷ್ಪಗಿರಿ ಎಂದೇ ಪ್ರಸಿದ್ಧ, ಪಶ್ಚಿಮ ಘಟ್ಟಗಳ ಸಾಲಿನಲ್ಲಿರುವ ಕರ್ನಾಟಕ ರಾಜ್ಯದ  ನಾಲ್ಕನೇ ಎತ್ತರದ ಶಿಖರವಾಗಿದೆ ಕುಕ್ಕೆ ಸುಬ್ರಹ್ಮಣ್ಯದಿಂದ ಆರಂಭವಾಗುವ ಚಾರಣ ದಕ್ಷಿಣ ಭಾರತದ ಕಠಿಣ ಚಾರಣಗಳಲ್ಲಿ ಒಂದು. ಚಾರಣ ಆರಂಭಗೊಳ್ಳುವ ಸ್ಥಳವಾದ ಸುಬ್ರಹ್ಮಣ್ಯದ ದೇವರಗದ್ದೆ ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ 10.1 ಕಿಮೀ ದೂರದಲ್ಲಿದೆ.", image: P15 },
       { name: "ಕೊಚ್ಚಿಲ ಶ್ರೀ ಮಯೂರವಹನ ಸುಬ್ರಹ್ಮಣ್ಯ ಸ್ವಾಮಿ ದೇವಸ್ಥಾನ", description: "ಹರಿಹರಪಲ್ಲತ್ತಡ್ಕ ಸಮೀಪದ ಕೊಲ್ಲಮೊಗ್ರದ ಕಟ್ಟ ಗ್ರಾಮದಲ್ಲಿ ಇರುವ ಈ ಸ್ಥಳದಲ್ಲಿ ಶ್ರೀ ಸುಬ್ರಹ್ಮಣ್ಯ ಸ್ವಾಮಿಯನ್ನು ಪೂಜಿಸಲಾಗುತ್ತದೆ. ಈ ದೇವಸ್ಥಾನ ಹರಿಹರಪಲ್ಲತ್ತಡ್ಕದಿಂದ 4.3 ಕಿ.ಮಿ ದೂರದಲ್ಲಿದೆ.", image: P16 },
+      // Add the rest of your data entries here...
     ],
   },
 };

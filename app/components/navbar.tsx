@@ -1,83 +1,132 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Link from "next/link";
-import { FaBars, FaTimes, FaCaretDown } from "react-icons/fa";
-import Banner from "./banner"; // Import the Banner component
-import LanguageSwitcher from "./LanguageSwitcher"; // Import the LanguageSwitcher component
-import LoadingSpinner from "./LoadingSpinner"; // Import the LoadingSpinner component
+import { useState } from "react"
+import Link from "next/link"
+import { FaBars, FaTimes, FaCaretDown } from "react-icons/fa"
+import { ChevronDown } from "lucide-react"
+import Banner from "@/app/components/banner"
+import LanguageSwitcher from "@/app/components/LanguageSwitcher"
 
 interface NavLink {
-  href: string;
-  label: string;
+  href: string
+  label: string
+  subLinks?: NavLink[]
 }
 
 const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
+  {
+    href: "",
+    label: "About",
+    subLinks: [
+      { href: "/history", label: "History" },
+      { href: "/temple", label: "About Temple" },
+      { href: "/administration", label: "Administration" },
+      { href: "/how_to_reach", label: "How to Reach" },
+      { href: "/nearby_places", label: "Nearby Places" },
+    ],
+  },
   { href: "/sevas", label: "Sevas" },
   { href: "/donations", label: "Donations" },
-  { href: "/festivals", label: "Festivals" },
+  { href: "/newsupdates", label: "News & Updates" },
   { href: "/gallery", label: "Gallery" },
-];
+  { href: "/contact", label: "Contact" },
+]
 
-const Navbar: React.FC = () => {
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false); // State for dropdown menu
-  const [loading, setLoading] = useState<boolean>(false); // State for loading
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
+  const [aboutDropdownMobileOpen, setAboutDropdownMobileOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
 
-  const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
-  };
+  const toggleMenu = () => setMenuOpen((prev) => !prev)
 
-  const closeDropdown = () => {
-    setDropdownOpen(false); // Close the dropdown
-  };
+  const toggleAboutDropdown = (event: React.MouseEvent) => {
+    event.preventDefault()
+    setAboutDropdownOpen((prev) => !prev)
+  }
 
-  const handleLinkClick = () => {
-    setLoading(true); // Set loading state when a link is clicked
-  };
+  const toggleAboutDropdownMobile = (event: React.MouseEvent) => {
+    event.preventDefault()
+    setAboutDropdownMobileOpen((prev) => !prev)
+  }
+
+  const closeMenu = () => {
+    setMenuOpen(false)
+    setAboutDropdownOpen(false)
+    setAboutDropdownMobileOpen(false)
+    setDropdownOpen(false)
+  }
 
   return (
     <>
-      {loading && <LoadingSpinner />} {/* Show spinner while loading */}
-      <Banner /> {/* Render the Banner component here */}
-      {/* Navbar Container */}
+      <Banner />
       <div className="sticky top-0 w-full z-10 bg-gradient-to-r from-white to-orange-100 shadow-lg">
         <div className="flex justify-between items-center mx-auto py-4 px-4 md:px-8">
-          {/* Navbar Links - Visible on Large Screens */}
           <nav className="hidden md:flex justify-center flex-1 space-x-6 text-sm">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={handleLinkClick} // Set loading on link click
-                className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
-          >
-                {label}
-              </Link>
+            {navLinks.map(({ href, label, subLinks }) => (
+              <div key={label} className="relative group">
+                {subLinks ? (
+                  <>
+                    <button
+                      onClick={toggleAboutDropdown}
+                      className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 focus:outline-none flex items-center"
+                      aria-haspopup="true"
+                      aria-expanded={aboutDropdownOpen}
+                    >
+                      {label}
+                      <ChevronDown
+                        className={`ml-1 h-4 w-4 transition-transform duration-200 ${
+                          aboutDropdownOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    <div
+                      className={`absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 z-20 transition-all duration-300 ease-in-out transform origin-top ${
+                        aboutDropdownOpen
+                          ? "opacity-100 scale-y-100"
+                          : "opacity-0 scale-y-0 pointer-events-none"
+                      }`}
+                    >
+                      {subLinks.map((subLink) => (
+                        <Link
+                          key={subLink.href}
+                          href={subLink.href}
+                          onClick={closeMenu}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-100"
+                        >
+                          {subLink.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <Link
+                    href={href}
+                    onClick={closeMenu}
+                    className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
+                  >
+                    {label}
+                  </Link>
+                )}
+              </div>
             ))}
           </nav>
 
-          {/* Language Switcher - Dropdown Menu */}
-          <div className="relative hidden md:flex items-center ">
+          <div className="relative hidden md:flex items-center">
             <button
-              onClick={() => setDropdownOpen((prev) => !prev)} // Toggle dropdown
+              onClick={() => setDropdownOpen((prev) => !prev)}
               className="flex items-center text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
             >
-              Language <FaCaretDown className="ml-1" />
+              Languages <FaCaretDown className="ml-1" />
             </button>
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 w-40 bg-gradient-to-r from-orange-100 to-orange-200 shadow-lg rounded-md z-10">
-                <LanguageSwitcher onSelect={closeDropdown} />{" "}
-                {/* Include LanguageSwitcher component */}
+                <LanguageSwitcher onSelect={closeMenu} />
               </div>
             )}
           </div>
 
-          {/* Hamburger Icon - Visible on Small and Medium Screens */}
           <div
             className="md:hidden cursor-pointer"
             onClick={toggleMenu}
@@ -91,28 +140,60 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Dropdown Menu for Small and Medium Screens */}
-        {menuOpen && (
-          <div className="md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 text-center py-6 shadow-md transition-all duration-200">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={handleLinkClick} // Set loading on link click
-                className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
-              >
-                {label}
-              </Link>
-            ))}
-            <LanguageSwitcher onSelect={closeDropdown} />{" "}
-            {/* Include LanguageSwitcher for small screens */}
-          </div>
-        )}
+        <div
+          className={`md:hidden flex flex-col items-center space-y-4 bg-gradient-to-r from-white to-orange-200 text-center py-6 shadow-md transition-all duration-300 ease-in-out transform origin-top ${
+            menuOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 h-0 overflow-hidden"
+          }`}
+        >
+          {navLinks.map(({ href, label, subLinks }) => (
+            <div key={label} className="relative w-full">
+              {subLinks ? (
+                <>
+                  <button
+                    onClick={toggleAboutDropdownMobile}
+                    className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 focus:outline-none flex items-center justify-center w-full"
+                    aria-haspopup="true"
+                    aria-expanded={aboutDropdownMobileOpen}
+                  >
+                    {label}
+                    <ChevronDown
+                      className={`ml-1 h-4 w-4 transition-transform duration-200 ${
+                        aboutDropdownMobileOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  <div
+                    className={`flex flex-col items-center mt-2 space-y-2 transition-all duration-300 ease-in-out ${
+                      aboutDropdownMobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                    }`}
+                  >
+                    {subLinks.map((subLink) => (
+                      <Link
+                        key={subLink.href}
+                        href={subLink.href}
+                        onClick={closeMenu}
+                        className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
+                      >
+                        {subLink.label}
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <Link
+                  href={href}
+                  onClick={closeMenu}
+                  className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 block"
+                >
+                  {label}
+                </Link>
+              )}
+            </div>
+          ))}
+          <LanguageSwitcher onSelect={closeMenu} />
+        </div>
       </div>
-      {/* Spacer to prevent content from being hidden behind navbar */}
       <div className="pt-4"></div>
     </>
-  );
-};
-
-export default Navbar;
+  )
+}
