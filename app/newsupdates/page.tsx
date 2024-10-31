@@ -61,25 +61,48 @@ export default function NewsUpdates(): JSX.Element {
       {error && <p className="text-red-500 text-center">{error}</p>}
       {loading && <LoadingSpinner />}
       {!loading && newsUpdates.length === 0 && !error && (
-        <p className="text-center">No news updates available.</p>
+        <p className="text-center text-orange-500 font-medium">No news updates available.</p>
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
         {newsUpdates.map((news) => (
           <div
             key={news.news_id}
-            className="bg-white shadow-lg rounded-lg p-6"
+            className="bg-white border-l-4 border-orange-500 shadow-lg rounded-lg p-6 max-h-80 overflow-hidden transition duration-300 transform hover:scale-105 flex flex-col justify-between"
           >
-            <h2 className="text-xl font-semibold text-gray-800">
-              {showKannada ? news.title_kannada : news.title}
-            </h2>
-            <p className="text-gray-600 mt-2">
-              {showKannada ? news.content_kannada : news.content}
-            </p>
-            <p className="text-sm text-gray-500 mt-4">Date: {news.created_at}</p>
+            <div className="relative max-h-40 overflow-y-auto pr-2 custom-scrollbar">
+              <h2 className="text-2xl font-semibold text-orange-600 mb-3">
+                {showKannada ? news.title_kannada : news.title}
+              </h2>
+              <p className="text-gray-700 mb-4">
+                {showKannada ? news.content_kannada : news.content}
+              </p>
+              <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+            </div>
+            <p className="text-sm text-gray-500 font-medium mt-2">Date: {news.created_at}</p>
           </div>
         ))}
       </div>
+
+      <style jsx>{`
+        /* Custom scrollbar styling */
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background-color: rgba(0, 0, 0, 0.2);
+          border-radius: 10px;
+        }
+        /* Hide scrollbar for other browsers */
+        .custom-scrollbar {
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: thin; /* Firefox */
+          scrollbar-color: white transparent; /* Firefox thumb color */
+        }
+      `}</style>
     </div>
   );
 }
