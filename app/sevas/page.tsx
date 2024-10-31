@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store"; // Adjust the import if needed
 import SevaForm from "../components/SevaForm"; // Ensure SevaForm is correctly imported
+import LoadingSpinner from "../components/LoadingSpinner"; // Import the LoadingSpinner component
 
 interface Seva {
   id: number;
@@ -22,8 +23,10 @@ const SevasList = (): JSX.Element => {
   const [sevas, setSevas] = useState<Seva[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [selectedSeva, setSelectedSeva] = useState<Seva | null>(null); // State to store selected seva
+  const [loading, setLoading] = useState(false); // Loading state
 
   const fetchSevas = async () => {
+    setLoading(true); // Start loading
     try {
       const res = await fetch(`/api/sevas`);
       if (!res.ok) throw new Error("Failed to load sevas");
@@ -51,6 +54,8 @@ const SevasList = (): JSX.Element => {
     } catch (err) {
       console.error(err);
       setError("Failed to load sevas. Please try again later.");
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -70,7 +75,8 @@ const SevasList = (): JSX.Element => {
   return (
     <div className="container mx-auto p-6">
       {error && <p className="text-red-500 text-center">{error}</p>}
-      {sevas.length === 0 && !error && (
+      {loading && <LoadingSpinner />} {/* Show loading spinner while fetching */}
+      {!loading && sevas.length === 0 && !error && (
         <p className="text-center">No sevas available.</p>
       )}
 

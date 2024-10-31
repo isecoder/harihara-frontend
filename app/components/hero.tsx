@@ -43,9 +43,7 @@ const ImageSlider: React.FC = () => {
         {" "}
         {/* Increased height */}
         <div
-          className={`transition-transform duration-500 ease-in-out ${
-            isAnimating ? "transform scale-95" : ""
-          }`}
+          className={`transition-transform duration-500 ease-in-out`}
         >
           <Image
             src={images[currentPage]}
