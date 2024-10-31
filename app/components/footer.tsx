@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="/about"
-                  className="hover:underline hover:text-yellow-500 flex items-center"
+                  className="hover:underline hover:text-yellow-300 flex items-center"
                 >
                   <span className="inline-block w-4">
                     <span className="text-xs leading-4">►</span>
@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="#"
-                  className="hover:underline hover:text-yellow-500 flex items-center"
+                  className="hover:underline hover:text-yellow-300 flex items-center"
                 >
                   <span className="inline-block w-4">
                     <span className="text-xs leading-4">►</span>
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="/sevas"
-                  className="hover:underline hover:text-yellow-500 flex items-center"
+                  className="hover:underline hover:text-yellow-300 flex items-center"
                 >
                   <span className="inline-block w-4">
                     <span className="text-xs leading-4">►</span>
@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="/gallery"
-                  className="hover:underline hover:text-yellow-500 flex items-center"
+                  className="hover:underline hover:text-yellow-300 flex items-center"
                 >
                   <span className="inline-block w-4">
                     <span className="text-xs leading-4">►</span>
@@ -147,7 +147,7 @@ const Footer: React.FC = () => {
                 >
                   <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2l-8 5-8-5V6l8 5 8-5v2zM4 18v-8l8 5 8-5v8H4z" />
                 </svg>
-                <p className="mt-0.5 text-white hover:text-blue-400 transition-colors duration-200">
+                <p className="mt-0.5 text-white transition-colors duration-200">
                   shriharihareshwara@gmail.com
                 </p>
               </div>
@@ -344,7 +344,7 @@ const Footer: React.FC = () => {
             >
               <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2l-8 5-8-5V6l8 5 8-5v2zM4 18v-8l8 5 8-5v8H4z" />
             </svg>
-            <p className="mt-0.5 text-white hover:text-blue-400 transition-colors duration-200">
+            <p className="mt-0.5 text-white ">
               shriharihareshwara@gmail.com
             </p>
           </div>
