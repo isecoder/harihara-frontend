@@ -14,10 +14,10 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: "/", label: "Home" },
+  { href: "/", label: "HOME" },
   {
     href: "",
-    label: "About",
+    label: "ABOUT",
     subLinks: [
       { href: "/history", label: "History" },
       { href: "/temple", label: "About Temple" },
@@ -26,11 +26,11 @@ const navLinks: NavLink[] = [
       { href: "/nearby_places", label: "Nearby Places" },
     ],
   },
-  { href: "/sevas", label: "Sevas" },
-  { href: "/donations", label: "Donations" },
-  { href: "/newsupdates", label: "News & Updates" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/contact", label: "Contact" },
+  { href: "/sevas", label: "SEVAS" },
+  { href: "/donations", label: "DONATIONS" },
+  { href: "/newsupdates", label: "NEWS & UPDATES" },
+  { href: "/gallery", label: "GALLERY" },
+  { href: "/contact", label: "CONTACT" },
 ]
 
 export default function Navbar() {
