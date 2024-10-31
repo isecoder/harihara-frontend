@@ -35,7 +35,6 @@ export default function Footer() {
             </div>
           </div>
 
-<<<<<<< HEAD
           <div>
             <h3 className="text-lg font-semibold mb-4">≡ Quick Links</h3>
             <ul className="space-y-2">
@@ -47,56 +46,6 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-=======
-          {/* Quick Links Section */}
-          <div className="text-center lg:text-left mb-6 lg:mb-0">
-            <h3 className="text-lg font-semibold mb-6">≡ Quick Links</h3>
-            <ul className="space-y-1">
-              <li>
-                <Link
-                  href="/about"
-                  className="hover:underline hover:text-yellow-300 flex items-center"
-                >
-                  <span className="inline-block w-4">
-                    <span className="text-xs leading-4">►</span>
-                  </span>
-                  History
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="hover:underline hover:text-yellow-300 flex items-center"
-                >
-                  <span className="inline-block w-4">
-                    <span className="text-xs leading-4">►</span>
-                  </span>
-                  News
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/sevas"
-                  className="hover:underline hover:text-yellow-300 flex items-center"
-                >
-                  <span className="inline-block w-4">
-                    <span className="text-xs leading-4">►</span>
-                  </span>
-                  Seva List
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/gallery"
-                  className="hover:underline hover:text-yellow-300 flex items-center"
-                >
-                  <span className="inline-block w-4">
-                    <span className="text-xs leading-4">►</span>
-                  </span>
-                  Gallery
-                </Link>
-              </li>
->>>>>>> b4df528ff3955ed2b387d6e23838eb2c9c805612
             </ul>
           </div>
           <div>
@@ -112,24 +61,9 @@ export default function Footer() {
                 <Phone className="w-4 h-4 mr-2" />
                 <p>9448116685</p>
               </div>
-<<<<<<< HEAD
               <div className="flex items-center mt-2">
                 <Mail className="w-4 h-4 mr-2" />
                 <a href="mailto:shriharihareshwara@gmail.com" className="hover:text-blue-400 transition-colors duration-200">
-=======
-              <div className="flex items-center space-x-2">
-                <svg
-                  width="15px"
-                  height="15px"
-                  className="mt-1.5"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2l-8 5-8-5V6l8 5 8-5v2zM4 18v-8l8 5 8-5v8H4z" />
-                </svg>
-                <p className="mt-0.5 text-white transition-colors duration-200">
->>>>>>> b4df528ff3955ed2b387d6e23838eb2c9c805612
                   shriharihareshwara@gmail.com
                 </a>
               </div>
@@ -279,7 +213,6 @@ export default function Footer() {
 //             </ul>
 //           </div>
 
-<<<<<<< HEAD
 //           <div className="text-center lg:text-left mb-6 lg:mb-0 mt-6">
 //             <h3 className="text-lg font-semibold mb-2">
 //               <span className="text-ms font-normal">🛈</span>Address
@@ -304,25 +237,6 @@ export default function Footer() {
 //                 </svg>
 //                 <p className="mt-0.5">9448116685</p>
 //               </div>
-=======
-          <div className="flex items-center space-x-2">
-            <svg
-              width="15px"
-              height="15px"
-              className="e-font-icon-svg e-fas-envelope mt-1.5"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2l-8 5-8-5V6l8 5 8-5v2zM4 18v-8l8 5 8-5v8H4z" />
-            </svg>
-            <p className="mt-0.5 text-white ">
-              shriharihareshwara@gmail.com
-            </p>
-          </div>
-        </address>
-      </div>
->>>>>>> b4df528ff3955ed2b387d6e23838eb2c9c805612
 
 //               <div className="flex items-center space-x-2">
 //                 <svg
