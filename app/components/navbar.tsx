@@ -21,14 +21,14 @@ const navLinks: NavLink[] = [
     subLinks: [
       { href: "/history", label: "History" },
       { href: "/temple", label: "About Temple" },
-      { href: "/administration", label: "Administration" },
+      { href: "/admin", label: "Administration" },
       { href: "/how_to_reach", label: "How to Reach" },
       { href: "/nearby_places", label: "Nearby Places" },
     ],
   },
   { href: "/sevas", label: "Sevas" },
   { href: "/donations", label: "Donations" },
-  { href: "/newsupdates", label: "News & Updates" },
+  { href: "/news", label: "News & Updates" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ]
