@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
           believe that the personal information of the participants should not
           be shared with third parties without the prior consent or request from
           the participants. Privacy is the right of an individual, and at Shree
-          Mahalingeshwara Temple, the information of the participants such as
+          Harihareshwara Temple, the information of the participants such as
           contact number, email, addresses, etc., is used only for internal
           purposes. Your contact information is stored in our database and is
           only used to contact you during the course of your stay with us for
