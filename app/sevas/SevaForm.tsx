@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface Seva {
   id: number;
@@ -15,7 +15,6 @@ interface SevaFormProps {
 }
 
 const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
-  // Define state for the application form
   const [name, setName] = useState("");
   const [nakshathra, setNakshathra] = useState("");
   const [rashi, setRashi] = useState("");
@@ -23,18 +22,29 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [mobileNumberConfirmation, setMobileNumberConfirmation] = useState("");
   const [date, setDate] = useState("");
-  
-  // State for error message, loading, and confirmation messages
-  const [error, setError] = useState<string | null>(null);
+
   const [loading, setLoading] = useState<boolean>(false);
-  const [confirmation, setConfirmation] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const [confirmation, setConfirmation] = useState<{ message: string; bookingId?: number; type: 'success' | 'error' } | null>(null);
+
+  useEffect(() => {
+    if (confirmation?.type === 'error') {
+      const timer = setTimeout(() => setConfirmation(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [confirmation]);
+
+  const handleDismissConfirmation = () => setConfirmation(null);
+
+  const handleCopyBookingId = () => {
+    if (confirmation?.bookingId) {
+      navigator.clipboard.writeText(confirmation.bookingId.toString());
+      alert("Booking ID copied to clipboard!");
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    setLoading(true); // Set loading state to true
-    setError(null); // Reset error state before the request
-    setConfirmation(null); // Reset confirmation state
+    setLoading(true);
 
     try {
       const response = await fetch('/api/sevaforms', {
@@ -56,12 +66,13 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Seva created:', data);
-        
-        // Show success confirmation
-        setConfirmation({ message: 'Seva submitted successfully!', type: 'success' });
-        
-        // Reset form fields after successful submission
+
+        setConfirmation({
+          message: `Seva submitted successfully! Booking ID: ${data.data.id}. Please show this ID at the temple for your Seva.`,
+          bookingId: data.data.id,
+          type: 'success',
+        });
+
         setName("");
         setNakshathra("");
         setRashi("");
@@ -71,23 +82,21 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
         setDate("");
       } else {
         const errorData = await response.json();
-        setError(errorData.message || 'Failed to create Seva.'); // Set error message
-        console.error('Failed to create Seva:', errorData);
-        
-        // Show error confirmation
-        setConfirmation({ message: errorData.message || 'Failed to create Seva.', type: 'error' });
+        setConfirmation({
+          message: errorData.message || 'Failed to create Seva.',
+          type: 'error',
+        });
       }
-    } catch (err) {
-      setError('An unexpected error occurred.'); // Handle network or unexpected errors
-      console.error('Error:', err);
-      // Show error confirmation
-      setConfirmation({ message: 'An unexpected error occurred.', type: 'error' });
+    } catch {
+      setConfirmation({
+        message: 'An unexpected error occurred.',
+        type: 'error',
+      });
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 
-  // Kannada Translations
   const labels = {
     name: showKannada ? "ಹೆಸರು" : "Name",
     nakshathra: showKannada ? "ನಕ್ಷತ್ರ" : "Nakshathra",
@@ -111,7 +120,6 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
         Price: ₹{seva.base_price}
       </p>
 
-      {/* Application Form */}
       <form onSubmit={handleSubmit} className="bg-white shadow rounded-lg p-4 space-y-4">
         <div>
           <label htmlFor="name" className="block mb-1 text-gray-800 font-medium">
@@ -213,19 +221,39 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
         <button
           type="submit"
           className="bg-orange-600 text-white py-2 rounded-md shadow hover:bg-orange-700 transition w-full"
-          disabled={loading} // Disable button while loading
+          disabled={loading}
         >
-          {loading ? 'Submitting...' : labels.submit} {/* Show loading text */}
+          {loading ? 'Submitting...' : labels.submit}
         </button>
       </form>
 
-      {/* Error message */}
-      {error && <p className="text-red-600 mb-4">{error}</p>}
-
-      {/* Confirmation Message */}
       {confirmation && (
         <div className={`p-4 rounded-lg mb-8 ${confirmation.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-          {confirmation.message}
+          <div className="flex justify-between items-center">
+            <p>
+            {confirmation.type === 'success'
+                ? showKannada
+                  ? `ಸೇವಾ ಅರ್ಜಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ! ದಯವಿಟ್ಟು ಈ ID ಅನ್ನು ದೇವಸ್ಥಾನದಲ್ಲಿ ಸೇವೆಯನ್ನು ಸಲ್ಲಿಸಲು ತೋರಿಸಿ.`
+                  : `Seva form submitted successfully! Please show this ID at the temple to perform your Seva.`
+                : confirmation.message}
+
+            </p>
+            {confirmation.type === 'success' && (
+              <button onClick={handleDismissConfirmation} className="ml-4 text-gray-600 font-bold">
+                ×
+              </button>
+            )}
+          </div>
+
+          {confirmation.type === 'success' && confirmation.bookingId && (
+            <div className="mt-2 flex items-center space-x-2">
+              <span className="font-semibold">Booking ID:</span>
+              <span>{confirmation.bookingId}</span>
+              <button onClick={handleCopyBookingId} className="text-blue-500 underline">
+                Copy
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
