@@ -199,7 +199,7 @@ export default function SevaForms(): JSX.Element {
             </p>
             <button
               onClick={() => deleteSevaForm(form.id)}
-              className="mt-4 bg-red-500 text-white px-3 py-1 rounded hidden md:block" // Hide on desktop
+              className="mt-4 bg-red-500 text-white px-3 py-1 rounded block" // Visible on all devices
             >
               Delete
             </button>
