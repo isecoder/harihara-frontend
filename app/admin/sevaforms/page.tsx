@@ -12,7 +12,7 @@ interface SevaForm {
   rashi: string;
   gotra?: string; // Optional
   mobileNumber: string;
-  date: string; // ISO format date string
+  date: string; // DD/MM/YYYY format date string
   sevaId: number;
   sevaName: string;
 }
@@ -50,7 +50,7 @@ export default function SevaForms(): JSX.Element {
         ...form,
         sevaName: form.seva.name || "N/A", // Access seva name safely
         bookingId: `BM${form.id}`, // Format id as bookingId
-        date: new Date(form.date).toLocaleDateString(), // Format date
+        date: new Date(form.date).toLocaleDateString("en-GB"), // Format date as DD/MM/YYYY
       }));
 
       setSevaForms(formattedData);
@@ -162,7 +162,7 @@ export default function SevaForms(): JSX.Element {
         <input
           type="text"
           name="date"
-          placeholder="Search by Date (MM/DD/YYYY)"
+          placeholder="Search by Date (DD/MM/YYYY)"
           value={filters.date}
           onChange={handleFilterChange}
           className="border border-gray-300 rounded-md p-2 flex-1"
