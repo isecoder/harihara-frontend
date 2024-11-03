@@ -2,6 +2,7 @@
 
 import { Provider } from "react-redux";
 import localFont from "next/font/local";
+import Head from "next/head";
 import "./globals.css";
 import store from "./store";
 import Navbar from "./components/navbar";
@@ -26,6 +27,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Head>
+        <title>Shri Harihareshwara Temple, Hariharapallathadka</title>
+        <meta
+          name="description"
+          content="Explore the spiritual heritage of Shri Harihareshwara Temple in Hariharapallathadka, Karnataka. Discover its rich history, unique architecture, and religious significance."
+        />
+        <meta name="keywords" content="Shri Harihareshwara Temple, Hariharapallathadka, Karnataka temples, Lord Harihara, Vishnu and Shiva, Hindu pilgrimage, Triveni Sangam" />
+        <meta property="og:title" content="Shri Harihareshwara Temple, Hariharapallathadka" />
+        <meta property="og:description" content="Discover the divine amalgamation of Lord Vishnu and Lord Shiva at Shri Harihareshwara Temple in Hariharapallathadka, Karnataka." />
+        <meta property="og:url" content="https://www.shriharihareshwara.org" />
+        <meta property="og:site_name" content="Shri Harihareshwara Temple" />
+        <meta property="og:image" content="/logo.jpg" />
+        <link rel="icon" href="/logo.jpg" sizes="48x48" type="image/jpeg" />
+        <link rel="apple-touch-icon" href="/logo.jpg" />
+        <link rel="icon" type="image/png" href="/logo.jpg" />
+        {/* Optionally add a fallback for .ico */}
+        <link rel="shortcut icon" href="/logo.jpg" />
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -33,7 +52,7 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow">{children}</main>
-            <Footer/>
+            <Footer />
           </div>
         </Provider>
       </body>
