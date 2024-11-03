@@ -46,7 +46,7 @@ const placesContent: Record<LocaleType, { title: string; places: { name: string;
       { name: "Mallalli Falls", description: "200-foot waterfall in Coorg, best visited during the monsoon, formed by the Kumaradhara River. Located 57.3 km from Shri Harihareshwara Temple.", image: P14 },
       { name: "Kumara Parvatha Trek", description: "Known as Pushpagiri, this challenging trek to the fourth-highest peak in the Western Ghats starts from the base camp in Kukke Subrahmanya, 10.1 km from Shri Harihareshwara Temple.", image: P15 },
       { name: "Kochila Shree Mayuravahana Subrahmanya Swamy Temple", description: "Located in Katta village. Lord Subrahmanya is worshipped here.", image: P16 },
-      { name: "Shri Durgaparameshwari Temple in Marakatha", description: "Shri Durgaparameshwari Temple in Marakatha, Sullia Taluk, is a revered Hindu temple dedicated to Goddess Durga Parameshwari. Situated 25 km from Sullia and 9.1 km from Shri Harihareshwara Temple in Hariharapallathadka, it draws devotees seeking blessings and spiritual solace. Managed by local authorities, the temple hosts various rituals and festivals honoring the Goddess. For inquiries, please contact 08257 282166.", image: P17 },
+      { name: "Shri Durgaparameshwari Temple,Marakatha", description: "Shri Durgaparameshwari Temple in Marakatha, Sullia Taluk, is a revered Hindu temple dedicated to Goddess Durga Parameshwari. Situated 25 km from Sullia and 9.1 km from Shri Harihareshwara Temple in Hariharapallathadka, it draws devotees seeking blessings and spiritual solace. Managed by local authorities, the temple hosts various rituals and festivals honoring the Goddess. For inquiries, please contact 08257 282166.", image: P17 },
     ],
   },
   kn: {
