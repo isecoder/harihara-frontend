@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import LoadingSpinner from "../../components/LoadingSpinner"; // Import the LoadingSpinner component
 import Swal from "sweetalert2";
 
+// Interface for each SevaForm entry
 interface SevaForm {
   id: number;
   name: string;
@@ -11,7 +12,14 @@ interface SevaForm {
   rashi: string;
   gotra?: string; // Optional
   mobileNumber: string;
-  date: string; // ISO format date string
+  date: string; // DD/MM/YYYY format date string
+  sevaId: number;
+  sevaName: string;
+}
+
+// Interface for API response that includes the nested seva object
+interface ApiSevaForm extends SevaForm {
+  seva: { name: string };
 }
 
 export default function SevaForms(): JSX.Element {
@@ -30,16 +38,19 @@ export default function SevaForms(): JSX.Element {
   // State for filtered results
   const [filteredSevaForms, setFilteredSevaForms] = useState<SevaForm[]>([]);
 
+  // Fetch Seva Forms with Seva name included
   const fetchSevaForms = async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/sevaforms`);
       if (!res.ok) throw new Error("Failed to load seva forms");
 
-      const { data } = await res.json();
-      const formattedData = data.map((form: SevaForm) => ({
+      const { data }: { data: ApiSevaForm[] } = await res.json(); // Type response data
+      const formattedData = data.map((form) => ({
         ...form,
-        date: new Date(form.date).toLocaleDateString(), // Format date
+        sevaName: form.seva.name || "N/A", // Access seva name safely
+        bookingId: `BM${form.id}`, // Format id as bookingId
+        date: new Date(form.date).toLocaleDateString("en-GB"), // Format date as DD/MM/YYYY
       }));
 
       setSevaForms(formattedData);
@@ -131,14 +142,14 @@ export default function SevaForms(): JSX.Element {
       )}
 
       {/* Filter Inputs */}
-      <div className="mb-4">
+      <div className="mb-4 flex flex-wrap gap-4">
         <input
           type="text"
           name="name"
           placeholder="Search by Name"
           value={filters.name}
           onChange={handleFilterChange}
-          className="border border-gray-300 rounded-md p-2 mr-2"
+          className="border border-gray-300 rounded-md p-2 flex-1"
         />
         <input
           type="text"
@@ -146,15 +157,15 @@ export default function SevaForms(): JSX.Element {
           placeholder="Search by Mobile Number"
           value={filters.mobileNumber}
           onChange={handleFilterChange}
-          className="border border-gray-300 rounded-md p-2 mr-2"
+          className="border border-gray-300 rounded-md p-2 flex-1"
         />
         <input
           type="text"
           name="date"
-          placeholder="Search by Date (MM/DD/YYYY)"
+          placeholder="Search by Date (DD/MM/YYYY)"
           value={filters.date}
           onChange={handleFilterChange}
-          className="border border-gray-300 rounded-md p-2 mr-2"
+          className="border border-gray-300 rounded-md p-2 flex-1"
         />
         <input
           type="text"
@@ -162,31 +173,33 @@ export default function SevaForms(): JSX.Element {
           placeholder="Search by ID"
           value={filters.id}
           onChange={handleFilterChange}
-          className="border border-gray-300 rounded-md p-2"
+          className="border border-gray-300 rounded-md p-2 flex-1"
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {filteredSevaForms.map((form) => (
           <div
             key={form.id}
-            className="bg-white border-l-4 border-orange-500 shadow-lg rounded-lg p-6 max-h-80 overflow-hidden transition duration-300 transform hover:scale-105 flex flex-col justify-between"
+            className="bg-white border-l-4 border-orange-500 shadow-lg rounded-lg p-6 transition duration-300 transform hover:scale-105 flex flex-col justify-between max-w-xs mx-auto"
           >
-            <h2 className="text-2xl font-semibold text-orange-600 mb-3">
+            <h2 className="text-xl font-semibold text-orange-600 mb-2">
               {form.name}
             </h2>
-            <p className="text-gray-700 mb-4">Nakshathra: {form.nakshathra}</p>
-            <p className="text-gray-700 mb-4">Rashi: {form.rashi}</p>
+            <p className="text-gray-700 mb-2">Booking ID: BM{form.id}</p>
+            <p className="text-gray-700 mb-2">Seva Name: {form.sevaName}</p>
+            <p className="text-gray-700 mb-2">Nakshathra: {form.nakshathra}</p>
+            <p className="text-gray-700 mb-2">Rashi: {form.rashi}</p>
             {form.gotra && (
-              <p className="text-gray-700 mb-4">Gotra: {form.gotra}</p>
+              <p className="text-gray-700 mb-2">Gotra: {form.gotra}</p>
             )}
-            <p className="text-gray-700 mb-4">Mobile: {form.mobileNumber}</p>
-            <p className="text-sm text-gray-500 font-medium mt-2">
+            <p className="text-gray-700 mb-2">Mobile: {form.mobileNumber}</p>
+            <p className="text-sm text-gray-500 font-medium">
               Date: {form.date}
             </p>
             <button
               onClick={() => deleteSevaForm(form.id)}
-              className="mt-2 bg-red-500 text-white px-3 py-1 rounded"
+              className="mt-4 bg-red-500 text-white px-3 py-1 rounded block" // Visible on all devices
             >
               Delete
             </button>

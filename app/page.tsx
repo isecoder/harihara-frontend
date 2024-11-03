@@ -7,6 +7,7 @@ import { changeLocale } from "./store/localeSlice"
 import Hero from "./components/hero"
 import Link from "next/link"
 import Image from "next/image"
+import SEOComponent from "./cmpnents/SEOComponent"
 
 type LocaleType = "en" | "kn"
 
@@ -35,6 +36,14 @@ export default function Component() {
   if (!isLocaleLoaded) return null
 
   return (
+    <>
+    <SEOComponent
+    title="Shri Harihareshwara Temple - A Sacred Destination for Devotees"
+    description="Explore the Shri Harihareshwara Temple, a revered spiritual destination in Karnataka, dedicated to peace, devotion, and cultural heritage."
+    image="http://www.shriharihareshwara.org/logo.jpg" 
+    url="http://www.shriharihareshwara.org/"
+  />
+
     <main className="min-h-screen flex flex-col items-center p-4 sm:p-8 text-center">
       <Hero />
       <div className="w-full max-w-6xl mt-8 sm:mt-20">
@@ -56,5 +65,6 @@ export default function Component() {
         </div>
       </div>
     </main>
+    </>
   )
 }

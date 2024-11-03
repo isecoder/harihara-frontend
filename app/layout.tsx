@@ -1,5 +1,7 @@
+// app/layout.tsx
 "use client";
 
+import Script from "next/script";
 import { Provider } from "react-redux";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -19,21 +21,34 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export default function RootLayout({
-  children,
-}: {
+interface LayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <head>
+        {/* Google Analytics script */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'GA_TRACKING_ID');
+          `}
+        </Script>
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Provider store={store}>
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow">{children}</main>
-            <Footer/>
+            <Footer />
           </div>
         </Provider>
       </body>

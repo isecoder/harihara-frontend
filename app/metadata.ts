@@ -43,21 +43,27 @@ export const metadata: Metadata = {
   authors: [{ name: 'Shri Harihareshwara Temple' }],
   openGraph: {
     title: 'Shri Harihareshwara Temple, Hariharapallathadka',
-    description: 'Discover the divine amalgamation of Lord Vishnu and Lord Shiva at Shri Harihareshwara Temple in Hariharapallathadka, Karnataka. Learn about its historical legends, architectural marvels, and religious festivals.',
-    url: 'www.shriharihareshwara.org',
+    description: 'Discover the divine amalgamation of Lord Vishnu and Lord Shiva at Shri Harihareshwara Temple in Hariharapallathadka, Karnataka.',
+    url: 'https://www.shriharihareshwara.org',
     siteName: 'Shri Harihareshwara Temple',
     images: [
       {
         url: '/logo.jpg',
         width: 800,
         height: 600,
-        alt: 'Shri Harihareshwara Temple',
+        alt: 'Shri Harihareshwara Temple Logo',
       },
     ],
     locale: 'en_US',
     type: 'website',
   },
   icons: {
-    icon: '/logo.jpg',
+    icon: [
+      { url: '/logo.jpg', type: 'image/jpeg', sizes: '48x48' },
+      { url: '/logo.jpg', type: 'image/jpeg', sizes: '32x32' },
+      { url: '/logo.jpg', type: 'image/jpeg', sizes: '16x16' },
+    ],
+    shortcut: { url: '/logo.jpg', type: 'image/jpeg' },
+    apple: { url: '/logo.jpg', type: 'image/jpeg' },
   },
 };

@@ -17,6 +17,8 @@ interface AdministrationContent {
   members: string[];
   templePriestTitle: string;
   templePriestName: string;
+  AssistantPriestTitle: string;
+  AssistantPriestName: string;
 }
 
 // Content in both English and Kannada
@@ -39,6 +41,8 @@ const administrationContent: Record<LocaleType, AdministrationContent> = {
     ],
     templePriestTitle: "Temple Priest:",
     templePriestName: "Shri Subrahmanya Narasimha Bhat",
+    AssistantPriestTitle: "Assistant Priest:",
+    AssistantPriestName: "Shri B. KrishnaKumara",
   },
   kn: {
     managementPresidentTitle: "ವ್ಯವಸ್ಥಾಪನ ಸಮಿತಿ ಅಧ್ಯಕ್ಷರು:",
@@ -58,6 +62,8 @@ const administrationContent: Record<LocaleType, AdministrationContent> = {
     ],
     templePriestTitle: "ಅರ್ಚಕರು:",
     templePriestName: "ಶ್ರೀ ಸುಬ್ರಹ್ಮಣ್ಯ ನರಸಿಂಹ ಭಟ್",
+    AssistantPriestTitle: "ಸಹಾಯಕ ಅರ್ಚಕರು:",
+    AssistantPriestName: "ಶ್ರೀ ಬಿ. ಕೃಷ್ಣಕುಮಾರ",
   }
 };
 
@@ -117,6 +123,10 @@ const Administration: React.FC = () => {
       <div style={{ margin: '40px 0' }}>
         <h3 style={{ color: 'red', fontWeight: 'bold', marginBottom: '5px' }}>{content.templePriestTitle}</h3>
         <p style={{ fontWeight: 'bold' }}>{content.templePriestName}</p>
+      </div>
+      <div style={{ margin: '40px 0' }}>
+        <h3 style={{ color: 'red', fontWeight: 'bold', marginBottom: '5px' }}>{content.AssistantPriestTitle}</h3>
+        <p style={{ fontWeight: 'bold' }}>{content.AssistantPriestName}</p>
       </div>
     </div>
   );
