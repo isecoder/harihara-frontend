@@ -1,4 +1,3 @@
-// app/admin/layout.tsx
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -57,6 +56,10 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const handleBack = () => {
+    router.back(); // Navigate to the previous page
+  };
+
   useEffect(() => {
     fetchSession();
   }, []);
@@ -83,12 +86,20 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
           <p className="text-lg mb-4">
             Logged in as: <span className="font-bold">{user.name}</span>
           </p>
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-200"
-          >
-            Logout
-          </button>
+          <div className="flex justify-between mb-4">
+            <button
+              onClick={handleBack}
+              className="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400 transition duration-200 mr-2"
+            >
+              Back
+            </button>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-200"
+            >
+              Logout
+            </button>
+          </div>
           <div className="mt-4">{children}</div>
         </>
       ) : (
