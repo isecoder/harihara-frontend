@@ -73,6 +73,7 @@ const SevasList = (): JSX.Element => {
   }
 
   return (
+    
     <div className="container mx-auto p-6">
       {error && <p className="text-red-500 text-center">{error}</p>}
       {loading && <LoadingSpinner />} {/* Show loading spinner while fetching */}
