@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useSelector } from "react-redux";
 import { RootState } from "../store"; // Adjust the import if needed
+import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
 
 interface NewsUpdate {
   news_id: number;
@@ -19,6 +20,7 @@ export default function NewsUpdates(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const showKannada = useSelector((state: RootState) => state.locale.locale === "kn");
+  const router = useRouter(); // Initialize router
 
   const fetchNewsUpdates = async () => {
     setLoading(true);
@@ -56,6 +58,11 @@ export default function NewsUpdates(): JSX.Element {
     fetchNewsUpdates();
   }, []);
 
+  const openNewsDetail = (news: NewsUpdate) => {
+    // Navigate to the news detail page in the same tab
+    router.push(`/newsupdates/${news.news_id}`); // Ensure this URL structure matches your routing
+  };
+
   return (
     <div className="container mx-auto p-6">
       {error && <p className="text-red-500 text-center">{error}</p>}
@@ -64,45 +71,28 @@ export default function NewsUpdates(): JSX.Element {
         <p className="text-center text-orange-500 font-medium">No news updates available.</p>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         {newsUpdates.map((news) => (
           <div
             key={news.news_id}
-            className="bg-white border-l-4 border-orange-500 shadow-lg rounded-lg p-6 max-h-80 overflow-hidden transition duration-300 transform hover:scale-105 flex flex-col justify-between"
+            className="bg-white rounded-lg shadow-lg transition-transform transform hover:scale-105 p-6"
           >
-            <div className="relative max-h-40 overflow-y-auto pr-2 custom-scrollbar">
-              <h2 className="text-2xl font-semibold text-orange-600 mb-3">
-                {showKannada ? news.title_kannada : news.title}
-              </h2>
-              <p className="text-gray-700 mb-4">
-                {showKannada ? news.content_kannada : news.content}
-              </p>
-              <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-            </div>
-            <p className="text-sm text-gray-500 font-medium mt-2">Date: {news.created_at}</p>
+            <h2 className="text-2xl font-bold text-orange-600 mb-2">
+              {showKannada ? news.title_kannada : news.title}
+            </h2>
+            <p className="text-sm text-gray-500 mb-2">Date: {news.created_at}</p>
+            <p className="text-gray-700 mb-4 line-clamp-3">
+              {showKannada ? news.content_kannada : news.content}
+            </p>
+            <button
+              className="bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700 transition duration-200 ease-in-out"
+              onClick={() => openNewsDetail(news)} // Use router.push instead of window.open
+            >
+              Read More
+            </button>
           </div>
         ))}
       </div>
-
-      <style jsx>{`
-        /* Custom scrollbar styling */
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background-color: rgba(0, 0, 0, 0.2);
-          border-radius: 10px;
-        }
-        /* Hide scrollbar for other browsers */
-        .custom-scrollbar {
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: thin; /* Firefox */
-          scrollbar-color: white transparent; /* Firefox thumb color */
-        }
-      `}</style>
     </div>
   );
 }
