@@ -21,6 +21,7 @@ import P13 from "/app/nearby_places/p13.jpeg";
 import P14 from "/app/nearby_places/p14.jpeg";
 import P15 from "/app/nearby_places/p15.jpeg";
 import P16 from "/app/nearby_places/p16.png";
+import P17 from "/app/nearby_places/p17.jpg";
 
 type LocaleType = "en" | "kn";
 type ImageType = typeof P1; // Inferred type for images
@@ -45,6 +46,7 @@ const placesContent: Record<LocaleType, { title: string; places: { name: string;
       { name: "Mallalli Falls", description: "200-foot waterfall in Coorg, best visited during the monsoon, formed by the Kumaradhara River. Located 57.3 km from Shri Harihareshwara Temple.", image: P14 },
       { name: "Kumara Parvatha Trek", description: "Known as Pushpagiri, this challenging trek to the fourth-highest peak in the Western Ghats starts from the base camp in Kukke Subrahmanya, 10.1 km from Shri Harihareshwara Temple.", image: P15 },
       { name: "Kochila Shree Mayuravahana Subrahmanya Swamy Temple", description: "Located in Katta village. Lord Subrahmanya is worshipped here.", image: P16 },
+      { name: "Shri Durgaparameshwari Temple in Marakatha", description: "Shri Durgaparameshwari Temple in Marakatha, Sullia Taluk, is a revered Hindu temple dedicated to Goddess Durga Parameshwari. Situated 25 km from Sullia and 9.1 km from Shri Harihareshwara Temple in Hariharapallathadka, it draws devotees seeking blessings and spiritual solace. Managed by local authorities, the temple hosts various rituals and festivals honoring the Goddess. For inquiries, please contact 08257 282166.", image: P17 },
     ],
   },
   kn: {
@@ -66,7 +68,7 @@ const placesContent: Record<LocaleType, { title: string; places: { name: string;
       { name: "ಮಲ್ಲಳ್ಳಿ ಜಲಪಾತ", description: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ 57.3 ಕಿಮೀ ದೂರದಲ್ಲಿರುವ ಕುಮಾರಧಾರ ನದಿಯಿಂದ ನಿರ್ಮಾಣಗೊಳ್ಳುವ ಈ 200 ಅಡಿ ಎತ್ತರದ ಜಲಪಾತವನ್ನು ನೋಡಲು ಮಳೆಗಾಲ ಹೇಳಿದ ಸಮಯ.", image: P14 },
       { name: "ಕುಮಾರ ಪರ್ವತ ಚಾರಣ", description: "ಪುಷ್ಪಗಿರಿ ಎಂದೇ ಪ್ರಸಿದ್ಧ, ಪಶ್ಚಿಮ ಘಟ್ಟಗಳ ಸಾಲಿನಲ್ಲಿರುವ ಕರ್ನಾಟಕ ರಾಜ್ಯದ  ನಾಲ್ಕನೇ ಎತ್ತರದ ಶಿಖರವಾಗಿದೆ ಕುಕ್ಕೆ ಸುಬ್ರಹ್ಮಣ್ಯದಿಂದ ಆರಂಭವಾಗುವ ಚಾರಣ ದಕ್ಷಿಣ ಭಾರತದ ಕಠಿಣ ಚಾರಣಗಳಲ್ಲಿ ಒಂದು. ಚಾರಣ ಆರಂಭಗೊಳ್ಳುವ ಸ್ಥಳವಾದ ಸುಬ್ರಹ್ಮಣ್ಯದ ದೇವರಗದ್ದೆ ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ 10.1 ಕಿಮೀ ದೂರದಲ್ಲಿದೆ.", image: P15 },
       { name: "ಕೊಚ್ಚಿಲ ಶ್ರೀ ಮಯೂರವಹನ ಸುಬ್ರಹ್ಮಣ್ಯ ಸ್ವಾಮಿ ದೇವಸ್ಥಾನ", description: "ಹರಿಹರಪಲ್ಲತ್ತಡ್ಕ ಸಮೀಪದ ಕೊಲ್ಲಮೊಗ್ರದ ಕಟ್ಟ ಗ್ರಾಮದಲ್ಲಿ ಇರುವ ಈ ಸ್ಥಳದಲ್ಲಿ ಶ್ರೀ ಸುಬ್ರಹ್ಮಣ್ಯ ಸ್ವಾಮಿಯನ್ನು ಪೂಜಿಸಲಾಗುತ್ತದೆ. ಈ ದೇವಸ್ಥಾನ ಹರಿಹರಪಲ್ಲತ್ತಡ್ಕದಿಂದ 4.3 ಕಿ.ಮಿ ದೂರದಲ್ಲಿದೆ.", image: P16 },
-      // Add the rest of your data entries here...
+      { name: "ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ದೇವಸ್ಥಾನ, ಮರಕತ", description: "ಸುಳ್ಯ ತಾಲೂಕಿನ ಮರಕತದಲ್ಲಿರುವ ಶ್ರೀ ದುರ್ಗಾಪರಮೇಶ್ವರಿ ದೇವಸ್ಥಾನವು ದುರ್ಗಾಪರಮೇಶ್ವರಿ ತಾಯಿ ದುರ್ಗೆಗೆ ಅರ್ಪಿತವಾದ ಹಿಂದೂ ದೇವಾಲಯವಾಗಿದೆ.ಸುಳ್ಯದಿಂದ 25 ಕಿಲೋಮೀಟರ್ ಮತ್ತು ಹರಿಹರಪಲ್ಲತ್ತಡ್ಕದ ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ 9.1 ಕಿಲೋಮೀಟರ್ ದೂರದಲ್ಲಿರುವ ಈ ದೇವಾಲಯವನ್ನು ಸ್ಥಳೀಯ ಆಡಳಿತವು ದೇವಾಲಯವನ್ನು ನೋಡಿಕೊಳ್ಳುತ್ತದೆ, ಇಲ್ಲಿ ವಿವಿಧ ಪೂಜೆಗಳು ಮತ್ತು ಉತ್ಸವಗಳು ನಡೆಯುತ್ತವೆ. ಹೆಚ್ಚಿನ ಮಾಹಿತಿಗಾಗಿ ದೇವಾಲಯದ ದೂರವಾಣಿ ಸಂಖ್ಯೆ 08257 282166 ಕರೆ ಮಾಡಬಹುದು.", image: P17 },
     ],
   },
 };
