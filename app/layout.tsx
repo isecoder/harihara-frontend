@@ -4,7 +4,6 @@
 import Script from "next/script";
 import { Provider } from "react-redux";
 import localFont from "next/font/local";
-import Head from "next/head";
 import "./globals.css";
 import store from "./store";
 import Navbar from "./components/navbar";
