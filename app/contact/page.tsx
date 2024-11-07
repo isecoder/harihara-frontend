@@ -1,8 +1,16 @@
 "use client";
 import React from "react";
+import SEOComponent from "../cmpnents/SEOComponent";
 
 const Contact: React.FC = () => {
   return (
+    <>
+    <SEOComponent
+        title="Contact Shri Harihareshwara Temple"
+        description="Get in touch with the Shri Harihareshwara Temple for inquiries, visits, or support. We welcome your communication and support."
+        image="https://yourwebsite.com/images/temple-contact.jpg" // Replace with actual image URL
+        url="http://www.shriharihareshwara.org/contact"
+      />
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-[#fdc8a0] p-10 relative font-serif">
       <div className="flex flex-col lg:flex-row w-full max-w-5xl gap-10">
         
@@ -51,6 +59,7 @@ const Contact: React.FC = () => {
       {/* Bottom orange bar */}
       <div className="absolute bottom-0 w-full h-1 bg-[#f28500]"></div>
     </div>
+    </>
   );
 };
 

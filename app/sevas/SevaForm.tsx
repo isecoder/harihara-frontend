@@ -23,8 +23,19 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
   const [mobileNumberConfirmation, setMobileNumberConfirmation] = useState("");
   const [date, setDate] = useState("");
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [confirmation, setConfirmation] = useState<{ message: string; bookingId?: number; type: 'success' | 'error' } | null>(null);
+  const [phoneError, setPhoneError] = useState("");
+  const [confirmationPhoneError, setConfirmationPhoneError] = useState("");
+
+  const today = new Date();
+  const todayString = today.toISOString().split('T')[0]; 
+  
+  const maxDate = (() => {
+    const today = new Date();
+    const maxDate = new Date(today.setMonth(today.getMonth() + 3)); // Add 3 months
+    return maxDate.toISOString().split('T')[0]; // Format to YYYY-MM-DD
+  })();
 
   useEffect(() => {
     if (confirmation?.type === 'error') {
@@ -42,9 +53,34 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
     }
   };
 
+  const validatePhoneNumber = (phone: string) => /^\d{10}$/.test(phone);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+
+    let hasError = false;
+
+  if (!validatePhoneNumber(mobileNumber)) {
+    setPhoneError(showKannada ? "ಸರಿಯಾದ 10 ಅಂಕಿ ಫೋನ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ" : "Please enter a valid 10-digit phone number.");
+    hasError = true;
+  } else {
+    setPhoneError("");
+  }
+
+  if (!validatePhoneNumber(mobileNumberConfirmation)) {
+    setConfirmationPhoneError(showKannada ? "ಸರಿಯಾದ 10 ಅಂಕಿ ಫೋನ್ ಸಂಖ್ಯೆಯ ದೃಢೀಕರಣ ನಮೂದಿಸಿ" : "Please enter a valid 10-digit confirmation phone number.");
+    hasError = true;
+  } else if (mobileNumber !== mobileNumberConfirmation) {
+    setConfirmationPhoneError(showKannada ? "ಫೋನ್ ಸಂಖ್ಯೆ ಸರಿಯಾಗಿಲ್ಲ" : "Phone numbers do not match.");
+    hasError = true;
+  } else {
+    setConfirmationPhoneError("");
+  }
+
+  if (hasError) return;
+
+  setLoading(true);
+  setConfirmation(null);
 
     try {
       const response = await fetch('/api/sevaforms', {
@@ -68,7 +104,9 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
         const data = await response.json();
 
         setConfirmation({
-          message: `Seva submitted successfully! Booking ID: ${data.data.id}. Please show this ID at the temple for your Seva.`,
+          message: showKannada
+            ? "ಸೇವಾ ಅರ್ಜಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ! ದಯವಿಟ್ಟು ಈ ID ಅನ್ನು ದೇವಸ್ಥಾನದಲ್ಲಿ ತೋರಿಸಿ."
+            : "Seva form submitted successfully! Please show this ID at the temple to perform your Seva.",
           bookingId: data.data.id,
           type: 'success',
         });
@@ -102,8 +140,8 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
     nakshathra: showKannada ? "ನಕ್ಷತ್ರ" : "Nakshathra",
     rashi: showKannada ? "ರಾಶಿ" : "Rashi",
     gotra: showKannada ? "ಗೋತ್ರ" : "Gotra (optional)",
-    mobileNumber: showKannada ? "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ" : "Mobile Number",
-    mobileNumberConfirmation: showKannada ? "ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯ ದೃಢೀಕರಣ" : "Mobile Number Confirmation",
+    mobileNumber: showKannada ? "ಫೋನ್ ಸಂಖ್ಯೆ" : "Phone Number",
+    mobileNumberConfirmation: showKannada ? "ಫೋನ್ ಸಂಖ್ಯೆಯ ದೃಢೀಕರಣ" : "Phone Number Confirmation",
     date: showKannada ? "ದಿನಾಂಕ" : "Date",
     submit: showKannada ? "ಸೇವೆಗೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ" : "Apply for Seva",
   };
@@ -183,11 +221,13 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
           <input
             type="text"
             id="mobileNumber"
+            autoComplete="off"
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
             required
             className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-orange-400"
           />
+          {phoneError && <p className="text-red-600 mt-1">{phoneError}</p>}
         </div>
 
         <div>
@@ -197,26 +237,30 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
           <input
             type="text"
             id="mobileNumberConfirmation"
+            autoComplete="off"
             value={mobileNumberConfirmation}
             onChange={(e) => setMobileNumberConfirmation(e.target.value)}
             required
             className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-orange-400"
           />
+          {confirmationPhoneError && <p className="text-red-600 mt-1">{confirmationPhoneError}</p>}
         </div>
-
+        
         <div>
-          <label htmlFor="date" className="block mb-1 text-gray-800 font-medium">
-            {labels.date}
-          </label>
-          <input
-            type="date"
-            id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-            className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-orange-400"
-          />
-        </div>
+        <label htmlFor="date" className="block mb-1 text-gray-800 font-medium">
+          {labels.date}
+        </label>
+        <input
+          type="date"
+          id="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          required
+          min={todayString} 
+          max={maxDate} // Set the maximum date
+          className="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-orange-400"
+        />
+      </div>
 
         <button
           type="submit"
@@ -230,28 +274,14 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
       {confirmation && (
         <div className={`p-4 rounded-lg mb-8 ${confirmation.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
           <div className="flex justify-between items-center">
-            <p>
-            {confirmation.type === 'success'
-                ? showKannada
-                  ? `ಸೇವಾ ಅರ್ಜಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ! ದಯವಿಟ್ಟು ಈ ID ಅನ್ನು ದೇವಸ್ಥಾನದಲ್ಲಿ ಸೇವೆಯನ್ನು ಸಲ್ಲಿಸಲು ತೋರಿಸಿ.`
-                  : `Seva form submitted successfully! Please show this ID at the temple to perform your Seva.`
-                : confirmation.message}
-
-            </p>
-            {confirmation.type === 'success' && (
-              <button onClick={handleDismissConfirmation} className="ml-4 text-gray-600 font-bold">
-                ×
-              </button>
-            )}
+            <p>{confirmation.message}</p>
+            <button onClick={handleDismissConfirmation} className="ml-4 text-gray-600 font-bold">×</button>
           </div>
-
           {confirmation.type === 'success' && confirmation.bookingId && (
             <div className="mt-2 flex items-center space-x-2">
               <span className="font-semibold">Booking ID:</span>
               <span>{confirmation.bookingId}</span>
-              <button onClick={handleCopyBookingId} className="text-blue-500 underline">
-                Copy
-              </button>
+              <button onClick={handleCopyBookingId} className="text-blue-500 underline">Copy</button>
             </div>
           )}
         </div>
