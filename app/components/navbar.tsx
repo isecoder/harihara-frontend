@@ -21,9 +21,9 @@ const navLinks: NavLink[] = [
       { href: "/history", label: "History" },
       { href: "/temple", label: "About Temple" },
       { href: "/administration", label: "Administration" },
+      { href: "/facilities", label: "Temple Facilities" },
       { href: "/how_to_reach", label: "How to Reach" },
       { href: "/nearby_places", label: "Nearby Places" },
-      { href: "/facilities", label: "Temple Facilities" },
     ],
   },
   { href: "/sevas", label: "Sevas" },
@@ -35,18 +35,11 @@ const navLinks: NavLink[] = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
-  const toggleAboutDropdown = (event: React.MouseEvent) => {
-    event.preventDefault();
-    setAboutDropdownOpen((prev) => !prev);
-  };
-
   const closeMenu = () => {
     setMenuOpen(false);
-    setAboutDropdownOpen(false);
   };
 
   return (
@@ -60,24 +53,16 @@ export default function Navbar() {
                 {subLinks ? (
                   <>
                     <button
-                      onClick={toggleAboutDropdown}
                       className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 focus:outline-none flex items-center"
                       aria-haspopup="true"
-                      aria-expanded={aboutDropdownOpen}
                     >
                       {label}
                       <FaChevronDown
-                        className={`ml-2 transform transition-transform duration-200 ${
-                          aboutDropdownOpen ? "rotate-180" : "rotate-0"
-                        }`}
+                        className="ml-2 transform transition-transform duration-200 group-hover:rotate-180"
                       />
                     </button>
                     <div
-                      className={`absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-6 z-20 transition-all duration-300 ease-in-out transform origin-top ${
-                        aboutDropdownOpen
-                          ? "opacity-100 scale-y-100"
-                          : "opacity-0 scale-y-0 pointer-events-none"
-                      }`}
+                      className="absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-6 z-20 opacity-0 group-hover:opacity-100 group-hover:scale-100 transform scale-y-0 transition-all duration-300 ease-in-out"
                     >
                       {subLinks.map((subLink) => (
                         <Link
@@ -133,24 +118,16 @@ export default function Navbar() {
               {subLinks ? (
                 <>
                   <button
-                    onClick={toggleAboutDropdown}
                     className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 focus:outline-none flex items-center justify-center w-full"
                     aria-haspopup="true"
-                    aria-expanded={aboutDropdownOpen}
                   >
                     {label}
                     <FaChevronDown
-                      className={`ml-2 transform transition-transform duration-200 ${
-                        aboutDropdownOpen ? "rotate-180" : "rotate-0"
-                      }`}
+                      className="ml-2 transform transition-transform duration-200"
                     />
                   </button>
                   <div
-                    className={`flex flex-col items-center mt-2 space-y-2 transition-all duration-300 ease-in-out ${
-                      aboutDropdownOpen
-                        ? "max-h-96 opacity-100"
-                        : "max-h-0 opacity-0 overflow-hidden"
-                    }`}
+                    className="flex flex-col items-center mt-2 space-y-2 transition-all duration-300 ease-in-out"
                   >
                     {subLinks.map((subLink) => (
                       <Link
