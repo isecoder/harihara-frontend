@@ -3,38 +3,41 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 import Banner from "@/app/components/banner";
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 
 interface NavLink {
   href: string;
-  label: string;
+  label: Record<"en" | "kn", string>;
   subLinks?: NavLink[];
 }
 
 const navLinks: NavLink[] = [
-  { href: "/", label: "Home" },
+  { href: "/", label: { en: "Home", kn: "ಮುಖಪುಟ" } },
   {
     href: "",
-    label: "About",
+    label: { en: "About", kn: "ದೇವಾಲಯದ ಮಾಹಿತಿ" },
     subLinks: [
-      { href: "/history", label: "History" },
-      { href: "/temple", label: "About Temple" },
-      { href: "/administration", label: "Administration" },
-      { href: "/facilities", label: "Temple Facilities" },
-      { href: "/how_to_reach", label: "How to Reach" },
-      { href: "/nearby_places", label: "Nearby Places" },
+      { href: "/history", label: { en: "History", kn: "ಇತಿಹಾಸ" } },
+      { href: "/temple", label: { en: "About Temple", kn: "ದೇವಸ್ಥಾನದ ಮಾಹಿತಿ" } },
+      { href: "/administration", label: { en: "Administration", kn: "ಆಡಳಿತ ಸಮಿತಿ" } },
+      { href: "/facilities", label: { en: "Temple Facilities", kn: "ದೇವಸ್ಥಾನದ ಸೌಲಭ್ಯಗಳು" } },
+      { href: "/how_to_reach", label: { en: "How to Reach", kn: "ದೇವಸ್ಥಾನಕ್ಕೆ ಹೋಗುವ ದಾರಿಯ ಮಾಹಿತಿ" } },
+      { href: "/nearby_places", label: { en: "Nearby Places", kn: "ಹತ್ತಿರದ ಸ್ಥಳಗಳು" } },
     ],
   },
-  { href: "/sevas", label: "Sevas" },
-  { href: "/donations", label: "Donations" },
-  { href: "/newsupdates", label: "News & Updates" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/contact", label: "Contact" },
+  { href: "/sevas", label: { en: "Sevas", kn: "ಸೇವೆಗಳು" } },
+  { href: "/donations", label: { en: "Donations", kn: "ದೇಣಿಗೆ" } },
+  { href: "/newsupdates", label: { en: "News & Updates", kn: "ಸುದ್ದಿಗಳು" } },
+  { href: "/gallery", label: { en: "Gallery", kn: "ಗ್ಯಾಲರಿ" } },
+  { href: "/contact", label: { en: "Contact", kn: "ಸಂಪರ್ಕಿಸಿ" } },
 ];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const currentLocale = useSelector((state: RootState) => state.locale.locale);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
@@ -49,14 +52,14 @@ export default function Navbar() {
         <div className="flex justify-between items-center mx-auto py-4 px-4 md:px-8">
           <nav className="hidden md:flex justify-center flex-1 space-x-6 text-sm">
             {navLinks.map(({ href, label, subLinks }) => (
-              <div key={label} className="relative group">
+              <div key={label.en} className="relative group">
                 {subLinks ? (
                   <>
                     <button
                       className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 focus:outline-none flex items-center"
                       aria-haspopup="true"
                     >
-                      {label}
+                      {label[currentLocale]}
                       <FaChevronDown
                         className="ml-2 transform transition-transform duration-200 group-hover:rotate-180"
                       />
@@ -71,7 +74,7 @@ export default function Navbar() {
                           onClick={closeMenu}
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-100"
                         >
-                          {subLink.label}
+                          {subLink.label[currentLocale]}
                         </Link>
                       ))}
                     </div>
@@ -82,7 +85,7 @@ export default function Navbar() {
                     onClick={closeMenu}
                     className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
                   >
-                    {label}
+                    {label[currentLocale]}
                   </Link>
                 )}
               </div>
@@ -114,14 +117,14 @@ export default function Navbar() {
           }`}
         >
           {navLinks.map(({ href, label, subLinks }) => (
-            <div key={label} className="relative w-full">
+            <div key={label.en} className="relative w-full">
               {subLinks ? (
                 <>
                   <button
                     className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 focus:outline-none flex items-center justify-center w-full"
                     aria-haspopup="true"
                   >
-                    {label}
+                    {label[currentLocale]}
                     <FaChevronDown
                       className="ml-2 transform transition-transform duration-200"
                     />
@@ -136,7 +139,7 @@ export default function Navbar() {
                         onClick={closeMenu}
                         className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
                       >
-                        {subLink.label}
+                        {subLink.label[currentLocale]}
                       </Link>
                     ))}
                   </div>
@@ -147,7 +150,7 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 block"
                 >
-                  {label}
+                  {label[currentLocale]}
                 </Link>
               )}
             </div>
