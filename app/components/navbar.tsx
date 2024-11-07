@@ -1,9 +1,8 @@
-// app/components/Navbar.tsx
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import Banner from "@/app/components/banner";
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 
@@ -67,6 +66,11 @@ export default function Navbar() {
                       aria-expanded={aboutDropdownOpen}
                     >
                       {label}
+                      <FaChevronDown
+                        className={`ml-2 transform transition-transform duration-200 ${
+                          aboutDropdownOpen ? "rotate-180" : "rotate-0"
+                        }`}
+                      />
                     </button>
                     <div
                       className={`absolute left-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-6 z-20 transition-all duration-300 ease-in-out transform origin-top ${
@@ -135,6 +139,11 @@ export default function Navbar() {
                     aria-expanded={aboutDropdownOpen}
                   >
                     {label}
+                    <FaChevronDown
+                      className={`ml-2 transform transition-transform duration-200 ${
+                        aboutDropdownOpen ? "rotate-180" : "rotate-0"
+                      }`}
+                    />
                   </button>
                   <div
                     className={`flex flex-col items-center mt-2 space-y-2 transition-all duration-300 ease-in-out ${
