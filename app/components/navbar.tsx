@@ -24,6 +24,7 @@ const navLinks: NavLink[] = [
       { href: "/administration", label: "Administration" },
       { href: "/how_to_reach", label: "How to Reach" },
       { href: "/nearby_places", label: "Nearby Places" },
+      { href: "/facilities", label: "Temple Facilities" },
     ],
   },
   { href: "/sevas", label: "Sevas" },
