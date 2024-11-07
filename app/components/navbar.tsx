@@ -59,7 +59,7 @@ export default function Navbar() {
                       className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 focus:outline-none flex items-center"
                       aria-haspopup="true"
                     >
-                      {label[currentLocale]}
+                      {label[currentLocale as "en" | "kn"]}
                       <FaChevronDown
                         className="ml-2 transform transition-transform duration-200 group-hover:rotate-180"
                       />
@@ -74,7 +74,7 @@ export default function Navbar() {
                           onClick={closeMenu}
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-100"
                         >
-                          {subLink.label[currentLocale]}
+                          {subLink.label[currentLocale as "en" | "kn"]}
                         </Link>
                       ))}
                     </div>
@@ -85,7 +85,7 @@ export default function Navbar() {
                     onClick={closeMenu}
                     className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
                   >
-                    {label[currentLocale]}
+                    {label[currentLocale as "en" | "kn"]}
                   </Link>
                 )}
               </div>
@@ -124,7 +124,7 @@ export default function Navbar() {
                     className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 focus:outline-none flex items-center justify-center w-full"
                     aria-haspopup="true"
                   >
-                    {label[currentLocale]}
+                    {label[currentLocale as "en" | "kn"]}
                     <FaChevronDown
                       className="ml-2 transform transition-transform duration-200"
                     />
@@ -139,7 +139,7 @@ export default function Navbar() {
                         onClick={closeMenu}
                         className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
                       >
-                        {subLink.label[currentLocale]}
+                        {subLink.label[currentLocale as "en" | "kn"]}
                       </Link>
                     ))}
                   </div>
@@ -150,7 +150,7 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 block"
                 >
-                  {label[currentLocale]}
+                  {label[currentLocale as "en" | "kn"]}
                 </Link>
               )}
             </div>
