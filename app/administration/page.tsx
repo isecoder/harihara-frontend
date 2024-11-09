@@ -135,6 +135,10 @@ const Administration: React.FC = () => {
         <h3 style={{ color: 'red', fontWeight: 'bold', marginBottom: '5px' }}>{content.AssistantPriestTitle}</h3>
         <p style={{ fontWeight: 'bold' }}>{content.AssistantPriestName}</p>
       </div>
+      <div style={{ margin: '40px 0' }}>
+        <h3 style={{ color: 'red', fontWeight: 'bold', marginBottom: '5px' }}>{content.OfficeClerkTitle}</h3>
+        <p style={{ fontWeight: 'bold' }}>{content.OfficeClerkName}</p>
+      </div>
     </div>
   );
 };
