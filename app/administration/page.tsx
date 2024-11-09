@@ -19,6 +19,9 @@ interface AdministrationContent {
   templePriestName: string;
   AssistantPriestTitle: string;
   AssistantPriestName: string;
+  OfficeClerkTitle: string;
+  OfficeClerkName:string;
+
 }
 
 // Content in both English and Kannada
@@ -43,6 +46,8 @@ const administrationContent: Record<LocaleType, AdministrationContent> = {
     templePriestName: "Shri Subrahmanya Narasimha Bhat",
     AssistantPriestTitle: "Assistant Priest:",
     AssistantPriestName: "Shri B. KrishnaKumara",
+    OfficeClerkTitle:"Office Clerk",
+    OfficeClerkName: "Shri Lokanatha.K"
   },
   kn: {
     managementPresidentTitle: "ವ್ಯವಸ್ಥಾಪನ ಸಮಿತಿ ಅಧ್ಯಕ್ಷರು:",
@@ -54,16 +59,18 @@ const administrationContent: Record<LocaleType, AdministrationContent> = {
     members: [
       "ಶ್ರೀ ಚಂದ್ರಹಾಸ ಎಸ್. ಶಿವಾಲ",
       "ಶ್ರೀ ಚಂದ್ರಶೇಖರ ಕೆ. ಕೆ. ಕಿರಿಭಾಗ",
-      "ಶ್ರೀ ಶರತ್ ಡಿ. ಎಸ್. ಕಟ್ಟೋಡಿ",
+      "ಶ್ರೀ ಶರತ್ ಡಿ. ಎಸ್. ಕಜ್ಜೋಡಿ",
       "ಶ್ರೀಮತಿ ರೇಷ್ಮಾ ಕಟ್ಟೆಮನೆ",
       "ಶ್ರೀ ಭವಾನಿಶಂಕರ ಪಿ. ಪೈಲಾಜೆ",
-      "ಶ್ರೀಮತಿ ಜ್ಯೋತಿ ಕೆ. ಎಲ್ ಕಲಿಗೆ",
+      "ಶ್ರೀಮತಿ ಜ್ಯೋತಿ ಕೆ. ಎಲ್ ಕಳಿಗೆ",
       "ಶ್ರೀ ಆನಂದ ಕೆ. ಕೆರೆಕ್ಕೋಡಿ"
     ],
     templePriestTitle: "ಅರ್ಚಕರು:",
     templePriestName: "ಶ್ರೀ ಸುಬ್ರಹ್ಮಣ್ಯ ನರಸಿಂಹ ಭಟ್",
     AssistantPriestTitle: "ಸಹಾಯಕ ಅರ್ಚಕರು:",
     AssistantPriestName: "ಶ್ರೀ ಬಿ. ಕೃಷ್ಣಕುಮಾರ",
+    OfficeClerkTitle:"ಕಚೇರಿ ಗುಮಾಸ್ತರು",
+    OfficeClerkName: "ಶ್ರೀ ಲೋಕನಾಥ.ಕೆ"
   }
 };
 
