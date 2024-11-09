@@ -37,13 +37,16 @@ const navLinks: NavLink[] = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const currentLocale = useSelector((state: RootState) => state.locale.locale);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
-
   const closeMenu = () => {
     setMenuOpen(false);
+    setDropdownOpen(false); // Close the dropdown as well when the menu closes
   };
+
+  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
   return (
     <>
@@ -121,28 +124,31 @@ export default function Navbar() {
               {subLinks ? (
                 <>
                   <button
+                    onClick={toggleDropdown}
                     className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200 focus:outline-none flex items-center justify-center w-full"
                     aria-haspopup="true"
                   >
                     {label[currentLocale as "en" | "kn"]}
                     <FaChevronDown
-                      className="ml-2 transform transition-transform duration-200"
+                      className={`ml-2 transform transition-transform duration-200 ${
+                        dropdownOpen ? "rotate-180" : ""
+                      }`}
                     />
                   </button>
-                  <div
-                    className="flex flex-col items-center mt-2 space-y-2 transition-all duration-300 ease-in-out"
-                  >
-                    {subLinks.map((subLink) => (
-                      <Link
-                        key={subLink.href}
-                        href={subLink.href}
-                        onClick={closeMenu}
-                        className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
-                      >
-                        {subLink.label[currentLocale as "en" | "kn"]}
-                      </Link>
-                    ))}
-                  </div>
+                  {dropdownOpen && (
+                    <div className="flex flex-col items-center mt-2 space-y-2">
+                      {subLinks.map((subLink) => (
+                        <Link
+                          key={subLink.href}
+                          href={subLink.href}
+                          onClick={closeMenu} // Close menu on sublink click
+                          className="text-orange-500 font-medium hover:text-gray-600 transition-all duration-200"
+                        >
+                          {subLink.label[currentLocale as "en" | "kn"]}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </>
               ) : (
                 <Link
