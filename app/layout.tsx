@@ -1,4 +1,3 @@
-// app/layout.tsx
 "use client";
 
 import Script from "next/script";
@@ -40,6 +39,19 @@ export default function RootLayout({ children }: LayoutProps) {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'GA_TRACKING_ID');
+          `}
+        </Script>
+
+        {/* Disable right-click, image download, and content copy */}
+        <Script id="disable-actions" strategy="afterInteractive">
+          {`
+            document.addEventListener('contextmenu', (e) => e.preventDefault());
+            document.addEventListener('keydown', (e) => {
+              if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p')) {
+                e.preventDefault();
+              }
+            });
+            document.addEventListener('copy', (e) => e.preventDefault());
           `}
         </Script>
       </head>
