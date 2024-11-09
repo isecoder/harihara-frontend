@@ -77,7 +77,7 @@ const SevasList = (): JSX.Element => {
       {/* Note about contacting the temple office in English and Kannada */}
       <p className="text-center text-sm font-bold text-red-500 mb-4 animate-pulse shadow-lg">
         {showKannada
-          ? "ದಯವಿಟ್ಟು ಸೇವೆಯ ಪೂಜೆಯ ದಿನಕ್ಕಿಂತ ಕನಿಷ್ಟ ಒಂದು ದಿನದ ಮುನ್ನ ದೇವಾಲಯದ ಕಚೇರಿಯೊಂದಿಗೆ ದೃಢೀಕರಣಕ್ಕಾಗಿ ಸಂಪರ್ಕಿಸಿ."
+          ? "ದಯವಿಟ್ಟು ಸೇವೆಯನ್ನು ನಡೆಸುವ ದಿನಕ್ಕಿಂತ ಕನಿಷ್ಟ ಒಂದು ದಿನದ ಮುಂಚಿತವಾಗಿ ದೃಢೀಕರಣಕ್ಕಾಗಿ ದೇವಾಲಯದ ಕಚೇರಿಯನ್ನು ಸಂಪರ್ಕಿಸಿ."
           : "Please contact the temple office for confirmation regarding the seva at least one day prior to the day of worship."}
       </p>
       {error && <p className="text-red-500 text-center">{error}</p>}
