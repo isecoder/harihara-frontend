@@ -10,7 +10,7 @@ const Banner = () => {
         layout="responsive" // Adjusts to maintain aspect ratio and responsiveness
         width={1920} // Set the width according to your design
         height={1080} // Set the height according to your design
-        className="w-screen" // This will keep the image responsive
+        className="w-screen max-h-[300px] md:max-h-[400px] lg:max-h-[400px]" // Sets max height for different screen sizes
       />
     </div>
   );
