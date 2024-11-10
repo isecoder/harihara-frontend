@@ -25,11 +25,19 @@ import P17 from "/app/nearby_places/p17.jpg";
 import P18 from "/app/nearby_places/p18.jpg";
 
 type LocaleType = "en" | "kn";
-type ImageType = typeof P1; // Inferred type for images
+type ImageType = typeof P1;
 
-const placesContent: Record<LocaleType, { title: string; places: { name: string; description: string; image: ImageType }[] }> = {
+const placesContent: Record<
+  LocaleType,
+  {
+    title: string;
+    buttonLabel: string;
+    places: { name: string; description: string; image: ImageType }[];
+  }
+> = {
   en: {
     title: "Nearby Places",
+    buttonLabel: "View Details",
     places: [
       { name: "Kukke Shri Subrahmanya Temple", description: "Famous Hindu temple in Subrahmanya, located 8.8 km from Shri Harihareshwara Temple.", image: P1 },
       { name: "Adi Subrahmanya Temple", description: "Dedicated to Lord Subrahmanya, worshipped in the form of an ant hill (valmika) for serpent-related afflictions, located 9.3 km from Shri Harihareshwara Temple.", image: P2 },
@@ -53,6 +61,7 @@ const placesContent: Record<LocaleType, { title: string; places: { name: string;
   },
   kn: {
     title: "ಸಮೀಪದ ಸ್ಥಳಗಳು",
+    buttonLabel: "ಹೆಚ್ಚಿನ ವಿವರಗಳು",
     places: [
       { name: "ಕುಕ್ಕೆ ಶ್ರೀ ಸುಬ್ರಹ್ಮಣ್ಯ ದೇವಸ್ಥಾನ", description: "ಸುಬ್ರಹ್ಮಣ್ಯದಲ್ಲಿರುವ ರಾಜ್ಯದ ಪ್ರಸಿದ್ಧ ಹಿಂದೂ ದೇವಸ್ಥಾನ, ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ 8.8 ಕಿಮೀ ದೂರ8.8 ಕಿಮೀ ದೂರದಲ್ಲಿದೆ.", image: P1 },
       { name: "ಆದಿ ಸುಬ್ರಹ್ಮಣ್ಯ ದೇವಸ್ಥಾನ", description: "ಸರ್ಪ ದೋಷದ ಪರಿಹಾರಕ್ಕಾಗಿ ವಲ್ಮೀಕ (ಹುತ್ತ) ರೂಪದಲ್ಲಿ ಸುಬ್ರಹ್ಮಣ್ಯ ದೇವರನ್ನು ಪೂಜಿಸಲ್ಪಡುವ ಈ ದೇವಾಲಯವು ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನದಿಂದ 9.3 ಕಿಮೀ ದೂರದಲ್ಲಿದೆ.", image: P2 },
@@ -82,7 +91,7 @@ export default function Nearby_Places() {
     (state: RootState) => state.locale.locale
   ) as LocaleType;
 
-  const { title, places } = placesContent[currentLocale];
+  const { title, buttonLabel, places } = placesContent[currentLocale];
   const [isLocaleLoaded, setIsLocaleLoaded] = useState(false);
   const [activePlace, setActivePlace] = useState<number | null>(null);
 
@@ -106,7 +115,7 @@ export default function Nearby_Places() {
               onClick={() => setActivePlace(index)}
               className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"
             >
-              View Details
+              {buttonLabel}
             </button>
 
             {activePlace === index && (
