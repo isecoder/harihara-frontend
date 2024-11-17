@@ -6,6 +6,7 @@ import { RootState } from "../../store"; // Adjust the import if needed
 import LoadingSpinner from "../../components/LoadingSpinner"; // Import the LoadingSpinner component
 import AddSeva from "../components/AddSevaForm"; // Import the AddSeva component
 import Swal from "sweetalert2"; // Import SweetAlert2 for alerts
+import UpdateSevaForm from "../components/UpdateSevaForm"; // Import UpdateSevaForm component
 
 interface Seva {
   id: number;
@@ -22,9 +23,11 @@ const SevasList = (): JSX.Element => {
   ); // Track language from Redux state
 
   const [sevas, setSevas] = useState<Seva[]>([]);
+  const [selectedSeva, setSelectedSeva] = useState<Seva | null>(null); // Track selected seva for updating
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false); // Loading state
 
+  // Fetch sevas from API
   const fetchSevas = async () => {
     setLoading(true); // Start loading
     try {
@@ -59,6 +62,7 @@ const SevasList = (): JSX.Element => {
     }
   };
 
+  // Delete seva
   const deleteSeva = async (id: number) => {
     const confirmDelete = await Swal.fire({
       title: "Are you sure?",
@@ -94,6 +98,19 @@ const SevasList = (): JSX.Element => {
     }
   };
 
+  // Update seva callback
+  const handleUpdateSeva = () => {
+    Swal.fire({
+      title: "Update Successful!",
+      text: "The seva has been updated successfully.",
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then(() => {
+      // Reload the page after the user clicks "OK"
+      window.location.reload();
+    });
+  };
+
   useEffect(() => {
     fetchSevas();
   }, []);
@@ -111,27 +128,48 @@ const SevasList = (): JSX.Element => {
         {sevas.map((seva) => (
           <div
             key={seva.id}
-            className="bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 cursor-pointer relative h-60"
+            className="bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105 cursor-pointer relative flex flex-col justify-between"
+            style={{ minHeight: "320px" }} // Ensure consistent and compact height
           >
-            <h2 className="text-xl font-semibold text-gray-800">
+            <h2 className="text-xl font-semibold text-gray-800 break-words">
+              {/* Allow title to wrap properly */}
               {showKannada ? seva.name_kannada : seva.name}
             </h2>
-            <p className="text-gray-600 mt-2">
+            <p className="text-gray-600 mt-2 break-words">
+              {/* Allow description to wrap properly */}
               {showKannada ? seva.description_kannada : seva.description}
             </p>
             <p className="mt-4 font-bold text-lg">Price: ₹{seva.base_price}</p>
-            <button
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent the card from opening the modal
-                deleteSeva(seva.id); // Call delete function
-              }}
-              className="absolute bottom-4 right-4 bg-red-500 text-white px-3 py-1 rounded"
-            >
-              Delete
-            </button>
+            <div className="mt-auto flex space-x-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent the card from opening the modal
+                  setSelectedSeva(seva); // Open update form
+                }}
+                className="bg-blue-500 text-white px-3 py-1 rounded"
+              >
+                Update
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent the card from opening the modal
+                  deleteSeva(seva.id); // Call delete function
+                }}
+                className="bg-red-500 text-white px-3 py-1 rounded"
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>
+      {selectedSeva && (
+        <UpdateSevaForm
+          seva={selectedSeva}
+          onUpdate={handleUpdateSeva} // Trigger page reload after update
+          onClose={() => setSelectedSeva(null)}
+        />
+      )}
     </div>
   );
 };
