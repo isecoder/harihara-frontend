@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
   const text = footerText[currentLocale];
 
   return (
-    <div className="flex flex-col max-h-screen">
+    <div className="flex flex-col ">
       <footer className="bg-gradient-to-r from-orange-500 to-orange-300 text-white py-10 px-10 md:px-10 lg:px-10 mt-[6rem] flex-grow">
         <div className="container mx-auto flex flex-col lg:flex-row justify-between lg:items-center">
           {/* Logo and Title Section */}
