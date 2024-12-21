@@ -15,7 +15,7 @@ const contactText: Record<LocaleType, { postalAddress: string; contactDetails: s
     contactDetails: "Contact Details",
     googleMap: "Google Map",
     address: "Shri Harihareshwara Temple,\nHariharapallathadka Post and Village,\nSullia Taluk, Dakshina Kannada,\nPIN-574218",
-    phone: "Contact Number: +919448116685, +918073030594",
+    phone: "Contact Number:+918073030594",
     tele: "Telephone Number: 08257-283366",
     president: "President: +919481321850",
     email: "E-mail: shriharihareshwara@gmail.com"
