@@ -31,7 +31,7 @@ const footerText: Record<LocaleType, { templeName: string; quickLinks: string; a
     quickLinks: "ಲಿಂಕ್ಸ್",
     addressTitle: "ವಿಳಾಸ",
     address: ["ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ,", "ಹರಿಹರಪಲ್ಲತಡ್ಕ ಅಂಚೆ ಮತ್ತು ಗ್ರಾಮ,", "ಸುಳ್ಯ ತಾಲೂಕು, ದ.ಕ.", "ಪಿನ್ - 574218"],
-    contactNumbers: "08257-283366,9448116685,8073030594",
+    contactNumbers: "08257-283366,8073030594",
     email: "shriharihareshwara@gmail.com",
     privacyPolicy: "ಗೌಪ್ಯತಾ ನೀತಿ",
     refundPolicy: "ಮರುಪಾವತಿ ಮತ್ತು ರದ್ದುಪಡಿಸುವಿಕೆ",
