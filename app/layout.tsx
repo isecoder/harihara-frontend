@@ -6,7 +6,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import store from "./store";
 import Navbar from "./components/navbar";
-import Footer from "./components/footer";
+import dynamic from 'next/dynamic';
+const Footer = dynamic(() => import('./components/footer'), { ssr: false });
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
