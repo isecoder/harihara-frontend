@@ -64,7 +64,8 @@ const SevasList = (): JSX.Element => {
   }, []);
 
   const handleSevaClick = (seva: Seva) => {
-    setSelectedSeva(seva); // Set the selected seva to display in SevaForm
+    setSelectedSeva(seva); 
+    window.scrollTo({top: 130,behavior:'smooth'});
   };
 
   if (selectedSeva) {
