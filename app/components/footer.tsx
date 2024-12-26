@@ -46,9 +46,9 @@ const footerText: Record<LocaleType, {
     contactNumbers: "08257-283366, 8073030594",
     email: "shriharihareshwara@gmail.com",
     privacyPolicy: "Privacy Policy",
-    refundPolicy: "Refund & Cancellation",
-    admin: "Admin",
-    rightsReserved: "Shri Harihareshwara Temple, Hariharapallathadka. All Rights Reserved",
+    refundPolicy: " Refund & Cancellation",
+    admin: " Admin",
+    rightsReserved: " Shri Harihareshwara Temple, Hariharapallathadka. All Rights Reserved",
     designedBy: "Designed:",
     designerName: "ISCODERZ"
   },
@@ -75,7 +75,7 @@ const footerText: Record<LocaleType, {
     privacyPolicy: "ಗೌಪ್ಯತಾ ನೀತಿ",
     refundPolicy: " ಮರುಪಾವತಿ ಮತ್ತು ರದ್ದುಪಡಿಸುವಿಕೆ",
     admin: " ಅಡ್ಮಿನ್",
-    rightsReserved: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ, ಹರಿಹರಪಲ್ಲತಡ್ಕ | ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ",
+    rightsReserved: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ, ಹರಿಹರಪಲ್ಲತಡ್ಕ. ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ",
     designedBy: "ಹೋಸ್ಟಿಂಗ್ ಮತ್ತು ನಿರ್ವಹಣೆ:",
     designerName: "ಐಎಸ್ ಕೋಡರ್ಸ್"
   }
