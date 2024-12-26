@@ -11,32 +11,71 @@ import { FaLink, FaMapMarkerAlt } from "react-icons/fa";
 type LocaleType = "en" | "kn";
 
 // Define text content for each language
-const footerText: Record<LocaleType, { templeName: string; quickLinks: string; addressTitle: string; address: string[]; contactNumbers: string; email: string; privacyPolicy: string; refundPolicy: string; admin: string; rightsReserved: string; designedBy: string; designerName: string }> = {
+const footerText: Record<LocaleType, { 
+  templeName: string; 
+  quickLinks: { title: string; links: { name: string; path: string }[] }; 
+  addressTitle: string; 
+  address: string[]; 
+  contactNumbers: string; 
+  email: string; 
+  privacyPolicy: string; 
+  refundPolicy: string; 
+  admin: string; 
+  rightsReserved: string; 
+  designedBy: string; 
+  designerName: string; 
+}> = {
   en: {
     templeName: "Shri Harihareshwara Temple",
-    quickLinks: "Quick Links",
+    quickLinks: {
+      title: "Quick Links",
+      links: [
+        { name: "History", path: "/history" },
+        { name: "News", path: "/newsupdates" },
+        { name: "Sevas", path: "/sevas" },
+        { name: "Gallery", path: "/gallery" }
+      ]
+    },
     addressTitle: "Address",
-    address: ["Shri Harihareshwara Temple,", "Hariharapallathadka Post and Village,", "Sullia Taluk, Dakshina Kannada", "PIN - 574218"],
-    contactNumbers: "08257-283366,9448116685,8073030594",
+    address: [
+      "Shri Harihareshwara Temple,",
+      "Hariharapallathadka Post and Village,",
+      "Sullia Taluk, Dakshina Kannada",
+      "PIN - 574218"
+    ],
+    contactNumbers: "08257-283366, 8073030594",
     email: "shriharihareshwara@gmail.com",
     privacyPolicy: "Privacy Policy",
     refundPolicy: "Refund & Cancellation",
     admin: "Admin",
-    rightsReserved: "Shri Harihareshwara Temple,Hariharapallathadka.All Rights Reserved",
+    rightsReserved: "Shri Harihareshwara Temple, Hariharapallathadka. All Rights Reserved",
     designedBy: "Designed:",
     designerName: "ISCODERZ"
   },
   kn: {
     templeName: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ",
-    quickLinks: "ಲಿಂಕ್ಸ್",
+    quickLinks: {
+      title: "ಲಿಂಕ್ಸ್",
+      links: [// ದೇವಾಲಯದ ಬಗ್ಗೆ ಇತಿಹಾಸ
+        { name: "ದೇವಸ್ಥಾನದ ಬಗ್ಗೆ", path: "/history" },
+        { name: "ಸುದ್ದಿಗಳು", path: "/newsupdates" },
+        { name: "ಸೇವೆಗಳು", path: "/sevas" },
+        { name: "ಗ್ಯಾಲರಿ", path: "/gallery" }
+      ]
+    },
     addressTitle: "ವಿಳಾಸ",
-    address: ["ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ,", "ಹರಿಹರಪಲ್ಲತಡ್ಕ ಅಂಚೆ ಮತ್ತು ಗ್ರಾಮ,", "ಸುಳ್ಯ ತಾಲೂಕು, ದ.ಕ.", "ಪಿನ್ - 574218"],
-    contactNumbers: "08257-283366,8073030594",
+    address: [
+      "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ,",
+      "ಹರಿಹರಪಲ್ಲತಡ್ಕ ಅಂಚೆ ಮತ್ತು ಗ್ರಾಮ,",
+      "ಸುಳ್ಯ ತಾಲೂಕು, ದ.ಕ.",
+      "ಪಿನ್ - 574218"
+    ],
+    contactNumbers: "08257-283366, 8073030594",
     email: "shriharihareshwara@gmail.com",
     privacyPolicy: "ಗೌಪ್ಯತಾ ನೀತಿ",
-    refundPolicy: "ಮರುಪಾವತಿ ಮತ್ತು ರದ್ದುಪಡಿಸುವಿಕೆ",
-    admin: "ಅಡ್ಮಿನ್",
-    rightsReserved: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ,ಹರಿಹರಪಲ್ಲತಡ್ಕ.ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ",
+    refundPolicy: " ಮರುಪಾವತಿ ಮತ್ತು ರದ್ದುಪಡಿಸುವಿಕೆ",
+    admin: " ಅಡ್ಮಿನ್",
+    rightsReserved: "ಶ್ರೀ ಹರಿಹರೇಶ್ವರ ದೇವಸ್ಥಾನ, ಹರಿಹರಪಲ್ಲತಡ್ಕ | ಎಲ್ಲಾ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ",
     designedBy: "ಹೋಸ್ಟಿಂಗ್ ಮತ್ತು ನಿರ್ವಹಣೆ:",
     designerName: "ಐಎಸ್ ಕೋಡರ್ಸ್"
   }
@@ -82,16 +121,16 @@ const Footer: React.FC = () => {
           {/* Quick Links Section with Icon */}
           <div className="text-left lg:text-center mb-6 lg:mb-0">
             <h3 className="text-lg font-semibold mb-6 flex items-center space-x-2">
-              <FaLink className="w-5 h-5" /> <span>{text.quickLinks}</span>
+              <FaLink className="w-5 h-5" /> <span>{text.quickLinks.title}</span>
             </h3>
             <ul className="space-y-1">
-              {['History', 'News', 'Sevas', 'Gallery'].map((link, index) => (
+              {text.quickLinks.links.map((link, index) => (
                 <li key={index}>
-                  <Link href={link === 'News' ? '/newsupdates' : `/${link.toLowerCase()}`} className="hover:underline hover:text-yellow-300 flex items-center">
+                  <Link href={link.path} className="hover:underline hover:text-yellow-300 flex items-center">
                     <span className="inline-block w-4">
                       <span className="text-xs leading-4">►</span>
                     </span>
-                    {link}
+                    {link.name}
                   </Link>
                 </li>
               ))}
