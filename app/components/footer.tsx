@@ -198,7 +198,7 @@ const Footer: React.FC = () => {
           <Link href="/policy" className="text-yellow-400 hover:underline">{text.refundPolicy}</Link> |
           <Link href="/admin" className="text-yellow-400 hover:underline">{text.admin}</Link> | {text.rightsReserved}
         </p>
-        <p>{text.designedBy} <Link href="https://www.instagram.com/iscoderz/" className="text-yellow-400 hover:underline">{text.designerName}</Link></p>
+        <p>{text.designedBy} <Link href="https://www.instagram.com/isdc.sahyadri/" className="text-yellow-400 hover:underline">{text.designerName}</Link></p>
       </div>
     </div>
   );
