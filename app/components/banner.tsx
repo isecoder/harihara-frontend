@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <div className="bg-gradient-to-br from-orange-300 to-orange-500 text-white relative">
       <Image
-        src="/banner.png" // Use the actual path to your banner image
+        src="/banner.svg" // Use the actual path to your banner image
         alt="Temple Banner" // Updated alt text for better accessibility
         layout="responsive" // Adjusts to maintain aspect ratio and responsiveness
         width={1920} // Set the width according to your design
