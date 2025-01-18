@@ -49,7 +49,7 @@ const footerText: Record<LocaleType, {
     refundPolicy: " Refund & Cancellation",
     admin: " Admin",
     rightsReserved: " Shri Harihareshwara Temple, Hariharapallathadka. All Rights Reserved",
-    designedBy: "Designed:",
+    designedBy: "Designed by:",
     designerName: "ISCODERZ"
   },
   kn: {
@@ -194,7 +194,7 @@ const Footer: React.FC = () => {
       {/* Footer Bottom Section */}
       <div className="bg-black text-white py-2 text-center site-footer-bottom mx-0 mb-0">
         <p>
-          © 2024 | Disclaimer - <Link href="/policy" className="text-yellow-400 hover:underline">{text.privacyPolicy}</Link> | 
+          © 2025 | Disclaimer - <Link href="/policy" className="text-yellow-400 hover:underline">{text.privacyPolicy}</Link> | 
           <Link href="/policy" className="text-yellow-400 hover:underline">{text.refundPolicy}</Link> |
           <Link href="/admin" className="text-yellow-400 hover:underline">{text.admin}</Link> | {text.rightsReserved}
         </p>
