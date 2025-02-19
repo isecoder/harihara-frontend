@@ -9,22 +9,22 @@ export async function generateMetadata({
 
   if (!newsId) {
     return {
-      title: "Shrirama Temple, Chokkadi",
+      title: "Shri Harihareshwara Temple, Haripallathadka",
       description:
-        "Explore the rich heritage and spiritual essence of Shrirama Temple, Chokkadi.",
+        "Explore the rich heritage and spiritual essence of Shri Harihareshwara Temple, Haripallathadka",
       openGraph: {
-        title: "Shrirama Temple, Chokkadi",
+        title: "Shri Harihareshwara Temple, Haripallathadka",
         description:
-          "Explore the rich heritage and spiritual essence of Shrirama Temple, Chokkadi.",
+          "Explore the rich heritage and spiritual essence of Shri Harihareshwara Temple, Haripallathadka.",
         url: `/newsupdates/unknown`,
         images: [{ url: `/default-og-image.webp` }], // ✅ Uses relative path
         type: "article",
       },
       twitter: {
         card: "summary_large_image",
-        title: "Shrirama Temple, Chokkadi",
+        title: "Shri Harihareshwara Temple, Haripallathadka",
         description:
-          "Explore the rich heritage and spiritual essence of Shrirama Temple, Chokkadi.",
+          "Explore the rich heritage and spiritual essence of Shri Harihareshwara Temple, Haripallathadka.",
         images: [`/default-og-image.webp`], // ✅ Uses relative path
       },
     };
@@ -46,10 +46,10 @@ export async function generateMetadata({
 
     console.log("Fetched metadata data:", JSON.stringify(data, null, 2));
 
-    const title = data.title || "Shrirama Temple, Chokkadi";
+    const title = data.title || "Shri Harihareshwara Temple, Haripallathadka";
     const description =
       data.content?.substring(0, 150) ||
-      "Explore the rich heritage and spiritual essence of Shrirama Temple, Chokkadi.";
+      "Explore the rich heritage and spiritual essence of Shri Harihareshwara Temple, Haripallathadka.";
 
     // ✅ Use the first image if available, otherwise use a fallback image
     const imageUrl =
@@ -80,22 +80,22 @@ export async function generateMetadata({
     console.error("Error fetching metadata:", error);
 
     return {
-      title: "Shrirama Temple, Chokkadi",
+      title: "Shri Harihareshwara Temple, Haripallathadka",
       description:
-        "Explore the rich heritage and spiritual essence of Shrirama Temple, Chokkadi.",
+        "Explore the rich heritage and spiritual essence of Shri Harihareshwara Temple, Haripallathadka.",
       openGraph: {
-        title: "Shrirama Temple, Chokkadi",
+        title: "Shri Harihareshwara Temple, Haripallathadka",
         description:
-          "Explore the rich heritage and spiritual essence of Shrirama Temple, Chokkadi.",
+          "Explore the rich heritage and spiritual essence of Shri Harihareshwara Temple, Haripallathadka.",
         url: `/newsupdates/${newsId}`,
         images: [{ url: `/default-og-image.webp` }], // ✅ Uses relative path
         type: "article",
       },
       twitter: {
         card: "summary_large_image",
-        title: "Shrirama Temple, Chokkadi",
+        title: "Shri Harihareshwara Temple, Haripallathadka",
         description:
-          "Explore the rich heritage and spiritual essence of Shrirama Temple, Chokkadi.",
+          "Explore the rich heritage and spiritual essence of Shri Harihareshwara Temple, Haripallathadka.",
         images: [`/default-og-image.webp`], // ✅ Uses relative path
       },
     };
