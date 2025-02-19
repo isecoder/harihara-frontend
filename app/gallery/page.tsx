@@ -108,7 +108,7 @@ export default function Gallery(): JSX.Element {
 
       <div className="text-center mb-4">
         <h1 className="text-3xl font-bold text-green-800">
-          Shrirama Temple Chokkadi
+         Shri Harihareshwara Temple
         </h1>
       </div>
 
