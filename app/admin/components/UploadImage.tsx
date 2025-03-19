@@ -36,7 +36,7 @@ const UploadImage: React.FC<UploadImageProps> = ({ onImageUpload }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/images/upload", {
+      const response = await fetch("/api/h1/images/upload", {
         method: "POST",
         body: formData,
       });

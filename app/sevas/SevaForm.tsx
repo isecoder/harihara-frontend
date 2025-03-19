@@ -83,7 +83,7 @@ const SevaForm: React.FC<SevaFormProps> = ({ seva, showKannada }) => {
   setConfirmation(null);
 
     try {
-      const response = await fetch('/api/sevaforms', {
+      const response = await fetch('/api/h1/sevaforms', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

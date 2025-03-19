@@ -37,7 +37,7 @@ const AddSeva: React.FC = () => {
     setLoading(true); // Start loading
 
     try {
-      const response = await fetch("/api/sevas", {
+      const response = await fetch("/api/h1/sevas", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

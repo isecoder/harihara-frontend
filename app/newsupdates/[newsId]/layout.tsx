@@ -33,7 +33,7 @@ export async function generateMetadata({
   try {
     // ✅ Fetch data from the API (using a proxy path)
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SITE_URL}/api/news-updates/${newsId}`,
+      `${process.env.NEXT_PUBLIC_SITE_URL}/api/h1/news-updates/${newsId}`,
       {
         cache: "no-store",
       }

@@ -35,7 +35,7 @@ const UpdateSevaForm = ({
   const handleUpdate = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/sevas/${seva.id}`, {
+      const res = await fetch(`/api/h1/sevas/${seva.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

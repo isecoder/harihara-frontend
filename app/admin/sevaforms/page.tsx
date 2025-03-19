@@ -42,7 +42,7 @@ export default function SevaForms(): JSX.Element {
   const fetchSevaForms = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/sevaforms`);
+      const res = await fetch(`/api/h1/sevaforms`);
       if (!res.ok) throw new Error("Failed to load seva forms");
 
       const { data }: { data: ApiSevaForm[] } = await res.json(); // Type response data
@@ -76,7 +76,7 @@ export default function SevaForms(): JSX.Element {
 
     if (confirmDelete.isConfirmed) {
       try {
-        const response = await fetch(`/api/sevaforms/${id}`, {
+        const response = await fetch(`/api/h1/sevaforms/${id}`, {
           method: "DELETE",
         });
 

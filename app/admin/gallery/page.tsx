@@ -38,7 +38,7 @@ export default function Gallery(): JSX.Element {
     setLoading(true);
 
     try {
-      const res = await fetch(`/api/gallery`, { cache: "no-store" });
+      const res = await fetch(`/api/h1/gallery`, { cache: "no-store" });
 
       if (!res.ok) throw new Error("Failed to load gallery data");
 
@@ -96,7 +96,7 @@ export default function Gallery(): JSX.Element {
     }
 
     try {
-      const response = await fetch(`/api/gallery/create`, {
+      const response = await fetch(`/api/h1/gallery/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -136,7 +136,7 @@ export default function Gallery(): JSX.Element {
 
     if (confirmDelete.isConfirmed) {
       try {
-        const response = await fetch(`/api/gallery/delete/${galleryId}`, {
+        const response = await fetch(`/api/h1/gallery/delete/${galleryId}`, {
           method: "DELETE",
         });
 

@@ -34,7 +34,7 @@ const NewsDetail = () => {
   const fetchNewsDetail = useCallback(async () => {
     if (!newsId) return;
     try {
-      const res = await fetch(`/api/news-updates/${newsId}`);
+      const res = await fetch(`/api/h1/news-updates/${newsId}`);
       if (!res.ok) throw new Error("Failed to load news detail");
 
       const { data } = await res.json();

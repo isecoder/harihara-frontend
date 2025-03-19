@@ -28,7 +28,7 @@ const SevasList = (): JSX.Element => {
   const fetchSevas = async () => {
     setLoading(true); // Start loading
     try {
-      const res = await fetch(`/api/sevas`);
+      const res = await fetch(`/api/h1/sevas`);
       if (!res.ok) throw new Error("Failed to load sevas");
       const { data } = await res.json();
 

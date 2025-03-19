@@ -17,7 +17,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   const fetchSession = async () => {
     try {
-      const response = await fetch("/api/auth/session");
+      const response = await fetch("/api/h1/auth/session");
       if (!response.ok) {
         throw new Error("No active session");
       }
@@ -35,7 +35,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("/api/auth/logout", {
+      const response = await fetch("/api/h1/auth/logout", {
         method: "POST",
       });
 

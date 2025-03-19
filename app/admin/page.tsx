@@ -14,10 +14,10 @@ const AdminPage = () => {
     try {
       const [sevasRes, newsUpdatesRes, sevaFormsRes, galleryRes] =
         await Promise.all([
-          fetch("/api/sevas"),
-          fetch("/api/news-updates"),
-          fetch("/api/sevaforms"),
-          fetch("/api/gallery"),
+          fetch("/api/h1/sevas"),
+          fetch("/api/h1/news-updates"),
+          fetch("/api/h1/sevaforms"),
+          fetch("/api/h1/gallery"),
         ]);
 
       if (

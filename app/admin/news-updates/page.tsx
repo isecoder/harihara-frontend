@@ -29,7 +29,7 @@ export default function NewsUpdates(): JSX.Element {
   const fetchNewsUpdates = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/news-updates`);
+      const res = await fetch(`/api/h1/news-updates`);
       if (!res.ok) throw new Error("Failed to load news updates");
 
       const { data } = await res.json();
@@ -81,7 +81,7 @@ export default function NewsUpdates(): JSX.Element {
 
     if (confirmDelete.isConfirmed) {
       try {
-        const response = await fetch(`/api/news-updates/${newsId}`, {
+        const response = await fetch(`/api/h1/news-updates/${newsId}`, {
           method: "DELETE",
         });
 

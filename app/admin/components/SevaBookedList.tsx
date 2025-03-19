@@ -17,7 +17,7 @@ export default function SevaBookedList() {
     // Fetch booked Sevas from API
     const fetchSevas = async () => {
       try {
-        const response = await fetch("/api/booked-sevas"); 
+        const response = await fetch("/api/h1/booked-sevas"); 
         if (!response.ok) {
           throw new Error("Failed to fetch booked Sevas");
         }

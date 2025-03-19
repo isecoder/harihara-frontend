@@ -62,7 +62,7 @@ const AddNewsUpdate: React.FC<AddNewsUpdateProps> = ({ onAdd }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/news-updates", {
+      const response = await fetch("/api/h1/news-updates", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

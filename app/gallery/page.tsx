@@ -57,7 +57,7 @@ export default function Gallery(): JSX.Element {
   const fetchGalleryData = async (): Promise<void> => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/gallery`, { cache: "no-store" });
+      const res = await fetch(`/api/h1/gallery`, { cache: "no-store" });
       if (!res.ok) throw new Error("Failed to fetch gallery data");
       const data: GalleryResponse = await res.json();
 
